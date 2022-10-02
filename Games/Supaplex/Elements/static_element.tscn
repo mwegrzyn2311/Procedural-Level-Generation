@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://sh2ule304uhg"]
+
+[ext_resource type="Script" path="res://Games/Supaplex/Elements/static_element.gd" id="1_8cyhk"]
+
+[node name="StaticElement" type="StaticBody2D"]
+script = ExtResource("1_8cyhk")
+
+[node name="Sprite2d" type="Sprite2D" parent="."]

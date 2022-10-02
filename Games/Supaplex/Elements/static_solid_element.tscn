@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://51au0lpa2ecr"]
+
+[ext_resource type="PackedScene" uid="uid://sh2ule304uhg" path="res://Games/Supaplex/Elements/static_element.tscn" id="1_ramju"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exjap"]
+size = Vector2(64, 64)
+
+[node name="StaticSolidElement" instance=ExtResource("1_ramju")]
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_exjap")

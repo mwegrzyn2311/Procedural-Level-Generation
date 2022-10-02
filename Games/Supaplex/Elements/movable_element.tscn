@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://does8dg375ha8"]
+
+[ext_resource type="PackedScene" uid="uid://bnpmur4dcntgw" path="res://Games/Supaplex/Elements/exploadable.tscn" id="1_8xnfv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_biuer"]
+size = Vector2(64, 64)
+
+[node name="MovableElement" type="RigidBody2D"]
+
+[node name="Sprite2d" type="Sprite2D" parent="."]
+
+[node name="Exploadable" parent="." instance=ExtResource("1_8xnfv")]
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_biuer")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbuo1ffce6xcr"]
+
+[ext_resource type="Script" path="res://Games/Supaplex/Elements/Player/player.gd" id="1_dgcj1"]
+[ext_resource type="Texture2D" uid="uid://3c347qphu8kg" path="res://Games/Supaplex/Elements/Player/tmp_player_animationless.png" id="1_lknmv"]
+[ext_resource type="PackedScene" uid="uid://bnpmur4dcntgw" path="res://Games/Supaplex/Elements/exploadable.tscn" id="2_esrc1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o1hsk"]
+size = Vector2(64, 64)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_dgcj1")
+
+[node name="Sprite2d" type="Sprite2D" parent="."]
+texture = ExtResource("1_lknmv")
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_o1hsk")
+
+[node name="Exploadable" parent="." instance=ExtResource("2_esrc1")]
+
+[node name="Camera2d" type="Camera2D" parent="."]
+current = true

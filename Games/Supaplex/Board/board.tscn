@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bblyjhtnya5fc"]
+
+[ext_resource type="Script" path="res://Games/Supaplex/Board/board.gd" id="1_2ddqx"]
+
+[node name="Board" type="Node2D"]
+script = ExtResource("1_2ddqx")
