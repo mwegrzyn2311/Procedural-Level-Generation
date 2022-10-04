@@ -39,6 +39,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+TILE_ELEMENTS="*res://Games/Supaplex/LevelGeneration/TILE_ELEMENTS.gd"
+TILEMAP_UTILS="*res://Games/Supaplex/LevelGeneration/TILEMAP_UTILS.gd"
 CONSTANTS="*res://Games/Supaplex/Info/CONSTANTS.gd"
 SUPAPLEX_LEVEL_GENERATOR="*res://Games/Supaplex/LevelGeneration/SUPAPLEX_LEVEL_GENERATOR.gd"
 CURRENT_LEVEL_INFO="*res://Games/Supaplex/Info/CURRENT_LEVEL_INFO.gd"

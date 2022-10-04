@@ -1,12 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://2mt6hd1vftbm"]
+[gd_scene load_steps=3 format=3 uid="uid://2mt6hd1vftbm"]
 
 [ext_resource type="PackedScene" uid="uid://does8dg375ha8" path="res://Games/Supaplex/Elements/movable_element.tscn" id="1_mcati"]
 [ext_resource type="Texture2D" uid="uid://dyg3usisfaof1" path="res://Games/Supaplex/Elements/Point/tmp_point.png" id="2_n6hvy"]
-[ext_resource type="PackedScene" uid="uid://b1bu1sp3neq57" path="res://Games/Supaplex/Elements/eatable.tscn" id="3_c2my0"]
 
-[node name="Point" instance=ExtResource("1_mcati")]
+[node name="Point" groups=["eatable"] instance=ExtResource("1_mcati")]
 
 [node name="Sprite2d" parent="." index="0"]
 texture = ExtResource("2_n6hvy")
-
-[node name="eatable" parent="." index="2" instance=ExtResource("3_c2my0")]

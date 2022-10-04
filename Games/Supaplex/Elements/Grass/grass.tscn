@@ -1,15 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cm4gewfmpw7ia"]
+[gd_scene load_steps=3 format=3 uid="uid://cg2sd743q150g"]
 
-[ext_resource type="PackedScene" uid="uid://sh2ule304uhg" path="res://Games/Supaplex/Elements/static_element.tscn" id="1_h5q7j"]
+[ext_resource type="PackedScene" uid="uid://51au0lpa2ecr" path="res://Games/Supaplex/Elements/static_solid_element.tscn" id="1_jvkst"]
 [ext_resource type="Texture2D" uid="uid://d064jv64i718p" path="res://Games/Supaplex/Elements/Grass/tmp_grass.png" id="2_ms2fa"]
-[ext_resource type="PackedScene" uid="uid://b1bu1sp3neq57" path="res://Games/Supaplex/Elements/eatable.tscn" id="3_a5m1g"]
-[ext_resource type="PackedScene" uid="uid://bnpmur4dcntgw" path="res://Games/Supaplex/Elements/exploadable.tscn" id="4_plvuv"]
 
-[node name="Grass" instance=ExtResource("1_h5q7j")]
+[node name="Grass" instance=ExtResource("1_jvkst")]
 
 [node name="Sprite2d" parent="." index="0"]
 texture = ExtResource("2_ms2fa")
-
-[node name="eatable" parent="." index="1" instance=ExtResource("3_a5m1g")]
-
-[node name="Exploadable" parent="." index="2" instance=ExtResource("4_plvuv")]

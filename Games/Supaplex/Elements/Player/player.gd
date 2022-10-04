@@ -1,29 +1,76 @@
 extends CharacterBody2D
 class_name Player
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+@onready var ray: RayCast2D = $MoveDirRayCast
+@onready var falling_objects_ray: RayCast2D = $FallingObjectsRayCast
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var direction: Vector2 = Vector2.ZERO
 
+var _pixels_per_second: float = CONSTANTS.ELE_SPEED_MULT * CONSTANTS.TILE_SIZE
+var _step_size: float = 1 / _pixels_per_second
+
+var _step: float = 0
+var _pixels_moved: int = 0
 
 func set_coords(coordinates: Vector2):
 	self.position = (coordinates + Vector2(1, 1)) * CONSTANTS.TILE_SIZE
 
 func _physics_process(delta):
-	var direction_y = Input.get_axis("ui_up", "ui_down")
-	if direction_y:
-		velocity.y = direction_y * SPEED
-	else:
-		velocity.y = move_toward(velocity.y, 0, SPEED)
+	if not is_moving():
+		if not self.move():
+			return
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction_x = Input.get_axis("ui_left", "ui_right")
-	if direction_x:
-		velocity.x = direction_x * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+	self._step += delta
+	
+	var steps: int = floor(self._step / self._step_size)
+	if steps:
+		self._step -= steps * self._step_size
+		while steps > 0 and _pixels_moved < CONSTANTS.TILE_SIZE:
+			self._pixels_moved += 1
+			steps -= 1
+			move_and_collide(self.direction, false, 0.0)
+		if self._pixels_moved == CONSTANTS.TILE_SIZE:
+			self.direction = Vector2.ZERO
+			self._pixels_moved = 0
+			self._step = 0
 
-	move_and_slide()
+func is_moving() -> bool:
+	return self.direction != Vector2.ZERO
+
+# Returns true if can move afterwards
+func move() -> bool:
+	self.set_move_dir_from_input()
+	
+	if self.direction == Vector2.ZERO:
+		return false
+	
+	ray.target_position = self.direction * CONSTANTS.TILE_SIZE
+	ray.force_raycast_update()
+	falling_objects_ray.target_position.x = self.direction.x * CONSTANTS.TILE_SIZE
+	falling_objects_ray.force_raycast_update()
+	if falling_objects_ray.is_colliding():
+		var collider = falling_objects_ray.get_collider()
+		if collider.is_in_group("movable") and (collider.is_moving() or collider.try_for_movement()):
+			return false
+	if ray.is_colliding():
+		var collider = ray.get_collider()
+		if collider.is_in_group("eatable"):
+			if collider.eat():
+				return true
+		elif collider.is_in_group("movable"):
+			if collider.push(self.direction):
+				return true
+			else:
+				self.direction = Vector2.ZERO
+				return false
+		else:
+			self.direction = Vector2.ZERO
+			return false
+	else:
+		return true
+
+func set_move_dir_from_input():
+	self.direction.x = Input.get_axis("ui_left", "ui_right")
+	if self.direction == Vector2.ZERO:
+			self.direction.y = Input.get_axis("ui_up", "ui_down")
+	

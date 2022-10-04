@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Games/Supaplex/Elements/Wall/wall.gd" id="2_bng4f"]
 [ext_resource type="Texture2D" uid="uid://dnxrjn2dqp8m8" path="res://Games/Supaplex/Elements/Wall/supaplex_wall.png" id="2_dfhoc"]
 
-[node name="Wall" instance=ExtResource("1_5lk6s")]
+[node name="Wall" groups=["exploadable"] instance=ExtResource("1_5lk6s")]
 script = ExtResource("2_bng4f")
 
 [node name="Sprite2d" parent="." index="0"]

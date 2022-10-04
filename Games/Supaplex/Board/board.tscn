@@ -1,6 +1,90 @@
-[gd_scene load_steps=2 format=3 uid="uid://bblyjhtnya5fc"]
+[gd_scene load_steps=7 format=3 uid="uid://bblyjhtnya5fc"]
 
 [ext_resource type="Script" path="res://Games/Supaplex/Board/board.gd" id="1_2ddqx"]
+[ext_resource type="PackedScene" uid="uid://cg2sd743q150g" path="res://Games/Supaplex/Elements/Grass/grass.tscn" id="2_mmnyc"]
+[ext_resource type="PackedScene" uid="uid://dbuo1ffce6xcr" path="res://Games/Supaplex/Elements/Player/player.tscn" id="2_u5nec"]
+[ext_resource type="PackedScene" uid="uid://b6p2nci0wui2e" path="res://Games/Supaplex/Elements/Wall/wall.tscn" id="3_av25s"]
+[ext_resource type="PackedScene" uid="uid://c7d6gjyc1c6t0" path="res://Games/Supaplex/Elements/Boulder/boulder.tscn" id="3_qs0ol"]
+[ext_resource type="PackedScene" uid="uid://2mt6hd1vftbm" path="res://Games/Supaplex/Elements/Point/point.tscn" id="6_l45q1"]
 
 [node name="Board" type="Node2D"]
 script = ExtResource("1_2ddqx")
+
+[node name="Fence" type="Node2D" parent="."]
+
+[node name="GameElements" type="Node2D" parent="."]
+
+[node name="TmpTestingElements" type="Node2D" parent="."]
+
+[node name="Player" parent="TmpTestingElements" groups=["player"] instance=ExtResource("2_u5nec")]
+position = Vector2(384, 192)
+
+[node name="Walls" type="Node2D" parent="TmpTestingElements"]
+
+[node name="Wall5" parent="TmpTestingElements/Walls" instance=ExtResource("3_av25s")]
+position = Vector2(512, 256)
+
+[node name="Wall4" parent="TmpTestingElements/Walls" instance=ExtResource("3_av25s")]
+position = Vector2(448, 384)
+
+[node name="Wall3" parent="TmpTestingElements/Walls" instance=ExtResource("3_av25s")]
+position = Vector2(448, 256)
+
+[node name="Wall2" parent="TmpTestingElements/Walls" instance=ExtResource("3_av25s")]
+position = Vector2(512, 128)
+
+[node name="Wall" parent="TmpTestingElements/Walls" instance=ExtResource("3_av25s")]
+position = Vector2(384, 128)
+
+[node name="Wall6" parent="TmpTestingElements/Walls" instance=ExtResource("3_av25s")]
+position = Vector2(512, 384)
+
+[node name="Wall7" parent="TmpTestingElements/Walls" instance=ExtResource("3_av25s")]
+position = Vector2(576, 384)
+
+[node name="Wall8" parent="TmpTestingElements/Walls" instance=ExtResource("3_av25s")]
+position = Vector2(640, 256)
+
+[node name="Wall9" parent="TmpTestingElements/Walls" instance=ExtResource("3_av25s")]
+position = Vector2(640, 384)
+
+[node name="Wall10" parent="TmpTestingElements/Walls" instance=ExtResource("3_av25s")]
+position = Vector2(640, 128)
+
+[node name="Wall11" parent="TmpTestingElements/Walls" instance=ExtResource("3_av25s")]
+position = Vector2(640, 320)
+
+[node name="Wall12" parent="TmpTestingElements/Walls" instance=ExtResource("3_av25s")]
+position = Vector2(640, 192)
+
+[node name="Wall13" parent="TmpTestingElements/Walls" instance=ExtResource("3_av25s")]
+position = Vector2(640, 64)
+
+[node name="Grasses" type="Node2D" parent="TmpTestingElements"]
+
+[node name="Grass" parent="TmpTestingElements/Grasses" instance=ExtResource("2_mmnyc")]
+position = Vector2(256, 320)
+
+[node name="Grass2" parent="TmpTestingElements/Grasses" instance=ExtResource("2_mmnyc")]
+position = Vector2(192, 256)
+
+[node name="Grass3" parent="TmpTestingElements/Grasses" instance=ExtResource("2_mmnyc")]
+position = Vector2(320, 320)
+
+[node name="Boulders" type="Node2D" parent="TmpTestingElements"]
+
+[node name="Boulder" parent="TmpTestingElements/Boulders" instance=ExtResource("3_qs0ol")]
+position = Vector2(192, 192)
+gravity_scale = 1.0
+
+[node name="Boulder2" parent="TmpTestingElements/Boulders" instance=ExtResource("3_qs0ol")]
+position = Vector2(256, 192)
+gravity_scale = 1.0
+
+[node name="Boulder3" parent="TmpTestingElements/Boulders" instance=ExtResource("3_qs0ol")]
+position = Vector2(448, 128)
+
+[node name="Points" type="Node2D" parent="TmpTestingElements"]
+
+[node name="Point" parent="TmpTestingElements/Points" instance=ExtResource("6_l45q1")]
+position = Vector2(448, 192)
