@@ -48,9 +48,11 @@ func move() -> bool:
 	ray.force_raycast_update()
 	falling_objects_ray.target_position.x = self.direction.x * CONSTANTS.TILE_SIZE
 	falling_objects_ray.force_raycast_update()
+	# FIXME: Something is wrong here
 	if falling_objects_ray.is_colliding():
 		var collider = falling_objects_ray.get_collider()
-		if collider.is_in_group("movable") and (collider.is_moving() or collider.try_for_movement()):
+		if collider.is_in_group("movable") and (collider.is_moving()):
+			self.direction = Vector2.ZERO
 			return false
 	if ray.is_colliding():
 		var collider = ray.get_collider()
