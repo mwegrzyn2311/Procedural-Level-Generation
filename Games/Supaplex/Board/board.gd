@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var fence: Node2D = $Fence
 @onready var game_elements: Node2D = $GameElements
+@onready var tmp_testing_elements: Node2D = $TmpTestingElements
 
 func _ready():
 	self.generate_fence()
@@ -29,6 +30,5 @@ func generate_elements():
 #	counter += 1
 #	if counter > 333:
 #		counter = 0
-#		var children = game_elements.get_children()
-#		for child in children:
-#			print(child.position)
+#		var points = tmp_testing_elements.get_child(4).get_children()
+#		print(points.size())

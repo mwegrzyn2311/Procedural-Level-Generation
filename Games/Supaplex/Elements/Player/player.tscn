@@ -5,7 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://3jbv6fsvf4lj" path="res://Games/Supaplex/Elements/tile_collision.tscn" id="3_1aybp"]
 [ext_resource type="PackedScene" uid="uid://caqbelolne23g" path="res://Games/Supaplex/Elements/move_dir_ray_cast.tscn" id="3_esdch"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["exploadable", "explosive"]]
+z_index = 1
 script = ExtResource("1_dgcj1")
 
 [node name="Sprite2d" type="Sprite2D" parent="."]
@@ -18,5 +19,8 @@ current = true
 
 [node name="TileCollision" parent="." instance=ExtResource("3_1aybp")]
 
-[node name="FallingObjectsRayCast" type="RayCast2D" parent="."]
+[node name="FallingObjectsRayCastUp" type="RayCast2D" parent="."]
 target_position = Vector2(64, -48)
+
+[node name="FallingObjectsRayCastDown" type="RayCast2D" parent="."]
+target_position = Vector2(64, 48)

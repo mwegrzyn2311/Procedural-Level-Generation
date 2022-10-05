@@ -17,7 +17,7 @@ script = ExtResource("1_2ddqx")
 [node name="TmpTestingElements" type="Node2D" parent="."]
 
 [node name="Player" parent="TmpTestingElements" groups=["player"] instance=ExtResource("2_u5nec")]
-position = Vector2(384, 192)
+position = Vector2(192, 512)
 
 [node name="Walls" type="Node2D" parent="TmpTestingElements"]
 
@@ -84,7 +84,13 @@ gravity_scale = 1.0
 [node name="Boulder3" parent="TmpTestingElements/Boulders" instance=ExtResource("3_qs0ol")]
 position = Vector2(448, 128)
 
+[node name="Boulder4" parent="TmpTestingElements/Boulders" instance=ExtResource("3_qs0ol")]
+position = Vector2(128, 384)
+
 [node name="Points" type="Node2D" parent="TmpTestingElements"]
 
 [node name="Point" parent="TmpTestingElements/Points" instance=ExtResource("6_l45q1")]
 position = Vector2(448, 192)
+
+[node name="Point2" parent="TmpTestingElements/Points" instance=ExtResource("6_l45q1")]
+position = Vector2(256, 384)

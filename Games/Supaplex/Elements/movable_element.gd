@@ -1,5 +1,7 @@
 extends RigidBody2D
+class_name MovableElement
 
+@onready var sprite: Sprite2D = $Sprite2d
 
 @onready var ray: RayCast2D = $MoveDirRayCast
 @onready var gravity_ray: RayCast2D = $GravityRayCast
@@ -10,6 +12,9 @@ extends RigidBody2D
 @onready var slide_left_vert_ray: RayCast2D = $SlideLeftRayCastVert
 @onready var slide_right_horiz_ray: RayCast2D = $SlideRightRayCastHoriz
 @onready var slide_right_vert_ray: RayCast2D = $SlideRightRayCastVert
+
+@onready var explode_below_rays: Array = [$ExplodeEleBelowRayCastDown,
+ $ExplodeEleBelowRayCastRight, $ExplodeEleBelowRayCastLeft]
 
 @onready var collision_shape: CollisionShape2D = $TileCollision
 
@@ -42,6 +47,12 @@ func _physics_process(delta):
 			self._pixels_moved += 1
 			steps -= 1
 			move_and_collide(self.direction, false, 0.0)
+			if self.direction == Vector2.DOWN:
+				for explode_below_ray in explode_below_rays:
+					if explode_below_ray.is_colliding():
+						var collider = explode_below_ray.get_collider()
+						if collider.is_in_group("explosive"):
+							collider.explode()
 		if self._pixels_moved == CONSTANTS.TILE_SIZE:
 			self.direction = Vector2.ZERO
 			self._pixels_moved = 0
@@ -54,6 +65,9 @@ func is_moving() -> bool:
 func push(direction: Vector2) -> bool:
 	# If is already in move, disallow pushing
 	if self.direction != Vector2.ZERO:
+		return false
+		
+	if self.is_moving() or self.try_for_gravity():
 		return false
 	
 	ray.target_position = direction * CONSTANTS.TILE_SIZE
@@ -97,6 +111,15 @@ func try_for_slide() -> bool:
 		return false
 		
 # object can't be eaten if in movement
-func eat() -> bool:
+func try_eat() -> bool:
+	if self.is_moving() or self.try_for_gravity():
+		return false
+	else:
+		eat()
+		return true
+
+func eat():
 	self.collision_shape.disabled = true
-	return self.direction == Vector2.ZERO
+
+func has_been_eaten():
+	self.queue_free()

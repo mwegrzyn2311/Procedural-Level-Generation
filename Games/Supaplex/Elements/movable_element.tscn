@@ -36,3 +36,12 @@ target_position = Vector2(64, 0)
 [node name="SlideRightRayCastVert" type="RayCast2D" parent="."]
 position = Vector2(64, 0)
 target_position = Vector2(0, 64)
+
+[node name="ExplodeEleBelowRayCastDown" type="RayCast2D" parent="."]
+target_position = Vector2(0, 41)
+
+[node name="ExplodeEleBelowRayCastRight" type="RayCast2D" parent="."]
+target_position = Vector2(39, 41)
+
+[node name="ExplodeEleBelowRayCastLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-39, 41)

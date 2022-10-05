@@ -1,7 +1,7 @@
 extends Node
 
-var width: int = 10
-var height: int = 10
+var width: int = 20
+var height: int = 20
 var difficulty: int = 5
 
 var level_map: Array = []
