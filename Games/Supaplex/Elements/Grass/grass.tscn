@@ -3,7 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://51au0lpa2ecr" path="res://Games/Supaplex/Elements/static_solid_element.tscn" id="1_jvkst"]
 [ext_resource type="Texture2D" uid="uid://d064jv64i718p" path="res://Games/Supaplex/Elements/Grass/tmp_grass.png" id="2_ms2fa"]
 
-[node name="Grass" instance=ExtResource("1_jvkst")]
+[node name="Grass" groups=["eatable"] instance=ExtResource("1_jvkst")]
 
 [node name="Sprite2d" parent="." index="0"]
 texture = ExtResource("2_ms2fa")
+region_rect = Rect2(0, 0, 64, 64)

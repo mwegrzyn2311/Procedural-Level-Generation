@@ -8,10 +8,16 @@ class_name MovableElement
 @onready var gravity_ray_right: RayCast2D = $GravityRayCastRight
 @onready var gravity_ray_left: RayCast2D = $GravityRayCastLeft
 
-@onready var slide_left_horiz_ray: RayCast2D = $SlideLeftRayCastHoriz
-@onready var slide_left_vert_ray: RayCast2D = $SlideLeftRayCastVert
-@onready var slide_right_horiz_ray: RayCast2D = $SlideRightRayCastHoriz
-@onready var slide_right_vert_ray: RayCast2D = $SlideRightRayCastVert
+@onready var gravity_rays: Array = [gravity_ray, $GravityRayCastRight,
+ $GravityRayCastLeft, $GravityRayCastEnsureSlowerFall,
+ $GravityRayCastRightEnsureSlowerFall, $GravityRayCastLeftEnsureSlowerFall
+]
+
+
+@onready var slide_right_rays = [$SlideRightRayCastHoriz, 
+$SlideRightRayCastHorizUp, $SlideRightRayCastVert]
+@onready var slide_left_rays: Array = [$SlideLeftRayCastHoriz, 
+$SlideLeftRayCastHorizUp, $SlideLeftRayCastVert]
 
 @onready var explode_below_rays: Array = [$ExplodeEleBelowRayCastDown,
  $ExplodeEleBelowRayCastRight, $ExplodeEleBelowRayCastLeft]
@@ -88,7 +94,7 @@ func try_for_movement() -> bool:
 
 # TODO: Because of smalled collision shapes, while something is pushed underneath, we need to make sure objects above don't start falling
 func try_for_gravity() -> bool:
-	if !gravity_ray.is_colliding() and !gravity_ray_left.is_colliding() and !gravity_ray_right.is_colliding():
+	if !are_rays_colliding(gravity_rays):
 		self.direction = Vector2.DOWN
 		return true
 	return false
@@ -97,14 +103,18 @@ func try_for_slide() -> bool:
 	# It's needed because of smaller collision shapes and objects being pushed underneath
 	if !gravity_ray.is_colliding():
 		return false
+	
 	var ele_below = gravity_ray.get_collider()
 	if !ele_below.is_in_group("movable"):
 		return false
 	
-	if !slide_right_horiz_ray.is_colliding() and !slide_right_vert_ray.is_colliding():
+	if ele_below.is_moving() or ele_below.try_for_movement():
+		return false
+	
+	if !are_rays_colliding(slide_right_rays):
 		self.direction = Vector2.RIGHT
 		return true
-	elif !slide_left_horiz_ray.is_colliding() and !slide_left_vert_ray.is_colliding():
+	elif !are_rays_colliding(slide_left_rays):
 		self.direction = Vector2.LEFT
 		return true
 	else:
@@ -123,3 +133,10 @@ func eat():
 
 func has_been_eaten():
 	self.queue_free()
+
+# Util part: Consider moving to an external file
+func are_rays_colliding(rays: Array) -> bool:
+	return rays.filter(is_ray_colliding).size() != 0
+
+func is_ray_colliding(ray: RayCast2D) -> bool:
+	return ray.is_colliding()

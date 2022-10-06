@@ -9,5 +9,4 @@
 texture_filter = 1
 texture_repeat = 2
 texture = ExtResource("2_n6hvy")
-region_enabled = true
 region_rect = Rect2(0, 0, 64, 64)

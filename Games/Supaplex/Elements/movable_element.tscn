@@ -9,6 +9,8 @@ gravity_scale = 0.0
 script = ExtResource("1_lyefr")
 
 [node name="Sprite2d" type="Sprite2D" parent="."]
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
 
 [node name="TileCollision" parent="." instance=ExtResource("1_q6wfi")]
 
@@ -23,8 +25,20 @@ target_position = Vector2(39, 64)
 [node name="GravityRayCastLeft" type="RayCast2D" parent="."]
 target_position = Vector2(-39, 64)
 
+[node name="GravityRayCastEnsureSlowerFall" type="RayCast2D" parent="."]
+target_position = Vector2(0, 103)
+
+[node name="GravityRayCastRightEnsureSlowerFall" type="RayCast2D" parent="."]
+target_position = Vector2(39, 103)
+
+[node name="GravityRayCastLeftEnsureSlowerFall" type="RayCast2D" parent="."]
+target_position = Vector2(-39, 103)
+
 [node name="SlideLeftRayCastHoriz" type="RayCast2D" parent="."]
 target_position = Vector2(-64, 0)
+
+[node name="SlideLeftRayCastHorizUp" type="RayCast2D" parent="."]
+target_position = Vector2(-64, -39)
 
 [node name="SlideLeftRayCastVert" type="RayCast2D" parent="."]
 position = Vector2(-64, 0)
@@ -32,6 +46,9 @@ target_position = Vector2(0, 64)
 
 [node name="SlideRightRayCastHoriz" type="RayCast2D" parent="."]
 target_position = Vector2(64, 0)
+
+[node name="SlideRightRayCastHorizUp" type="RayCast2D" parent="."]
+target_position = Vector2(64, -39)
 
 [node name="SlideRightRayCastVert" type="RayCast2D" parent="."]
 position = Vector2(64, 0)
@@ -41,7 +58,7 @@ target_position = Vector2(0, 64)
 target_position = Vector2(0, 41)
 
 [node name="ExplodeEleBelowRayCastRight" type="RayCast2D" parent="."]
-target_position = Vector2(39, 41)
+target_position = Vector2(38, 41)
 
 [node name="ExplodeEleBelowRayCastLeft" type="RayCast2D" parent="."]
-target_position = Vector2(-39, 41)
+target_position = Vector2(-38, 41)

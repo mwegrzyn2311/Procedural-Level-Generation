@@ -92,7 +92,9 @@ func set_move_dir_from_input():
 	if self.direction == Vector2.ZERO:
 			self.direction.y = Input.get_axis("ui_up", "ui_down")
 
+#TODO: Implement
 func explode():
+	print(self._pixels_moved)
 	print("player explodes")
 
 func eat_one_pixel():
