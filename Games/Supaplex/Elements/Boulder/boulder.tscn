@@ -5,5 +5,5 @@
 
 [node name="Boulder" instance=ExtResource("1_1skq4")]
 
-[node name="Sprite2d" parent="." index="0"]
+[node name="TileSprite" parent="." index="0"]
 texture = ExtResource("2_st8ij")

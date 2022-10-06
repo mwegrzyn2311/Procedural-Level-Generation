@@ -1,7 +1,7 @@
 extends RigidBody2D
 class_name MovableElement
 
-@onready var sprite: Sprite2D = $Sprite2d
+@onready var sprite: Sprite2D = $TileSprite
 
 @onready var ray: RayCast2D = $MoveDirRayCast
 @onready var gravity_ray: RayCast2D = $GravityRayCast

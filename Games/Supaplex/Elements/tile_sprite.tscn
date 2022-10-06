@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://du2f0bowkjdvr"]
+
+[node name="TileSprite" type="Sprite2D"]
+texture_filter = 1
+texture_repeat = 2
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)

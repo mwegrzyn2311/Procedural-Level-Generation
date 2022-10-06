@@ -5,8 +5,5 @@
 
 [node name="Point" groups=["eatable"] instance=ExtResource("1_mcati")]
 
-[node name="Sprite2d" parent="." index="0"]
-texture_filter = 1
-texture_repeat = 2
+[node name="TileSprite" parent="." index="0"]
 texture = ExtResource("2_n6hvy")
-region_rect = Rect2(0, 0, 64, 64)
