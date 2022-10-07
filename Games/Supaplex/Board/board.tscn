@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bblyjhtnya5fc"]
+[gd_scene load_steps=8 format=3 uid="uid://1vhbvgfl36ai"]
 
 [ext_resource type="Script" path="res://Games/Supaplex/Board/board.gd" id="1_2ddqx"]
 [ext_resource type="PackedScene" uid="uid://cg2sd743q150g" path="res://Games/Supaplex/Elements/Grass/grass.tscn" id="2_mmnyc"]

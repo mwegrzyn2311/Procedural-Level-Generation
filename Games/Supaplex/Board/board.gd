@@ -7,7 +7,9 @@ extends Node2D
 func _ready():
 	self.generate_fence()
 	self.generate_elements()
-	print(self.testing_elements_to_generation_array_string())
+	# Generation helper
+	if tmp_testing_elements.visible:
+		print(self.testing_elements_to_generation_array_string())
 
 func generate_fence():
 	for i in range(-1, CURRENT_LEVEL_INFO.width + 2):
@@ -26,9 +28,9 @@ func generate_elements():
 
 func testing_elements_to_generation_array_string() -> String:
 	var res: String = "	return [\n"
-	for container in self.tmp_testing_elements:
-		for element in container:
-			res += "		%s,\n" % container.to_string()
+	for container in self.tmp_testing_elements.get_children():
+		for element in container.get_children():
+			res += "		%s,\n" % TILEMAP_UTILS.to_gen_str(element)
 	res +="]"
 	return res  
 

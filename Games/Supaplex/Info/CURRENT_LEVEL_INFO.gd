@@ -16,7 +16,7 @@ func set_height(height: int):
 	
 func generate_map():
 	self.level_map = SUPAPLEX_LEVEL_GENERATOR.generate_level(self.width, self.height, self.difficulty)
-	#self.points = number_of_points_in_map()
+	self.points = number_of_points_in_map()
 
 func number_of_points_in_map() -> int:
 	return self.level_map.filter(is_game_point).map(get_point_value).reduce(sum, 0)

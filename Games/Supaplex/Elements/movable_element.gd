@@ -73,7 +73,8 @@ func push(direction: Vector2) -> bool:
 	if self.direction != Vector2.ZERO:
 		return false
 		
-	if self.is_moving() or self.try_for_gravity():
+	# We cannot push something that is moving or when nothing is underneath
+	if self.is_moving() or !gravity_ray.is_colliding():
 		return false
 	
 	ray.target_position = direction * CONSTANTS.TILE_SIZE
