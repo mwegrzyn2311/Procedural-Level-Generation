@@ -1,9 +1,9 @@
 extends Node
 
-var width: int = 20
-var height: int = 20
+var width: int = 13
+var height: int = 13
 var difficulty: int = 5
-var points: int = 0
+var points: int = 2
 var collected_points: int = 0
 
 var level_map: Array = []
@@ -16,8 +16,7 @@ func set_height(height: int):
 	
 func generate_map():
 	self.level_map = SUPAPLEX_LEVEL_GENERATOR.generate_level(self.width, self.height, self.difficulty)
-	self.points = number_of_points_in_map()
-	print("hmm")
+	#self.points = number_of_points_in_map()
 
 func number_of_points_in_map() -> int:
 	return self.level_map.filter(is_game_point).map(get_point_value).reduce(sum, 0)

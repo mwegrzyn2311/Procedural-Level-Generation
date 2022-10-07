@@ -68,6 +68,9 @@ func move() -> bool:
 	# Check if player is trying to move to an occupied field
 	if ray.is_colliding():
 		var collider = ray.get_collider()
+		if collider.is_in_group("exit"):
+			collider.try_exit()
+		
 		if collider.is_in_group("eatable"):
 			if collider.try_eat():
 				eaten_ele = collider

@@ -7,6 +7,7 @@ extends Node2D
 func _ready():
 	self.generate_fence()
 	self.generate_elements()
+	print(self.testing_elements_to_generation_array_string())
 
 func generate_fence():
 	for i in range(-1, CURRENT_LEVEL_INFO.width + 2):
@@ -22,6 +23,14 @@ func generate_elements():
 	for element in CURRENT_LEVEL_INFO.level_map:
 		game_elements.add_child(element)
 		element.add_to_group("game_elements")
+
+func testing_elements_to_generation_array_string() -> String:
+	var res: String = "	return [\n"
+	for container in self.tmp_testing_elements:
+		for element in container:
+			res += "		%s,\n" % container.to_string()
+	res +="]"
+	return res  
 
 # TODO: Remove this debug function
 #var counter: int = 0
