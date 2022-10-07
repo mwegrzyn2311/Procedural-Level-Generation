@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cg2sd743q150g"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="PackedScene" uid="uid://51au0lpa2ecr" path="res://Games/Supaplex/Elements/static_solid_element.tscn" id="1_jvkst"]
+[ext_resource type="PackedScene" uid="uid://dh5wu1penwk5g" path="res://Games/Supaplex/Elements/LEGACY/static_solid_element.tscn" id="1_jvkst"]
 [ext_resource type="Texture2D" uid="uid://d064jv64i718p" path="res://Games/Supaplex/Elements/Grass/tmp_grass.png" id="2_ms2fa"]
 
 [node name="Grass" groups=["eatable"] instance=ExtResource("1_jvkst")]

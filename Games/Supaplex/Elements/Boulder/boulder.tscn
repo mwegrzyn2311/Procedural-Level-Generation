@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7d6gjyc1c6t0"]
+[gd_scene load_steps=3 format=3 uid="uid://d1kat3lfxjlap"]
 
-[ext_resource type="PackedScene" uid="uid://does8dg375ha8" path="res://Games/Supaplex/Elements/movable_element.tscn" id="1_1skq4"]
+[ext_resource type="PackedScene" path="res://Games/Supaplex/Elements/LEGACY/movable_element.tscn" id="1_1skq4"]
 [ext_resource type="Texture2D" uid="uid://d22w6kyhcpn2j" path="res://Games/Supaplex/Elements/Boulder/tmp_boulder.png" id="2_st8ij"]
 
 [node name="Boulder" instance=ExtResource("1_1skq4")]

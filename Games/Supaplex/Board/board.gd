@@ -7,7 +7,7 @@ extends Node2D
 func _ready():
 	self.generate_fence()
 	self.generate_elements()
-	print(self.testing_elements_to_generation_array_string())
+	#print(self.testing_elements_to_generation_array_string())
 
 func generate_fence():
 	for i in range(-1, CURRENT_LEVEL_INFO.width + 2):

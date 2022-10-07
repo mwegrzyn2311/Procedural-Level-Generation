@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://sh2ule304uhg"]
-
-[ext_resource type="Script" path="res://Games/Supaplex/Elements/static_element.gd" id="1_8cyhk"]
-[ext_resource type="PackedScene" uid="uid://du2f0bowkjdvr" path="res://Games/Supaplex/Elements/tile_sprite.tscn" id="2_nfemy"]
-
-[node name="StaticElement" type="StaticBody2D"]
-script = ExtResource("1_8cyhk")
-
-[node name="TileSprite" parent="." instance=ExtResource("2_nfemy")]

@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://do3oqcm6278j6"]
+[gd_scene load_steps=3 format=3 uid="uid://dxjb1vuihqrn4"]
 
-[ext_resource type="PackedScene" uid="uid://51au0lpa2ecr" path="res://Games/Supaplex/Elements/static_solid_element.tscn" id="1_a8grg"]
+[ext_resource type="PackedScene" path="res://Games/Supaplex/Elements/LEGACY/static_solid_element.tscn" id="1_a8grg"]
 [ext_resource type="Texture2D" uid="uid://dfmoxpwgygehm" path="res://Games/Supaplex/Elements/Obelisk/obelisk.png" id="2_xxs21"]
 
 [node name="Obelisk" instance=ExtResource("1_a8grg")]

@@ -1,5 +1,12 @@
-[gd_scene format=3 uid="uid://dwllp8hasv2l6"]
+[gd_scene load_steps=4 format=3 uid="uid://dwllp8hasv2l6"]
+
+[ext_resource type="Script" path="res://Games/Supaplex/Elements/base_tile_element.gd" id="1_7d1xa"]
+[ext_resource type="PackedScene" uid="uid://du2f0bowkjdvr" path="res://Games/Supaplex/Elements/tile_sprite.tscn" id="2_4xsbi"]
+[ext_resource type="PackedScene" uid="uid://3jbv6fsvf4lj" path="res://Games/Supaplex/Elements/tile_collision.tscn" id="3_r2rm8"]
 
 [node name="BaseTileElement" type="Node2D"]
+script = ExtResource("1_7d1xa")
 
-[node name="AudioListener2d" type="AudioListener2D" parent="."]
+[node name="TileSprite" parent="." instance=ExtResource("2_4xsbi")]
+
+[node name="TileCollision" parent="." instance=ExtResource("3_r2rm8")]

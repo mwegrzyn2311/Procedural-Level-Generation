@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbuo1ffce6xcr"]
+[gd_scene load_steps=6 format=3 uid="uid://boxwfnhc3acfd"]
 
 [ext_resource type="Script" path="res://Games/Supaplex/Elements/Player/player.gd" id="1_dgcj1"]
 [ext_resource type="Texture2D" uid="uid://3c347qphu8kg" path="res://Games/Supaplex/Elements/Player/tmp_player_animationless.png" id="1_lknmv"]
 [ext_resource type="PackedScene" uid="uid://du2f0bowkjdvr" path="res://Games/Supaplex/Elements/tile_sprite.tscn" id="2_jq7wh"]
 [ext_resource type="PackedScene" uid="uid://3jbv6fsvf4lj" path="res://Games/Supaplex/Elements/tile_collision.tscn" id="3_1aybp"]
-[ext_resource type="PackedScene" uid="uid://caqbelolne23g" path="res://Games/Supaplex/Elements/move_dir_ray_cast.tscn" id="3_esdch"]
+[ext_resource type="PackedScene" uid="uid://caqbelolne23g" path="res://Games/Supaplex/Elements/LEGACY/move_dir_ray_cast.tscn" id="3_esdch"]
 
 [node name="Player" type="CharacterBody2D" groups=["exploadable", "explosive"]]
 z_index = 1

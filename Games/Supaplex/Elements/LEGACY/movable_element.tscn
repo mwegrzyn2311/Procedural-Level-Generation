@@ -1,18 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://3a8fq5nb1kpt"]
+[gd_scene load_steps=5 format=3 uid="uid://dkerbg5b5ovqq"]
 
-[ext_resource type="Script" path="res://Games/Supaplex/Elements/base_tile_element.gd" id="1_i2ymr"]
-[ext_resource type="PackedScene" uid="uid://caqbelolne23g" path="res://Games/Supaplex/Elements/LEGACY/move_dir_ray_cast.tscn" id="2_fj4o7"]
-[ext_resource type="PackedScene" uid="uid://du2f0bowkjdvr" path="res://Games/Supaplex/Elements/tile_sprite.tscn" id="2_v68de"]
-[ext_resource type="PackedScene" uid="uid://3jbv6fsvf4lj" path="res://Games/Supaplex/Elements/tile_collision.tscn" id="3_san18"]
+[ext_resource type="Script" path="res://Games/Supaplex/Elements/movable_element.gd" id="1_ryklw"]
+[ext_resource type="PackedScene" uid="uid://du2f0bowkjdvr" path="res://Games/Supaplex/Elements/tile_sprite.tscn" id="2_odpsl"]
+[ext_resource type="PackedScene" uid="uid://3jbv6fsvf4lj" path="res://Games/Supaplex/Elements/tile_collision.tscn" id="3_atf7w"]
+[ext_resource type="PackedScene" uid="uid://caqbelolne23g" path="res://Games/Supaplex/Elements/LEGACY/move_dir_ray_cast.tscn" id="4_sulpw"]
 
-[node name="MovableElement" type="RigidBody2D"]
-script = ExtResource("1_i2ymr")
+[node name="MovableElement" type="RigidBody2D" groups=["movable"]]
+gravity_scale = 0.0
+script = ExtResource("1_ryklw")
 
-[node name="TileSprite" parent="." instance=ExtResource("2_v68de")]
+[node name="TileSprite" parent="." instance=ExtResource("2_odpsl")]
 
-[node name="TileCollision" parent="." instance=ExtResource("3_san18")]
+[node name="TileCollision" parent="." instance=ExtResource("3_atf7w")]
 
-[node name="MoveDirRayCast" parent="." instance=ExtResource("2_fj4o7")]
+[node name="MoveDirRayCast" parent="." instance=ExtResource("4_sulpw")]
 
 [node name="GravityRayCast" type="RayCast2D" parent="."]
 target_position = Vector2(0, 64)

@@ -9,6 +9,11 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "Node2D",
+"class": &"BaseTileElement",
+"language": &"GDScript",
+"path": "res://Games/Supaplex/Elements/base_tile_element.gd"
+}, {
 "base": "RigidBody2D",
 "class": &"MovableElement",
 "language": &"GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[{
 "path": "res://Games/Supaplex/Elements/Wall/wall.gd"
 }]
 _global_script_class_icons={
+"BaseTileElement": "",
 "MovableElement": "",
 "Player": "",
 "StaticElement": "",

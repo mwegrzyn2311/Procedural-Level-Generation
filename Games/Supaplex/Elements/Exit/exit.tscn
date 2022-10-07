@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvhpjqyedv2bn"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="PackedScene" uid="uid://51au0lpa2ecr" path="res://Games/Supaplex/Elements/static_solid_element.tscn" id="1_ayc2f"]
+[ext_resource type="PackedScene" uid="uid://dh5wu1penwk5g" path="res://Games/Supaplex/Elements/LEGACY/static_solid_element.tscn" id="1_ayc2f"]
 [ext_resource type="Texture2D" uid="uid://nbikjjaww18j" path="res://Games/Supaplex/Elements/Exit/exit.png" id="2_folyg"]
 [ext_resource type="Script" path="res://Games/Supaplex/Elements/Exit/exit.gd" id="2_haquo"]
 

@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://bblyjhtnya5fc"]
 
 [ext_resource type="Script" path="res://Games/Supaplex/Board/board.gd" id="1_2ddqx"]
-[ext_resource type="PackedScene" uid="uid://cg2sd743q150g" path="res://Games/Supaplex/Elements/Grass/grass.tscn" id="2_mmnyc"]
-[ext_resource type="PackedScene" uid="uid://dbuo1ffce6xcr" path="res://Games/Supaplex/Elements/Player/player.tscn" id="2_u5nec"]
-[ext_resource type="PackedScene" uid="uid://b6p2nci0wui2e" path="res://Games/Supaplex/Elements/Wall/wall.tscn" id="3_av25s"]
-[ext_resource type="PackedScene" uid="uid://c7d6gjyc1c6t0" path="res://Games/Supaplex/Elements/Boulder/boulder.tscn" id="3_qs0ol"]
-[ext_resource type="PackedScene" uid="uid://2mt6hd1vftbm" path="res://Games/Supaplex/Elements/Point/point.tscn" id="6_l45q1"]
-[ext_resource type="PackedScene" uid="uid://bvhpjqyedv2bn" path="res://Games/Supaplex/Elements/Exit/exit.tscn" id="7_bbnne"]
+[ext_resource type="PackedScene" path="res://Games/Supaplex/Elements/Grass/grass.tscn" id="2_mmnyc"]
+[ext_resource type="PackedScene" uid="uid://boxwfnhc3acfd" path="res://Games/Supaplex/Elements/Player/player.tscn" id="2_u5nec"]
+[ext_resource type="PackedScene" path="res://Games/Supaplex/Elements/Wall/wall.tscn" id="3_av25s"]
+[ext_resource type="PackedScene" uid="uid://d1kat3lfxjlap" path="res://Games/Supaplex/Elements/Boulder/boulder.tscn" id="3_qs0ol"]
+[ext_resource type="PackedScene" path="res://Games/Supaplex/Elements/Point/point.tscn" id="6_l45q1"]
+[ext_resource type="PackedScene" path="res://Games/Supaplex/Elements/Exit/exit.tscn" id="7_bbnne"]
 
 [node name="Board" type="Node2D"]
 script = ExtResource("1_2ddqx")
