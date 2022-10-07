@@ -3,7 +3,7 @@ extends Node
 var width: int = 13
 var height: int = 13
 var difficulty: int = 5
-var points: int = 2
+var total_points: int = 2
 var collected_points: int = 0
 
 var level_map: Array = []
@@ -16,7 +16,7 @@ func set_height(height: int):
 	
 func generate_map():
 	self.level_map = SUPAPLEX_LEVEL_GENERATOR.generate_level(self.width, self.height, self.difficulty)
-	self.points = number_of_points_in_map()
+	self.total_points = number_of_points_in_map()
 
 func number_of_points_in_map() -> int:
 	return self.level_map.filter(is_game_point).map(get_point_value).reduce(sum, 0)
@@ -24,8 +24,8 @@ func number_of_points_in_map() -> int:
 func is_game_point(ele: Node2D) -> bool:
 	return ele.is_in_group("game_point")
 
-func get_point_value(ele: Node2D) -> bool:
-	return ele.VALUE
+func get_point_value(ele: Node2D) -> int:
+	return ele.get_value()
 
 # TODO: Extract to some utils	
 func sum(accum, val) -> int:
@@ -33,6 +33,9 @@ func sum(accum, val) -> int:
 
 func inc_collected_points(quantity: int):
 	self.collected_points += quantity
+
+func win_condition_fulfilled() -> bool:
+	return  self.collected_points == self.total_points
 
 # TODO: Move to UI once it's created
 func _ready():

@@ -23,17 +23,11 @@ _global_script_classes=[{
 "class": &"StaticElement",
 "language": &"GDScript",
 "path": "res://Games/Supaplex/Elements/static_element.gd"
-}, {
-"base": "StaticElement",
-"class": &"Wall",
-"language": &"GDScript",
-"path": "res://Games/Supaplex/Elements/Wall/wall.gd"
 }]
 _global_script_class_icons={
 "MovableElement": "",
 "Player": "",
-"StaticElement": "",
-"Wall": ""
+"StaticElement": ""
 }
 
 [application]
