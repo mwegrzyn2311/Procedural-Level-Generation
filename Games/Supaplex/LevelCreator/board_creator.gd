@@ -10,5 +10,5 @@ func testing_elements_to_generation_array_string() -> String:
 	for container in self.elements.get_children():
 		for element in container.get_children():
 			res += "		%s,\n" % TILEMAP_UTILS.to_gen_str(element)
-	res +="]"
+	res += "]"
 	return res
