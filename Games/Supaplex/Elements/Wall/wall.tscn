@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6p2nci0wui2e"]
+
+[ext_resource type="PackedScene" uid="uid://51au0lpa2ecr" path="res://Games/Supaplex/Elements/static_solid_element.tscn" id="1_5lk6s"]
+[ext_resource type="Texture2D" uid="uid://dnxrjn2dqp8m8" path="res://Games/Supaplex/Elements/Wall/supaplex_wall.png" id="2_dfhoc"]
+
+[node name="Wall" groups=["exploadable"] instance=ExtResource("1_5lk6s")]
+
+[node name="TileSprite" parent="." index="0"]
+texture = ExtResource("2_dfhoc")

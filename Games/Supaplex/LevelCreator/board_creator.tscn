@@ -1,0 +1,276 @@
+[gd_scene load_steps=9 format=3 uid="uid://clch2ey87wclv"]
+
+[ext_resource type="PackedScene" uid="uid://do3oqcm6278j6" path="res://Games/Supaplex/Elements/Obelisk/obelisk.tscn" id="1_bd7yn"]
+[ext_resource type="Script" path="res://Games/Supaplex/LevelCreator/board_creator.gd" id="1_yakgo"]
+[ext_resource type="PackedScene" uid="uid://b6p2nci0wui2e" path="res://Games/Supaplex/Elements/Wall/wall.tscn" id="2_qm3t7"]
+[ext_resource type="PackedScene" uid="uid://cg2sd743q150g" path="res://Games/Supaplex/Elements/Grass/grass.tscn" id="3_xsb6u"]
+[ext_resource type="PackedScene" uid="uid://c7d6gjyc1c6t0" path="res://Games/Supaplex/Elements/Boulder/boulder.tscn" id="4_k0mk8"]
+[ext_resource type="PackedScene" uid="uid://2mt6hd1vftbm" path="res://Games/Supaplex/Elements/Point/point.tscn" id="5_p3igk"]
+[ext_resource type="PackedScene" uid="uid://dbuo1ffce6xcr" path="res://Games/Supaplex/Elements/Player/player.tscn" id="6_3ibnw"]
+[ext_resource type="PackedScene" uid="uid://bvhpjqyedv2bn" path="res://Games/Supaplex/Elements/Exit/exit.tscn" id="7_ooxgt"]
+
+[node name="BoardCreator" type="Node2D"]
+script = ExtResource("1_yakgo")
+
+[node name="Fence" type="Node2D" parent="."]
+
+[node name="Obelisk" parent="Fence" instance=ExtResource("1_bd7yn")]
+
+[node name="Obelisk33" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(0, 64)
+
+[node name="Obelisk34" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(0, 128)
+
+[node name="Obelisk40" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(0, 512)
+
+[node name="Obelisk41" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(0, 576)
+
+[node name="Obelisk51" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(0, 640)
+
+[node name="Obelisk52" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(0, 704)
+
+[node name="Obelisk53" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(960, 640)
+
+[node name="Obelisk54" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(960, 704)
+
+[node name="Obelisk50" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(960, 576)
+
+[node name="Obelisk35" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(0, 192)
+
+[node name="Obelisk36" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(0, 256)
+
+[node name="Obelisk37" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(0, 320)
+
+[node name="Obelisk38" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(0, 384)
+
+[node name="Obelisk39" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(0, 448)
+
+[node name="Obelisk42" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(960, 64)
+
+[node name="Obelisk43" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(960, 128)
+
+[node name="Obelisk44" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(960, 512)
+
+[node name="Obelisk45" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(960, 192)
+
+[node name="Obelisk46" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(960, 256)
+
+[node name="Obelisk47" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(960, 320)
+
+[node name="Obelisk48" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(960, 384)
+
+[node name="Obelisk49" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(960, 448)
+
+[node name="Obelisk2" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(64, 0)
+
+[node name="Obelisk3" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(128, 0)
+
+[node name="Obelisk4" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(192, 0)
+
+[node name="Obelisk5" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(256, 0)
+
+[node name="Obelisk6" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(320, 0)
+
+[node name="Obelisk7" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(384, 0)
+
+[node name="Obelisk8" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(448, 0)
+
+[node name="Obelisk9" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(512, 0)
+
+[node name="Obelisk10" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(576, 0)
+
+[node name="Obelisk11" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(640, 0)
+
+[node name="Obelisk12" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(704, 0)
+
+[node name="Obelisk13" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(768, 0)
+
+[node name="Obelisk14" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(832, 0)
+
+[node name="Obelisk15" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(896, 0)
+
+[node name="Obelisk16" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(960, 0)
+
+[node name="Obelisk17" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(0, 768)
+
+[node name="Obelisk18" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(64, 768)
+
+[node name="Obelisk19" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(128, 768)
+
+[node name="Obelisk20" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(192, 768)
+
+[node name="Obelisk21" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(256, 768)
+
+[node name="Obelisk22" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(320, 768)
+
+[node name="Obelisk23" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(384, 768)
+
+[node name="Obelisk24" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(448, 768)
+
+[node name="Obelisk25" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(512, 768)
+
+[node name="Obelisk26" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(576, 768)
+
+[node name="Obelisk27" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(640, 768)
+
+[node name="Obelisk28" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(704, 768)
+
+[node name="Obelisk29" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(768, 768)
+
+[node name="Obelisk30" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(832, 768)
+
+[node name="Obelisk31" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(896, 768)
+
+[node name="Obelisk32" parent="Fence" instance=ExtResource("1_bd7yn")]
+position = Vector2(960, 768)
+
+[node name="Elements" type="Node2D" parent="."]
+
+[node name="Walls" type="Node2D" parent="Elements"]
+
+[node name="Wall5" parent="Elements/Walls" instance=ExtResource("2_qm3t7")]
+position = Vector2(512, 256)
+
+[node name="Wall4" parent="Elements/Walls" instance=ExtResource("2_qm3t7")]
+position = Vector2(448, 384)
+
+[node name="Wall3" parent="Elements/Walls" instance=ExtResource("2_qm3t7")]
+position = Vector2(448, 256)
+
+[node name="Wall2" parent="Elements/Walls" instance=ExtResource("2_qm3t7")]
+position = Vector2(512, 128)
+
+[node name="Wall" parent="Elements/Walls" instance=ExtResource("2_qm3t7")]
+position = Vector2(384, 128)
+
+[node name="Wall6" parent="Elements/Walls" instance=ExtResource("2_qm3t7")]
+position = Vector2(512, 384)
+
+[node name="Wall7" parent="Elements/Walls" instance=ExtResource("2_qm3t7")]
+position = Vector2(576, 384)
+
+[node name="Wall8" parent="Elements/Walls" instance=ExtResource("2_qm3t7")]
+position = Vector2(640, 256)
+
+[node name="Wall9" parent="Elements/Walls" instance=ExtResource("2_qm3t7")]
+position = Vector2(640, 384)
+
+[node name="Wall10" parent="Elements/Walls" instance=ExtResource("2_qm3t7")]
+position = Vector2(640, 128)
+
+[node name="Wall11" parent="Elements/Walls" instance=ExtResource("2_qm3t7")]
+position = Vector2(640, 320)
+
+[node name="Wall12" parent="Elements/Walls" instance=ExtResource("2_qm3t7")]
+position = Vector2(640, 192)
+
+[node name="Wall13" parent="Elements/Walls" instance=ExtResource("2_qm3t7")]
+position = Vector2(640, 64)
+
+[node name="Grasses" type="Node2D" parent="Elements"]
+
+[node name="Grass" parent="Elements/Grasses" instance=ExtResource("3_xsb6u")]
+position = Vector2(256, 320)
+
+[node name="Grass2" parent="Elements/Grasses" instance=ExtResource("3_xsb6u")]
+position = Vector2(192, 256)
+
+[node name="Grass3" parent="Elements/Grasses" instance=ExtResource("3_xsb6u")]
+position = Vector2(320, 320)
+
+[node name="Boulders" type="Node2D" parent="Elements"]
+
+[node name="Boulder" parent="Elements/Boulders" instance=ExtResource("4_k0mk8")]
+position = Vector2(192, 192)
+gravity_scale = 1.0
+
+[node name="Boulder2" parent="Elements/Boulders" instance=ExtResource("4_k0mk8")]
+position = Vector2(256, 192)
+gravity_scale = 1.0
+
+[node name="Boulder3" parent="Elements/Boulders" instance=ExtResource("4_k0mk8")]
+position = Vector2(448, 128)
+
+[node name="Boulder4" parent="Elements/Boulders" instance=ExtResource("4_k0mk8")]
+position = Vector2(128, 384)
+
+[node name="Boulder5" parent="Elements/Boulders" instance=ExtResource("4_k0mk8")]
+position = Vector2(320, 640)
+
+[node name="Boulder6" parent="Elements/Boulders" instance=ExtResource("4_k0mk8")]
+position = Vector2(384, 576)
+
+[node name="Boulder7" parent="Elements/Boulders" instance=ExtResource("4_k0mk8")]
+position = Vector2(384, 512)
+
+[node name="Boulder8" parent="Elements/Boulders" instance=ExtResource("4_k0mk8")]
+position = Vector2(320, 512)
+
+[node name="Points" type="Node2D" parent="Elements"]
+
+[node name="Point" parent="Elements/Points" instance=ExtResource("5_p3igk")]
+position = Vector2(448, 192)
+
+[node name="Point2" parent="Elements/Points" instance=ExtResource("5_p3igk")]
+position = Vector2(256, 384)
+
+[node name="Players" type="Node2D" parent="Elements"]
+
+[node name="Player" parent="Elements/Players" groups=["player"] instance=ExtResource("6_3ibnw")]
+position = Vector2(512, 512)
+
+[node name="Exits" type="Node2D" parent="Elements"]
+
+[node name="Exit" parent="Elements/Exits" groups=["exit"] instance=ExtResource("7_ooxgt")]
+position = Vector2(448, 512)

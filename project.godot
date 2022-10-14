@@ -8,8 +8,39 @@
 
 config_version=5
 
+_global_script_classes=[{
+"base": "RigidBody2D",
+"class": &"MovableElement",
+"language": &"GDScript",
+"path": "res://Games/Supaplex/Elements/movable_element.gd"
+}, {
+"base": "CharacterBody2D",
+"class": &"Player",
+"language": &"GDScript",
+"path": "res://Games/Supaplex/Elements/Player/player.gd"
+}, {
+"base": "StaticBody2D",
+"class": &"StaticElement",
+"language": &"GDScript",
+"path": "res://Games/Supaplex/Elements/static_element.gd"
+}]
+_global_script_class_icons={
+"MovableElement": "",
+"Player": "",
+"StaticElement": ""
+}
+
 [application]
 
 config/name="Magisterka"
+run/main_scene="res://Games/Supaplex/Board/board.tscn"
 config/features=PackedStringArray("4.0", "Vulkan Clustered")
 config/icon="res://icon.svg"
+
+[autoload]
+
+TILE_ELEMENTS="*res://Games/Supaplex/LevelGeneration/TILE_ELEMENTS.gd"
+TILEMAP_UTILS="*res://Games/Supaplex/LevelGeneration/TILEMAP_UTILS.gd"
+CONSTANTS="*res://Games/Supaplex/Info/CONSTANTS.gd"
+SUPAPLEX_LEVEL_GENERATOR="*res://Games/Supaplex/LevelGeneration/SUPAPLEX_LEVEL_GENERATOR.gd"
+CURRENT_LEVEL_INFO="*res://Games/Supaplex/Info/CURRENT_LEVEL_INFO.gd"

@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvhpjqyedv2bn"]
+
+[ext_resource type="PackedScene" uid="uid://51au0lpa2ecr" path="res://Games/Supaplex/Elements/static_solid_element.tscn" id="1_ayc2f"]
+[ext_resource type="Texture2D" uid="uid://nbikjjaww18j" path="res://Games/Supaplex/Elements/Exit/exit.png" id="2_folyg"]
+[ext_resource type="Script" path="res://Games/Supaplex/Elements/Exit/exit.gd" id="2_haquo"]
+
+[node name="Exit" instance=ExtResource("1_ayc2f")]
+script = ExtResource("2_haquo")
+
+[node name="TileSprite" parent="." index="0"]
+texture = ExtResource("2_folyg")
