@@ -1,0 +1,128 @@
+extends Node
+
+const WALL = "wall"
+const GRASS = "grass"
+
+# Consider Array[Dictionary[Vector2,String]] as well
+const TEMPLATES_1: Array = [
+	[
+		[WALL, WALL, WALL],
+		[WALL, WALL, WALL],
+		[WALL, WALL, WALL]
+	],
+	[
+		[WALL, WALL, WALL],
+		[WALL, WALL, WALL],
+		[GRASS, GRASS, GRASS]
+	],
+	[
+		[WALL, WALL, WALL],
+		[GRASS, GRASS, GRASS],
+		[GRASS, GRASS, GRASS]
+	],
+	[
+		[GRASS, GRASS, GRASS],
+		[WALL, WALL, WALL],
+		[GRASS, GRASS, GRASS]
+	],
+	[
+		[GRASS, GRASS, GRASS],
+		[GRASS, GRASS, GRASS],
+		[GRASS, GRASS, GRASS]
+	],
+	[
+		[GRASS, GRASS, GRASS],
+		[GRASS, WALL, GRASS],
+		[GRASS, GRASS, GRASS]
+	],
+	[
+		[WALL, GRASS, GRASS],
+		[GRASS, GRASS, GRASS],
+		[GRASS, GRASS, GRASS]
+	],
+	[
+		[WALL, GRASS, GRASS],
+		[GRASS, GRASS, GRASS],
+		[GRASS, GRASS, WALL]
+	],
+	[
+		[WALL, GRASS, GRASS],
+		[GRASS, GRASS, GRASS],
+		[WALL, GRASS, GRASS]
+	],
+	[
+		[WALL, GRASS, WALL],
+		[GRASS, GRASS, GRASS],
+		[WALL, GRASS, GRASS]
+	],
+	[
+		[WALL, GRASS, WALL],
+		[GRASS, GRASS, GRASS],
+		[WALL, GRASS, WALL]
+	],
+	[
+		[WALL, GRASS, WALL],
+		[GRASS, WALL, GRASS],
+		[WALL, GRASS, WALL]
+	],
+	[
+		[WALL, GRASS, GRASS],
+		[WALL, WALL, GRASS],
+		[WALL, GRASS, GRASS]
+	],
+	[
+		[GRASS, WALL, GRASS],
+		[WALL, WALL, GRASS],
+		[GRASS, WALL, GRASS]
+	],
+		[
+		[GRASS, GRASS, GRASS],
+		[WALL, WALL, GRASS],
+		[GRASS, WALL, GRASS]
+	],
+	[
+		[WALL, GRASS, GRASS],
+		[WALL, WALL, WALL],
+		[WALL, GRASS, GRASS]
+	],
+	[
+		[WALL, GRASS, WALL],
+		[WALL, GRASS, GRASS],
+		[WALL, GRASS, WALL]
+	],
+	[
+		[WALL, WALL, WALL],
+		[WALL, GRASS, GRASS],
+		[WALL, GRASS, WALL]
+	],
+	[
+		[WALL, WALL, WALL],
+		[WALL, GRASS, GRASS],
+		[WALL, GRASS, GRASS]
+	],
+	[
+		[WALL, WALL, WALL],
+		[WALL, GRASS, GRASS],
+		[WALL, WALL, WALL]
+	],
+	[
+		[WALL, WALL, WALL],
+		[WALL, GRASS, GRASS],
+		[WALL, WALL, GRASS]
+	],
+	[
+		[WALL, GRASS, WALL],
+		[WALL, GRASS, GRASS],
+		[WALL, WALL, GRASS]
+	],
+	[
+		[GRASS, WALL, WALL],
+		[GRASS, GRASS, GRASS],
+		[WALL, WALL, GRASS]
+	],
+	[
+		[WALL, WALL, WALL],
+		[GRASS, GRASS, GRASS],
+		[WALL, WALL, GRASS]
+	],
+]

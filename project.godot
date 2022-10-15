@@ -39,8 +39,12 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+RNG_UTIL="*res://Common/RNG_UTIL.gd"
+TEMPLATE_LEVEL_GENERATOR="*res://Algorithm/TEMPLATE_LEVEL_GENERATOR.gd"
+SUPAPLEX_TEMPLATES="*res://Games/Supaplex/LevelGeneration/SUPAPLEX_TEMPLATES.gd"
 TILE_ELEMENTS="*res://Games/Supaplex/LevelGeneration/TILE_ELEMENTS.gd"
 TILEMAP_UTILS="*res://Games/Supaplex/LevelGeneration/TILEMAP_UTILS.gd"
 CONSTANTS="*res://Games/Supaplex/Info/CONSTANTS.gd"
+LEVEL_CONVERTER="*res://Games/Supaplex/LevelGeneration/LEVEL_CONVERTER.gd"
 SUPAPLEX_LEVEL_GENERATOR="*res://Games/Supaplex/LevelGeneration/SUPAPLEX_LEVEL_GENERATOR.gd"
 CURRENT_LEVEL_INFO="*res://Games/Supaplex/Info/CURRENT_LEVEL_INFO.gd"
