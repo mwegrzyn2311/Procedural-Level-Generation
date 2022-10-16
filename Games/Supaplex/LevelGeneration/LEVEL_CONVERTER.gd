@@ -11,6 +11,7 @@ var STR_TO_TILE: Dictionary = {
 func vec_string_dict_to_tile_arr(vec_string_dict) -> Array:
 	var res: Array = []
 	for index in vec_string_dict:
-		res.append(TILEMAP_UTILS.ele_instance(STR_TO_TILE[vec_string_dict[index]], index))
+		if vec_string_dict[index] != "empty":
+			res.append(TILEMAP_UTILS.ele_instance(STR_TO_TILE[vec_string_dict[index]], index))
 		
 	return res
