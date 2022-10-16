@@ -3,8 +3,11 @@ extends Node
 const WALL = "wall"
 const GRASS = "grass"
 
-# Consider Array[Dictionary[Vector2,String]] as well
-const TEMPLATES_1: Array = [
+# Consider Array[Dictionary[Vector2,String]] as well for templates
+var TEMPLATES_1: LevelTemplates = LevelTemplates.new(
+	3,
+	3,
+[
 	[
 		[WALL, WALL, WALL],
 		[WALL, WALL, WALL],
@@ -125,4 +128,75 @@ const TEMPLATES_1: Array = [
 		[GRASS, GRASS, GRASS],
 		[WALL, WALL, GRASS]
 	],
-]
+])
+
+var TEMPLATES_2: LevelTemplates = LevelTemplates.new(
+	3,
+	3,
+[
+	[
+		[WALL, WALL, WALL],
+		[WALL, WALL, WALL],
+		[WALL, WALL, WALL]
+	],
+	[
+		[WALL, WALL, WALL],
+		[GRASS, GRASS, GRASS],
+		[GRASS, GRASS, GRASS]
+	],
+	[
+		[GRASS, GRASS, GRASS],
+		[WALL, WALL, WALL],
+		[GRASS, GRASS, GRASS]
+	],
+	[
+		[GRASS, GRASS, GRASS],
+		[GRASS, GRASS, GRASS],
+		[GRASS, GRASS, GRASS]
+	],
+	[
+		[GRASS, GRASS, GRASS],
+		[GRASS, WALL, GRASS],
+		[GRASS, GRASS, GRASS]
+	],
+	[
+		[WALL, GRASS, GRASS],
+		[GRASS, GRASS, GRASS],
+		[GRASS, GRASS, GRASS]
+	],
+	[
+		[WALL, GRASS, GRASS],
+		[GRASS, GRASS, GRASS],
+		[GRASS, GRASS, WALL]
+	],
+	[
+		[WALL, GRASS, GRASS],
+		[GRASS, GRASS, GRASS],
+		[WALL, GRASS, GRASS]
+	],
+	[
+		[WALL, GRASS, WALL],
+		[GRASS, GRASS, GRASS],
+		[WALL, GRASS, GRASS]
+	],
+	[
+		[WALL, GRASS, WALL],
+		[GRASS, GRASS, GRASS],
+		[WALL, GRASS, WALL]
+	],
+	[
+		[GRASS, GRASS, GRASS],
+		[WALL, WALL, GRASS],
+		[GRASS, WALL, GRASS]
+	],
+	[
+		[WALL, WALL, WALL],
+		[WALL, GRASS, GRASS],
+		[WALL, GRASS, GRASS]
+	],
+	[
+		[WALL, WALL, WALL],
+		[WALL, GRASS, GRASS],
+		[WALL, WALL, GRASS]
+	],
+])

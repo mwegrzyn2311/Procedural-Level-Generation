@@ -3,7 +3,7 @@ extends Node
 func generate_level(width: int, height: int, difficulty: int) -> Array:
 	# Hardcoded array for testing purposes
 	return LEVEL_CONVERTER.vec_string_dict_to_tile_arr(TEMPLATE_LEVEL_GENERATOR
-	.generate_level(CURRENT_LEVEL_INFO.width, CURRENT_LEVEL_INFO.height, SUPAPLEX_TEMPLATES.TEMPLATES_1)
+	.generate_level(CURRENT_LEVEL_INFO.width, CURRENT_LEVEL_INFO.height, SUPAPLEX_TEMPLATES.TEMPLATES_2)
 	)
 #	return [
 #		TILEMAP_UTILS.ele_instance(TILE_ELEMENTS.WALL, Vector2(8, 4)),
