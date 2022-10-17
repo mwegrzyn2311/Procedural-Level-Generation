@@ -16,6 +16,10 @@ func generate_level(width: int, height: int, level_templates: LevelTemplates) ->
 	var t_width: int = level_templates.template_width
 	var t_height: int = level_templates.template_height
 	
+	var tile_vectors: Array = self.tile_vectors2(t_width, t_height)
+	var rotation_vectors: Array = self.rotation_tile_vectors(t_width, t_height)
+	assert(tile_vectors.size() == rotation_vectors[0].size())
+	
 	var tiles_vert: int = height/t_height
 	var tiles_horiz: int = width/t_width
 	
@@ -25,11 +29,13 @@ func generate_level(width: int, height: int, level_templates: LevelTemplates) ->
 	for j in range(tiles_vert):
 		for i in range(tiles_horiz):
 			# TODO: Add rotation and flip
-			var template_index = RNG_UTIL.RNG.randi_range(0, templates_count - 1)
+			var template_index: int = RNG_UTIL.RNG.randi_range(0, templates_count - 1)
+			var rotation: Array = RNG_UTIL.choice(rotation_vectors)
 			var template = templates[template_index]
-			for t_j in range(t_height):
-				for t_i in range(t_width):
-					res[Vector2(i * t_width + t_i, j * t_height + t_j)] = template[t_j][t_i]
+			for tile_i in range(tile_vectors.size()):
+				res[Vector2(i * t_width, j * t_height) + tile_vectors[tile_i]] = template[rotation[tile_i]]
+			for tile_vec in tile_vectors:
+				res[Vector2(i * t_width, j * t_height) + tile_vec] = template[tile_vec]
 	
 	# Randomly change grass into rocks/ points
 	# Chance to turn grass into rocks should depend on:
@@ -112,3 +118,65 @@ func get_passage_width_in_dir(map: Dictionary, start: Vector2, dir: Vector2) -> 
 		curr += dir
 		depth += 1
 	return depth
+
+func tile_vectors2(width: int, height: int) -> Array:
+	var res = []
+	for j in range(height):
+		for i in range(width):
+			res.append(Vector2(i, j))
+	return res
+
+# TODO: Switch from hardcoded for 3x3 to universally calculated
+# TODO: Consider extracting
+func rotation_tile_vectors(width: int, height: int) -> Array:
+	# Order here has crucial importance!
+	return [
+		# 0 degree
+		[
+			Vector2(0, 0), Vector2(1, 0), Vector2(2, 0), 
+			Vector2(0, 1), Vector2(1, 1), Vector2(2, 1),
+			Vector2(0, 2), Vector2(1, 2), Vector2(2, 2)
+		],
+		# 90 degree
+		[
+			Vector2(0, 2), Vector2(0, 1), Vector2(0, 0), 
+			Vector2(1, 2), Vector2(1, 1), Vector2(1, 0),
+			Vector2(2, 2), Vector2(2, 1), Vector2(2, 0)
+		],
+		# 180 degree
+		[
+			Vector2(2, 2), Vector2(1, 2), Vector2(0, 2), 
+			Vector2(2, 1), Vector2(1, 1), Vector2(1, 0),
+			Vector2(2, 0), Vector2(1, 0), Vector2(0, 0)
+		],
+		# 270 degree
+		[
+			Vector2(2, 0), Vector2(2, 1), Vector2(2, 2), 
+			Vector2(1, 0), Vector2(1, 1), Vector2(1, 2),
+			Vector2(0, 0), Vector2(0, 1), Vector2(0, 2)
+		],
+		# 0 degree + horizontal tilt
+		[
+			Vector2(2, 0), Vector2(1, 0), Vector2(0, 0), 
+			Vector2(2, 1), Vector2(1, 1), Vector2(0, 1),
+			Vector2(2, 2), Vector2(1, 2), Vector2(0, 2)
+		],
+		# 90 degree + horizontal tilt
+		[
+			Vector2(0, 0), Vector2(0, 1), Vector2(0, 2), 
+			Vector2(1, 0), Vector2(1, 1), Vector2(1, 2),
+			Vector2(2, 0), Vector2(2, 1), Vector2(2, 2)
+		],
+		# 180 degree + horizontal tilt
+		[
+			Vector2(0, 2), Vector2(1, 2), Vector2(2, 2), 
+			Vector2(0, 1), Vector2(1, 1), Vector2(2, 1),
+			Vector2(0, 0), Vector2(1, 0), Vector2(2, 0)
+		],
+		# 270 degree + horizontal tilt
+		[
+			Vector2(2, 2), Vector2(2, 1), Vector2(2, 0), 
+			Vector2(1, 2), Vector2(1, 1), Vector2(1, 0),
+			Vector2(0, 2), Vector2(0, 1), Vector2(0, 0)
+		],
+	]
