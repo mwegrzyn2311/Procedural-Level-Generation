@@ -28,12 +28,18 @@ _global_script_classes=[{
 "class": &"StaticElement",
 "language": &"GDScript",
 "path": "res://Games/Supaplex/Elements/static_element.gd"
+}, {
+"base": "Node",
+"class": &"TemplateLevelGenerator",
+"language": &"GDScript",
+"path": "res://Algorithm/template_level_generator.gd"
 }]
 _global_script_class_icons={
 "LevelTemplates": "",
 "MovableElement": "",
 "Player": "",
-"StaticElement": ""
+"StaticElement": "",
+"TemplateLevelGenerator": ""
 }
 
 [application]
@@ -47,7 +53,6 @@ config/icon="res://icon.svg"
 
 COLLECTION_UTIL="*res://Common/COLLECTION_UTIL.gd"
 RNG_UTIL="*res://Common/RNG_UTIL.gd"
-TEMPLATE_LEVEL_GENERATOR="*res://Algorithm/TEMPLATE_LEVEL_GENERATOR.gd"
 SUPAPLEX_TEMPLATES="*res://Games/Supaplex/LevelGeneration/SUPAPLEX_TEMPLATES.gd"
 TILE_ELEMENTS="*res://Games/Supaplex/LevelGeneration/TILE_ELEMENTS.gd"
 TILEMAP_UTILS="*res://Games/Supaplex/LevelGeneration/TILEMAP_UTILS.gd"
