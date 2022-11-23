@@ -1,7 +1,7 @@
 extends Node
 
-var width: int = 12
-var height: int = 12
+var width: int = 9
+var height: int = 9
 var difficulty: int = 5
 var total_points: int = 2
 var collected_points: int = 0

@@ -1,14 +1,14 @@
 extends Node
 
-var level_generator: TemplateLevelGenerator
+var level_generator: SupaplexTemplateLevelGenerator
 
 func _ready():
-	self.level_generator = TemplateLevelGenerator.new(CURRENT_LEVEL_INFO.width, CURRENT_LEVEL_INFO.height, SUPAPLEX_TEMPLATES.TEMPLATES_3)
+	self.level_generator = SupaplexTemplateLevelGenerator.new(CURRENT_LEVEL_INFO.width, CURRENT_LEVEL_INFO.height, SUPAPLEX_TEMPLATES.TEMPLATES_3)
 	
 
 func generate_level(width: int, height: int, difficulty: int) -> Array:
-	# Hardcoded array for testing purposes
 	return LEVEL_CONVERTER.vec_string_dict_to_tile_arr(level_generator.generate_level())
+	# Hardcoded array for testing purposes
 #	return [
 #		TILEMAP_UTILS.ele_instance(TILE_ELEMENTS.WALL, Vector2(8, 4)),
 #		TILEMAP_UTILS.ele_instance(TILE_ELEMENTS.WALL, Vector2(7, 6)),

@@ -12,7 +12,7 @@ _global_script_classes=[{
 "base": "Node",
 "class": &"LevelTemplates",
 "language": &"GDScript",
-"path": "res://Algorithm/level_templates.gd"
+"path": "res://Algorithm/template_generation/level_templates.gd"
 }, {
 "base": "RigidBody2D",
 "class": &"MovableElement",
@@ -29,17 +29,29 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://Games/Supaplex/Elements/static_element.gd"
 }, {
+"base": "TemplateLevelGenerator",
+"class": &"SupaplexTemplateLevelGenerator",
+"language": &"GDScript",
+"path": "res://Games/Supaplex/LevelGeneration/supaplex_template_level_generator.gd"
+}, {
 "base": "Node",
 "class": &"TemplateLevelGenerator",
 "language": &"GDScript",
-"path": "res://Algorithm/template_level_generator.gd"
+"path": "res://Algorithm/template_generation/template_level_generator.gd"
+}, {
+"base": "Node",
+"class": &"TemplateUtils",
+"language": &"GDScript",
+"path": "res://Algorithm/template_generation/template_utils.gd"
 }]
 _global_script_class_icons={
 "LevelTemplates": "",
 "MovableElement": "",
 "Player": "",
 "StaticElement": "",
-"TemplateLevelGenerator": ""
+"SupaplexTemplateLevelGenerator": "",
+"TemplateLevelGenerator": "",
+"TemplateUtils": ""
 }
 
 [application]
@@ -60,3 +72,12 @@ CONSTANTS="*res://Games/Supaplex/Info/CONSTANTS.gd"
 LEVEL_CONVERTER="*res://Games/Supaplex/LevelGeneration/LEVEL_CONVERTER.gd"
 SUPAPLEX_LEVEL_GENERATOR="*res://Games/Supaplex/LevelGeneration/SUPAPLEX_LEVEL_GENERATOR.gd"
 CURRENT_LEVEL_INFO="*res://Games/Supaplex/Info/CURRENT_LEVEL_INFO.gd"
+
+[display]
+
+window/size/viewport_width=1300
+window/size/viewport_height=800
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.344076, 0.344076, 0.344076, 1)
