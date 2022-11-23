@@ -35,9 +35,7 @@ func generate_level() -> Dictionary:
 	for j in range(tiles_vert):
 		for i in range(tiles_horiz):
 			var template_chosen: bool = false
-			print("=====")
 			while !template_chosen:
-				print("choosing...")
 				var template_index: int = RNG_UTIL.RNG.randi_range(0, templates_count - 1)
 				var rotation_index: int = RNG_UTIL.RNG.randi_range(0, rotations_count - 1)
 				var rotated_template: Dictionary = template_utils.rotate_template(templates[template_index], rotation_index)

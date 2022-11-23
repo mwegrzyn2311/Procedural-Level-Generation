@@ -70,7 +70,7 @@ func gen_rotation_vectors(width: int, height: int) -> Array:
 		# 180 degree
 		[
 			Vector2(2, 2), Vector2(1, 2), Vector2(0, 2), 
-			Vector2(2, 1), Vector2(1, 1), Vector2(1, 0),
+			Vector2(2, 1), Vector2(1, 1), Vector2(0, 1),
 			Vector2(2, 0), Vector2(1, 0), Vector2(0, 0)
 		],
 		# 270 degree
@@ -107,11 +107,17 @@ func gen_rotation_vectors(width: int, height: int) -> Array:
 
 func rotate_template(template: Dictionary, rotation_index: int) -> Dictionary:
 	var res: Dictionary = {}
+	res = __rotate_template_base(res, template, rotation_index)
+	res = __rotate_template_neighbour_constraints(res, template, rotation_index)
+	return res
+	
+func __rotate_template_base(res: Dictionary, template: Dictionary, rotation_index: int) -> Dictionary:
 	for tile_i in range(tile_vectors.size()):
 		res[tile_vectors[tile_i]] = template[rotation_vectors[rotation_index][tile_i]]
-	# Place template tiles that ensure good template connections
+	return res
+	
+func __rotate_template_neighbour_constraints(res: Dictionary, template: Dictionary, rotation_index: int) -> Dictionary:
 	for tile_i in range(neighbour_constraint_vectors.size()):
 		if template.has(constraint_rotation_vectors[rotation_index][tile_i]):
 			res[neighbour_constraint_vectors[tile_i]] = template[constraint_rotation_vectors[rotation_index][tile_i]]
-			
 	return res
