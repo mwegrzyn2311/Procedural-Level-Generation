@@ -11,9 +11,9 @@ static func from_level_templates(level_templates: LevelTemplates) -> TemplateUti
 
 func _init(width: int, height: int):
 	self.tile_vectors = self.gen_tile_vectors(width, height)
+	self.rotation_vectors = self.gen_rotation_vectors(width, height)
 	self.neighbour_constraint_vectors = self.gen_neighbour_constraint_vectors(width, height)
 	self.constraint_rotation_vectors = self.gen_constraint_rotation_vectors(width, height)
-	self.rotation_vectors = self.gen_rotation_vectors(width, height)
 	
 	assert(tile_vectors.size() == rotation_vectors[0].size())
 
@@ -31,9 +31,9 @@ func gen_neighbour_constraint_vectors(width: int, height: int) -> Array:
 		res.append(Vector2(i, -1))
 	for j in range(height):
 		res.append(Vector2(3, j))
-	for i in range(width):
+	for i in range(width-1, -1, -1):
 		res.append(Vector2(i, 3))
-	for j in range(height):
+	for j in range(height-1, -1, -1):
 		res.append(Vector2(-1, j))
 	return res
 	
@@ -42,14 +42,12 @@ func gen_constraint_rotation_vectors(width: int, height: int) -> Array:
 	var res = []
 	var len = self.neighbour_constraint_vectors.size()
 	res.append(Array(self.neighbour_constraint_vectors))
-	for i in range(1, 4):
+	for i in range(3, 0, -1):
 		res.append(self.neighbour_constraint_vectors.slice(i * width, len) + self.neighbour_constraint_vectors.slice(0, i * width))
 	for i in range(4):
-		var arr: Array = Array(res[(i + 1) % 4])
+		var arr: Array = res[(i + 3) % 4].duplicate(true)
 		arr.reverse()
 		res.append(arr)
-	# !!! It's here to keep sync with rotation_tile_vectors(). However if implementation changes, it has to be verified that it still stays in sync
-	res.reverse()
 	return res
 
 # TODO: Switch from hardcoded for 3x3 to universally calculated
@@ -106,3 +104,14 @@ func gen_rotation_vectors(width: int, height: int) -> Array:
 			Vector2(0, 2), Vector2(0, 1), Vector2(0, 0)
 		],
 	]
+
+func rotate_template(template: Dictionary, rotation_index: int) -> Dictionary:
+	var res: Dictionary = {}
+	for tile_i in range(tile_vectors.size()):
+		res[tile_vectors[tile_i]] = template[rotation_vectors[rotation_index][tile_i]]
+	# Place template tiles that ensure good template connections
+	for tile_i in range(neighbour_constraint_vectors.size()):
+		if template.has(constraint_rotation_vectors[rotation_index][tile_i]):
+			res[neighbour_constraint_vectors[tile_i]] = template[constraint_rotation_vectors[rotation_index][tile_i]]
+			
+	return res

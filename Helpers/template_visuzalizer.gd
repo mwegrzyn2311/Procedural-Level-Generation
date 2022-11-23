@@ -3,6 +3,7 @@ extends ScrollContainer
 # TODO: Remove testing containers (visible only in editor)
 
 var level_templates: LevelTemplates
+var template_utils: TemplateUtils
 @onready var templates_container: GridContainer = $Templates
 @onready var ref_rects_layer: CanvasLayer = $RefRectsLayer
 const OBJECTS_IN_A_ROW = 20
@@ -15,6 +16,7 @@ func _ready():
 	
 func set_level_templates(level_templates: LevelTemplates):
 	self.level_templates = level_templates
+	self.template_utils = TemplateUtils.from_level_templates(level_templates)
 	adjust_sizes(level_templates)
 	redraw_templates()
 
@@ -35,7 +37,7 @@ func redraw_templates():
 	for index in level_templates.templates.size():
 		# TODO: Here should apply rotations
 		for i in range(8):
-			visualizeLevelTemplate(level_templates.templates[index], i, index)
+			visualizeLevelTemplate(template_utils.rotate_template(level_templates.templates[index], i), i, index)
 
 # TODO: Extract as a helper function to sth like COMMONS/NODE_UTIL
 func clear_view():

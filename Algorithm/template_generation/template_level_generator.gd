@@ -35,34 +35,26 @@ func generate_level() -> Dictionary:
 	for j in range(tiles_vert):
 		for i in range(tiles_horiz):
 			var template_chosen: bool = false
+			print("=====")
 			while !template_chosen:
+				print("choosing...")
 				var template_index: int = RNG_UTIL.RNG.randi_range(0, templates_count - 1)
 				var rotation_index: int = RNG_UTIL.RNG.randi_range(0, rotations_count - 1)
-				var rotation: Array = template_utils.rotation_vectors[rotation_index]
-				var neighbour_constraint_rotation = template_utils.constraint_rotation_vectors[rotation_index]
-				var template: Dictionary = templates[template_index]
+				var rotated_template: Dictionary = template_utils.rotate_template(templates[template_index], rotation_index)
 				var base: Vector2 = Vector2(i * t_width, j * t_height)
-				if template_fits(base, res, template, rotation, neighbour_constraint_rotation):
+				#print("%d, %d" % [template_index, rotation_index])
+				if template_fits(base, res, rotated_template):
 					template_chosen = true
 					# Place template tiles
-					for tile_i in range(template_utils.tile_vectors.size()):
-						res[base + template_utils.tile_vectors[tile_i]] = template[rotation[tile_i]]
-					# Place template tiles that ensure good template connections
-					for tile_i in range(template_utils.neighbour_constraint_vectors.size()):
-						if template.has(neighbour_constraint_rotation[tile_i]):
-							res[base + template_utils.neighbour_constraint_vectors[tile_i]] = template[neighbour_constraint_rotation[tile_i]]
+					for pos in rotated_template:
+						res[base + pos] = rotated_template[pos]
 	return res
 	
-func template_fits(base: Vector2, map: Dictionary, template: Dictionary, rotation: Array, neighbour_constraint_rotation: Array) -> bool:
-	# Start by checking if there would appear a different type of tile on existing tile
-	for tile_i in range(template_utils.tile_vectors.size()):
-		var pos: Vector2 = base + template_utils.tile_vectors[tile_i]
-		if map.has(pos) and map[pos] != template[rotation[tile_i]]:
+func template_fits(base: Vector2, map: Dictionary, template: Dictionary) -> bool:
+	for pos in template:
+		if !is_in_map(base + pos):
 			return false
-	# Then check if neighbours don't overlap
-	for tile_i in range(template_utils.neighbour_constraint_vectors.size()):
-		var pos: Vector2 = base + template_utils.neighbour_constraint_vectors[tile_i]
-		if template.has(neighbour_constraint_rotation[tile_i]) and (!is_in_map(pos) or (map.has(pos) and map[pos] != template[neighbour_constraint_rotation[tile_i]])):
+		elif map.has(base + pos) and map[base + pos] != template[pos]:
 			return false
 	return true
 			
