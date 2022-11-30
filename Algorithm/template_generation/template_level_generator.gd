@@ -34,18 +34,27 @@ func generate_level() -> Dictionary:
 	# Start off by building levels out of random templates
 	for j in range(tiles_vert):
 		for i in range(tiles_horiz):
+			var template_indices: Array = range(templates_count)
 			var template_chosen: bool = false
-			while !template_chosen:
-				var template_index: int = RNG_UTIL.RNG.randi_range(0, templates_count - 1)
-				var rotation_index: int = RNG_UTIL.RNG.randi_range(0, rotations_count - 1)
-				var rotated_template: Dictionary = template_utils.rotate_template(templates[template_index], rotation_index)
-				var base: Vector2 = Vector2(i * t_width, j * t_height)
-				#print("%d, %d" % [template_index, rotation_index])
-				if template_fits(base, res, rotated_template):
-					template_chosen = true
-					# Place template tiles
-					for pos in rotated_template:
-						res[base + pos] = rotated_template[pos]
+			while !template_chosen and not template_indices.is_empty():
+				var template_index: int = RNG_UTIL.choice(template_indices)
+				var rotation_indices: Array = range(rotations_count)
+				while not rotation_indices.is_empty():
+					var rotation_index: int = RNG_UTIL.choice(rotation_indices)
+					var rotated_template: Dictionary = template_utils.rotate_template(templates[template_index], rotation_index)
+					var base: Vector2 = Vector2(i * t_width, j * t_height)
+					#print("%d, %d" % [template_index, rotation_index])
+					if template_fits(base, res, rotated_template):
+						template_chosen = true
+						# Place template tiles
+						for pos in rotated_template:
+							res[base + pos] = rotated_template[pos]
+						break
+					rotation_indices.remove_at(rotation_indices.find(rotation_index))
+				template_indices.remove_at(template_indices.find(template_index))
+			if not template_chosen:
+				print(res)
+			assert(template_chosen, "ERROR: Failed to find a matching template")
 	return res
 	
 func template_fits(base: Vector2, map: Dictionary, template: Dictionary) -> bool:

@@ -13,13 +13,11 @@ size_flags_vertical = 3
 script = ExtResource("1_arysy")
 
 [node name="Templates" type="GridContainer" parent="."]
-layout_mode = 2
 columns = 2
 
 [node name="TestingCont1" type="ColorRect" parent="Templates"]
 visible = false
 custom_minimum_size = Vector2i(256, 256)
-layout_mode = 2
 offset_right = 256.0
 offset_bottom = 256.0
 color = Color(1, 0.745098, 0.415686, 1)
@@ -32,7 +30,6 @@ position = Vector2(96, 96)
 [node name="TestingCont2" type="ColorRect" parent="Templates"]
 visible = false
 custom_minimum_size = Vector2i(256, 256)
-layout_mode = 2
 offset_right = 256.0
 offset_bottom = 256.0
 

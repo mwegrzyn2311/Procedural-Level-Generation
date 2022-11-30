@@ -3,7 +3,7 @@ extends Node
 var level_generator: SupaplexTemplateLevelGenerator
 
 func _ready():
-	self.level_generator = SupaplexTemplateLevelGenerator.new(CURRENT_LEVEL_INFO.width, CURRENT_LEVEL_INFO.height, SUPAPLEX_TEMPLATES.TEMPLATES_5)
+	self.level_generator = SupaplexTemplateLevelGenerator.new(CURRENT_LEVEL_INFO.width, CURRENT_LEVEL_INFO.height, SUPAPLEX_TEMPLATES.TEMPLATES_6)
 	
 
 func generate_level(width: int, height: int, difficulty: int) -> Array:

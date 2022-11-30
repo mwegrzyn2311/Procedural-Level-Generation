@@ -32,7 +32,7 @@ _global_script_classes=[{
 "base": "TemplateLevelGenerator",
 "class": &"SupaplexTemplateLevelGenerator",
 "language": &"GDScript",
-"path": "res://Games/Supaplex/LevelGeneration/supaplex_template_level_generator.gd"
+"path": "res://Games/Supaplex/LevelGeneration/template_generation/supaplex_template_level_generator.gd"
 }, {
 "base": "Node",
 "class": &"TemplateLevelGenerator",
@@ -65,7 +65,7 @@ config/icon="res://icon.svg"
 
 COLLECTION_UTIL="*res://Common/COLLECTION_UTIL.gd"
 RNG_UTIL="*res://Common/RNG_UTIL.gd"
-SUPAPLEX_TEMPLATES="*res://Games/Supaplex/LevelGeneration/SUPAPLEX_TEMPLATES.gd"
+SUPAPLEX_TEMPLATES="*res://Games/Supaplex/LevelGeneration/template_generation/SUPAPLEX_TEMPLATES.gd"
 TILE_ELEMENTS="*res://Games/Supaplex/LevelGeneration/TILE_ELEMENTS.gd"
 TILEMAP_UTILS="*res://Games/Supaplex/LevelGeneration/TILEMAP_UTILS.gd"
 CONSTANTS="*res://Games/Supaplex/Info/CONSTANTS.gd"
