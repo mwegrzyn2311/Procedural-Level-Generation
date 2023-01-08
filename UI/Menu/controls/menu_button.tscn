@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkmr2v1p6mjdq"]
+
+[ext_resource type="FontFile" uid="uid://v4yqlddodibg" path="res://Fonts/Roboto-Medium.ttf" id="1_gh6hh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fwfp4"]
+bg_color = Color(0, 0, 0, 0.392157)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vgdml"]
+bg_color = Color(0, 0, 0, 0.54902)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_075cq"]
+bg_color = Color(0, 0, 0, 0.705882)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="MenuButton" type="Button"]
+offset_right = 1056.0
+offset_bottom = 128.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.847059, 0.847059, 0.847059, 1)
+theme_override_fonts/font = ExtResource("1_gh6hh")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_fwfp4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vgdml")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_075cq")
+text = "Choose Game and parameters"

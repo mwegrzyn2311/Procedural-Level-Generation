@@ -4,12 +4,10 @@ const WALL = "wall"
 const GRASS = "grass"
 
 # Consider Array[Dictionary[Vector2,String]] as well for templates
-# TODO: Add templates with forcing neighbours (and add handling for them)
 var TEMPLATES_6: LevelTemplates = LevelTemplates.new(
 	3,
 	3,
 [
-	
 	# 9 walls
 	{
 		Vector2(0, 0): WALL, Vector2(1, 0): WALL, Vector2(2, 0): WALL,

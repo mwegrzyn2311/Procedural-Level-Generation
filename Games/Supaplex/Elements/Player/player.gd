@@ -6,7 +6,7 @@ class_name Player
 
 var direction: Vector2 = Vector2.ZERO
 
-var _pixels_per_second: float = CONSTANTS.ELE_SPEED_MULT * CONSTANTS.TILE_SIZE
+var _pixels_per_second: float = SUPAPLEX_CONSTANTS.ELE_SPEED_MULT * SUPAPLEX_CONSTANTS.TILE_SIZE
 var _step_size: float = 1 / _pixels_per_second
 
 var _step: float = 0
@@ -15,7 +15,7 @@ var _pixels_moved: int = 0
 var eaten_ele: MovableElement = null
 
 func set_coords(coordinates: Vector2):
-	self.position = (coordinates + Vector2(1, 1)) * CONSTANTS.TILE_SIZE
+	self.position = (coordinates + Vector2(1, 1)) * SUPAPLEX_CONSTANTS.TILE_SIZE
 
 func _physics_process(delta):
 	if not is_moving():
@@ -27,12 +27,12 @@ func _physics_process(delta):
 	var steps: int = floor(self._step / self._step_size)
 	if steps:
 		self._step -= steps * self._step_size
-		while steps > 0 and _pixels_moved < CONSTANTS.TILE_SIZE:
+		while steps > 0 and _pixels_moved < SUPAPLEX_CONSTANTS.TILE_SIZE:
 			self._pixels_moved += 1
 			steps -= 1
 			move_and_collide(self.direction, false, 0.0)
 			eat_one_pixel()
-		if self._pixels_moved == CONSTANTS.TILE_SIZE:
+		if self._pixels_moved == SUPAPLEX_CONSTANTS.TILE_SIZE:
 			if eaten_ele != null:
 				eaten_ele.has_been_eaten()
 				eaten_ele = null
@@ -51,10 +51,10 @@ func move() -> bool:
 		return false
 	
 	# Update ray casts
-	ray.target_position = self.direction * CONSTANTS.TILE_SIZE
+	ray.target_position = self.direction * SUPAPLEX_CONSTANTS.TILE_SIZE
 	ray.force_raycast_update()
 	for falling_objects_ray in falling_objects_rays:
-		falling_objects_ray.target_position.x = self.direction.x * CONSTANTS.TILE_SIZE
+		falling_objects_ray.target_position.x = self.direction.x * SUPAPLEX_CONSTANTS.TILE_SIZE
 		falling_objects_ray.force_raycast_update()
 	
 	# Check if player is trying to move to a place which is gonna be or still is occupied by a falling object

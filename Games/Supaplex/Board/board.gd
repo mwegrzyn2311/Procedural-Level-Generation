@@ -17,6 +17,7 @@ func generate_fence():
 		fence.add_child(TILEMAP_UTILS.ele_instance(TILE_ELEMENTS.OBELISK, Vector2(CURRENT_LEVEL_INFO.width, j)))
 
 func generate_elements():
+	CURRENT_LEVEL_INFO.generate_map()
 	for element in CURRENT_LEVEL_INFO.level_map:
 		game_elements.add_child(element)
 		element.add_to_group("game_elements")
