@@ -4,6 +4,7 @@ const WALL = "wall"
 const GRASS = "grass"
 
 # Consider Array[Dictionary[Vector2,String]] as well for templates
+
 var TEMPLATES_6: LevelTemplates = LevelTemplates.new(
 	3,
 	3,
