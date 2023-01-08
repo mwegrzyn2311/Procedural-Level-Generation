@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://c55wj1r2daqnj"]
+
+[ext_resource type="FontFile" uid="uid://v4yqlddodibg" path="res://Fonts/Roboto-Medium.ttf" id="1_3r6sl"]
+
+[node name="MenuTitle" type="Label"]
+offset_right = 1152.0
+offset_bottom = 350.0
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.85098, 0.85098, 0.85098, 1)
+theme_override_fonts/font = ExtResource("1_3r6sl")
+theme_override_font_sizes/font_size = 84
+text = "Logic Games Level Generator"
+horizontal_alignment = 1
+vertical_alignment = 1

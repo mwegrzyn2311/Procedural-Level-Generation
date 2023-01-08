@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://cluh1fstbfxsx"]
+
+[ext_resource type="PackedScene" uid="uid://dqcm14c5mumdg" path="res://UI/Menu/basic_menu.tscn" id="1_0hq47"]
+[ext_resource type="PackedScene" uid="uid://bjm1tvhsv2q8e" path="res://UI/Menu/controls/input_label.tscn" id="2_4vwx6"]
+[ext_resource type="Script" path="res://Games/Supaplex/UI/ParamSelection/supaplex_params_menu.gd" id="2_n23i0"]
+[ext_resource type="PackedScene" uid="uid://dkmr2v1p6mjdq" path="res://UI/Menu/controls/menu_button.tscn" id="4_d0ntp"]
+[ext_resource type="PackedScene" uid="uid://bhyhaf02ctar5" path="res://UI/Menu/controls/numeric_input.tscn" id="5_4b1fo"]
+
+[node name="SupaplexParamsMenu" instance=ExtResource("1_0hq47")]
+script = ExtResource("2_n23i0")
+
+[node name="Background" parent="." index="0"]
+layout_mode = 3
+
+[node name="Margin" parent="." index="1"]
+layout_mode = 3
+
+[node name="Title" parent="Margin/Contents" index="0"]
+text = "Input params for Boulder Dash"
+
+[node name="BackButton" parent="Margin/Contents/Interactive/VBoxContainer" index="0" instance=ExtResource("4_d0ntp")]
+layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 57.0
+text = "Back"
+
+[node name="GridContainer" type="GridContainer" parent="Margin/Contents/Interactive/VBoxContainer" index="1"]
+layout_mode = 2
+offset_top = 89.0
+offset_right = 1152.0
+offset_bottom = 241.0
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 2
+
+[node name="WidthLabel" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="0" instance=ExtResource("2_4vwx6")]
+layout_mode = 2
+offset_right = 560.0
+text = "Width"
+
+[node name="WidthInput" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="1" instance=ExtResource("5_4b1fo")]
+layout_mode = 2
+offset_top = 0.0
+offset_bottom = 60.0
+min_value = 3.0
+value = 3.0
+
+[node name="HeightLabel" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="2" instance=ExtResource("2_4vwx6")]
+layout_mode = 2
+offset_top = 92.0
+offset_right = 560.0
+offset_bottom = 152.0
+text = "Height"
+
+[node name="HeightInput" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="3" instance=ExtResource("5_4b1fo")]
+layout_mode = 2
+offset_top = 92.0
+offset_bottom = 152.0
+min_value = 3.0
+value = 3.0
+
+[node name="StartButton" parent="Margin/Contents/Interactive/VBoxContainer" index="2" instance=ExtResource("4_d0ntp")]
+layout_mode = 2
+offset_top = 273.0
+offset_right = 1152.0
+offset_bottom = 330.0
+text = "Start"
+
+[connection signal="pressed" from="Margin/Contents/Interactive/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Margin/Contents/Interactive/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

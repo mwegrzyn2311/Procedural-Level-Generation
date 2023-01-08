@@ -9,10 +9,10 @@ var template_utils: TemplateUtils
 const OBJECTS_IN_A_ROW = 20
 var template_cont_size: Vector2
 var ref_frame_size: Vector2
-const ref_frame_offset: Vector2 = Vector2(1.5 * CONSTANTS.TILE_SIZE, 1.5 * CONSTANTS.TILE_SIZE)
+const ref_frame_offset: Vector2 = Vector2(1.5 * SUPAPLEX_CONSTANTS.TILE_SIZE, 1.5 * SUPAPLEX_CONSTANTS.TILE_SIZE)
 
 func _ready():
-	set_level_templates(SUPAPLEX_TEMPLATES.TEMPLATES_5)
+	set_level_templates(SUPAPLEX_TEMPLATES.TEMPLATES_6)
 	
 func set_level_templates(level_templates: LevelTemplates):
 	self.level_templates = level_templates
@@ -26,11 +26,11 @@ func adjust_sizes(level_templates: LevelTemplates):
 	self.templates_container.columns = columns
 	# +3 is here for constraints and margins
 	self.ref_frame_size = Vector2(
-		level_templates.template_width * CONSTANTS.TILE_SIZE,
-		level_templates.template_height * CONSTANTS.TILE_SIZE)
+		level_templates.template_width * SUPAPLEX_CONSTANTS.TILE_SIZE,
+		level_templates.template_height * SUPAPLEX_CONSTANTS.TILE_SIZE)
 	self.template_cont_size = Vector2(
-		(level_templates.template_width + 3) * CONSTANTS.TILE_SIZE,
-		(level_templates.template_height + 3) * CONSTANTS.TILE_SIZE)
+		(level_templates.template_width + 3) * SUPAPLEX_CONSTANTS.TILE_SIZE,
+		(level_templates.template_height + 3) * SUPAPLEX_CONSTANTS.TILE_SIZE)
 
 func redraw_templates():
 	clear_view()

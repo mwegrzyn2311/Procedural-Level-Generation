@@ -8,7 +8,10 @@ func _ready():
 	self.seed = RNG.get_seed()
 	
 func set_seed(new_seed: int) -> void:
-	RNG.set_seed(new_seed)
+	if new_seed != -1:
+		RNG.set_seed(new_seed)
+	else:
+		RNG.randomize()
 	self.seed = RNG.get_seed()
 
 func rand_vec2(width: int, height: int) -> Vector2:

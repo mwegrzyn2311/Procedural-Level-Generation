@@ -1,0 +1,107 @@
+[gd_scene load_steps=8 format=3 uid="uid://egggous40yn"]
+
+[ext_resource type="PackedScene" uid="uid://do04ool062ch7" path="res://UI/Menu/controls/menu_background.tscn" id="1_fe5cs"]
+[ext_resource type="Script" path="res://UI/Menu/game_selection_menu.gd" id="1_fgtgf"]
+[ext_resource type="PackedScene" uid="uid://c55wj1r2daqnj" path="res://UI/Menu/controls/menu_title.tscn" id="3_ya88u"]
+[ext_resource type="PackedScene" uid="uid://bjm1tvhsv2q8e" path="res://UI/Menu/controls/input_label.tscn" id="5_63x0y"]
+[ext_resource type="PackedScene" uid="uid://dkmr2v1p6mjdq" path="res://UI/Menu/controls/menu_button.tscn" id="5_px8yu"]
+[ext_resource type="PackedScene" uid="uid://x4dsuiouj1xw" path="res://UI/Menu/controls/dropdown.tscn" id="6_keppc"]
+[ext_resource type="PackedScene" uid="uid://bhyhaf02ctar5" path="res://UI/Menu/controls/numeric_input.tscn" id="7_ai6cm"]
+
+[node name="GameSelectionMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fgtgf")
+
+[node name="MenuBackground" parent="." instance=ExtResource("1_fe5cs")]
+color = Color(0.054902, 0.0156863, 0.25098, 1)
+
+[node name="Margin" type="MarginContainer" parent="."]
+offset_right = 1280.0
+offset_bottom = 768.0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Contents" type="VBoxContainer" parent="Margin"]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 1248.0
+offset_bottom = 736.0
+
+[node name="MenuTitle" parent="Margin/Contents" instance=ExtResource("3_ya88u")]
+offset_right = 1216.0
+offset_bottom = 102.0
+text = "Selection
+"
+
+[node name="Interactive" type="MarginContainer" parent="Margin/Contents"]
+offset_top = 106.0
+offset_right = 1216.0
+offset_bottom = 704.0
+size_flags_vertical = 3
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBox" type="VBoxContainer" parent="Margin/Contents/Interactive"]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 1184.0
+offset_bottom = 566.0
+theme_override_constants/separation = 32
+
+[node name="BackButton" parent="Margin/Contents/Interactive/VBox" instance=ExtResource("5_px8yu")]
+offset_right = 1152.0
+offset_bottom = 57.0
+text = "Back
+"
+
+[node name="GridContainer" type="GridContainer" parent="Margin/Contents/Interactive/VBox"]
+offset_top = 89.0
+offset_right = 1152.0
+offset_bottom = 333.0
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 2
+
+[node name="GameLabel" parent="Margin/Contents/Interactive/VBox/GridContainer" instance=ExtResource("5_63x0y")]
+offset_right = 560.0
+text = "Game"
+
+[node name="GameSelect" parent="Margin/Contents/Interactive/VBox/GridContainer" instance=ExtResource("6_keppc")]
+
+[node name="GenerationAlgo" parent="Margin/Contents/Interactive/VBox/GridContainer" instance=ExtResource("5_63x0y")]
+offset_top = 92.0
+offset_right = 560.0
+offset_bottom = 152.0
+
+[node name="AlgoSelect" parent="Margin/Contents/Interactive/VBox/GridContainer" instance=ExtResource("6_keppc")]
+offset_top = 92.0
+offset_bottom = 152.0
+
+[node name="SeedLabel" parent="Margin/Contents/Interactive/VBox/GridContainer" instance=ExtResource("5_63x0y")]
+offset_top = 184.0
+offset_right = 560.0
+offset_bottom = 244.0
+text = "(Optional) Seed"
+
+[node name="SeedInput" parent="Margin/Contents/Interactive/VBox/GridContainer" instance=ExtResource("7_ai6cm")]
+min_value = -1.0
+value = -1.0
+
+[node name="NextButton" parent="Margin/Contents/Interactive/VBox" instance=ExtResource("5_px8yu")]
+offset_top = 365.0
+offset_right = 1152.0
+offset_bottom = 422.0
+text = "Next"
+
+[connection signal="pressed" from="Margin/Contents/Interactive/VBox/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="item_selected" from="Margin/Contents/Interactive/VBox/GridContainer/GameSelect" to="." method="_on_game_select_item_selected"]
+[connection signal="pressed" from="Margin/Contents/Interactive/VBox/NextButton" to="." method="_on_next_button_pressed"]

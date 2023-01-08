@@ -1,0 +1,82 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkxffujfi1x86"]
+
+[ext_resource type="Script" path="res://UI/Menu/main_menu.gd" id="1_geja6"]
+[ext_resource type="PackedScene" uid="uid://do04ool062ch7" path="res://UI/Menu/controls/menu_background.tscn" id="2_ibem2"]
+[ext_resource type="PackedScene" uid="uid://cid6qbcsgjjs1" path="res://UI/Menu/controls/margined_menu_button.tscn" id="2_ixbjo"]
+[ext_resource type="PackedScene" uid="uid://c55wj1r2daqnj" path="res://UI/Menu/controls/menu_title.tscn" id="3_g7eon"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_geja6")
+
+[node name="MenuBackground" parent="." instance=ExtResource("2_ibem2")]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 1280.0
+offset_bottom = 768.0
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+offset_left = 64.0
+offset_top = 32.0
+offset_right = 1216.0
+offset_bottom = 736.0
+
+[node name="MenuTitle" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_g7eon")]
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+offset_top = 354.0
+offset_right = 1152.0
+offset_bottom = 704.0
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="StartButtonCont" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_ixbjo")]
+offset_top = 0.0
+offset_right = 1152.0
+offset_bottom = 106.0
+
+[node name="MenuButton" parent="MarginContainer/VBoxContainer/VBoxContainer/StartButtonCont" index="0"]
+layout_mode = 3
+offset_right = 1120.0
+offset_bottom = 106.0
+
+[node name="CreditsButtonCont" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_ixbjo")]
+offset_top = 122.0
+offset_right = 1152.0
+offset_bottom = 228.0
+
+[node name="MenuButton" parent="MarginContainer/VBoxContainer/VBoxContainer/CreditsButtonCont" index="0"]
+layout_mode = 3
+offset_right = 1120.0
+offset_bottom = 106.0
+text = "Credits
+"
+
+[node name="QuitButtonCont" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_ixbjo")]
+offset_top = 244.0
+offset_right = 1152.0
+offset_bottom = 350.0
+
+[node name="MenuButton" parent="MarginContainer/VBoxContainer/VBoxContainer/QuitButtonCont" index="0"]
+layout_mode = 3
+offset_right = 1120.0
+offset_bottom = 106.0
+text = "Quit
+"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/StartButtonCont/MenuButton" to="." method="_on_start_button_pressed"]
+
+[editable path="MarginContainer/VBoxContainer/VBoxContainer/StartButtonCont"]
+[editable path="MarginContainer/VBoxContainer/VBoxContainer/CreditsButtonCont"]
+[editable path="MarginContainer/VBoxContainer/VBoxContainer/QuitButtonCont"]

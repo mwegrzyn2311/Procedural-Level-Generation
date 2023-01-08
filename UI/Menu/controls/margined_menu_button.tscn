@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cid6qbcsgjjs1"]
+
+[ext_resource type="PackedScene" uid="uid://dkmr2v1p6mjdq" path="res://UI/Menu/controls/menu_button.tscn" id="1_xf7im"]
+
+[node name="MarginedMenuButton" type="MarginContainer"]
+offset_top = 325.0
+offset_right = 1280.0
+offset_bottom = 382.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_right = 32
+
+[node name="MenuButton" parent="." instance=ExtResource("1_xf7im")]
+offset_left = 32.0
+offset_right = 1248.0
+offset_bottom = 57.0

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://x4dsuiouj1xw"]
+
+[ext_resource type="FontFile" uid="uid://v4yqlddodibg" path="res://Fonts/Roboto-Medium.ttf" id="1_up65q"]
+
+[node name="GameSelect" type="OptionButton"]
+offset_left = 592.0
+offset_right = 1152.0
+offset_bottom = 60.0
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_up65q")
+theme_override_font_sizes/font_size = 48

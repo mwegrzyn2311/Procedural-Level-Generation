@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqcm14c5mumdg"]
+
+[ext_resource type="PackedScene" uid="uid://c55wj1r2daqnj" path="res://UI/Menu/controls/menu_title.tscn" id="1_ftgse"]
+
+[node name="BasicMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 768.0
+color = Color(0.054902, 0.0156863, 0.25098, 1)
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 768.0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Contents" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 1248.0
+offset_bottom = 736.0
+
+[node name="Title" parent="Margin/Contents" instance=ExtResource("1_ftgse")]
+layout_mode = 2
+offset_right = 1216.0
+offset_bottom = 102.0
+text = "Title"
+
+[node name="Interactive" type="MarginContainer" parent="Margin/Contents"]
+layout_mode = 2
+offset_top = 106.0
+offset_right = 1216.0
+offset_bottom = 704.0
+size_flags_vertical = 3
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/Contents/Interactive"]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 1184.0
+offset_bottom = 566.0
+theme_override_constants/separation = 32

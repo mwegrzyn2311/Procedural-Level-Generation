@@ -26,14 +26,14 @@ $SlideLeftRayCastHorizUp, $SlideLeftRayCastVert]
 
 var direction: Vector2 = Vector2.ZERO
 
-var _pixels_per_second: float = CONSTANTS.ELE_SPEED_MULT * CONSTANTS.TILE_SIZE
+var _pixels_per_second: float = SUPAPLEX_CONSTANTS.ELE_SPEED_MULT * SUPAPLEX_CONSTANTS.TILE_SIZE
 var _step_size: float = 1 / _pixels_per_second
 
 var _step: float = 0
 var _pixels_moved: int = 0
 
 func set_coords(coordinates: Vector2):
-	self.position = (coordinates + Vector2(1, 1)) * CONSTANTS.TILE_SIZE
+	self.position = (coordinates + Vector2(1, 1)) * SUPAPLEX_CONSTANTS.TILE_SIZE
 
 # FIXME: Find out why setting Gravity Scale in editor doesn't work
 func _ready():
@@ -49,7 +49,7 @@ func _physics_process(delta):
 	var steps: int = floor(self._step / self._step_size)
 	if steps:
 		self._step -= steps * self._step_size
-		while steps > 0 and self._pixels_moved < CONSTANTS.TILE_SIZE:
+		while steps > 0 and self._pixels_moved < SUPAPLEX_CONSTANTS.TILE_SIZE:
 			self._pixels_moved += 1
 			steps -= 1
 			move_and_collide(self.direction, false, 0.0)
@@ -59,7 +59,7 @@ func _physics_process(delta):
 						var collider = explode_below_ray.get_collider()
 						if collider.is_in_group("explosive"):
 							collider.explode()
-		if self._pixels_moved == CONSTANTS.TILE_SIZE:
+		if self._pixels_moved == SUPAPLEX_CONSTANTS.TILE_SIZE:
 			self.direction = Vector2.ZERO
 			self._pixels_moved = 0
 			self._step = 0
@@ -77,7 +77,7 @@ func push(direction: Vector2) -> bool:
 	if self.is_moving() or !gravity_ray.is_colliding():
 		return false
 	
-	ray.target_position = direction * CONSTANTS.TILE_SIZE
+	ray.target_position = direction * SUPAPLEX_CONSTANTS.TILE_SIZE
 	ray.force_raycast_update()
 	if ray.is_colliding():
 		self.direction = Vector2.ZERO

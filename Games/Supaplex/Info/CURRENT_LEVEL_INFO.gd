@@ -6,6 +6,8 @@ var difficulty: int = 5
 var total_points: int = 2
 var collected_points: int = 0
 
+var level_generator: SupaplexTemplateLevelGenerator = null
+
 var level_map: Array = []
 
 func set_width(width: int):
@@ -14,8 +16,11 @@ func set_width(width: int):
 func set_height(height: int):
 	self.height = height
 	
+func apply():
+	level_generator = SupaplexTemplateLevelGenerator.new(width, height, SUPAPLEX_TEMPLATES.TEMPLATES_6)
+
 func generate_map():
-	self.level_map = SUPAPLEX_LEVEL_GENERATOR.generate_level(self.width, self.height, self.difficulty)
+	self.level_map = LEVEL_CONVERTER.vec_string_dict_to_tile_arr(level_generator.generate_level())
 	self.total_points = number_of_points_in_map()
 
 func number_of_points_in_map() -> int:
@@ -37,7 +42,3 @@ func inc_collected_points(quantity: int):
 func win_condition_fulfilled() -> bool:
 	return  self.collected_points == self.total_points
 
-# TODO: Move to UI once it's created
-func _ready():
-	if level_map.is_empty():
-		self.generate_map()

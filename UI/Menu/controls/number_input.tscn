@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://bro36d4ddxxcm"]
+
+[ext_resource type="Script" path="res://UI/Menu/controls/number_input.gd" id="1_d2poj"]
+[ext_resource type="PackedScene" uid="uid://bjm1tvhsv2q8e" path="res://UI/Menu/controls/input_label.tscn" id="1_l1sn5"]
+[ext_resource type="FontFile" uid="uid://v4yqlddodibg" path="res://Fonts/Roboto-Medium.ttf" id="2_is4ru"]
+
+[node name="NumberInput" type="HBoxContainer"]
+offset_left = 578.0
+offset_right = 1152.0
+offset_bottom = 60.0
+size_flags_horizontal = 3
+script = ExtResource("1_d2poj")
+
+[node name="Value" parent="." instance=ExtResource("1_l1sn5")]
+layout_mode = 2
+offset_right = 551.0
+text = "3"
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 555.0
+offset_right = 574.0
+offset_bottom = 60.0
+
+[node name="Up" type="Button" parent="Buttons"]
+layout_mode = 2
+offset_right = 19.0
+offset_bottom = 27.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_is4ru")
+text = "Λ"
+
+[node name="Down" type="Button" parent="Buttons"]
+layout_mode = 2
+offset_top = 31.0
+offset_right = 19.0
+offset_bottom = 58.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_is4ru")
+text = "V"
+
+[connection signal="pressed" from="Buttons/Up" to="." method="_on_up_pressed"]
+[connection signal="pressed" from="Buttons/Down" to="." method="_on_down_pressed"]
