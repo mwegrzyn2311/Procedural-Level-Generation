@@ -108,4 +108,3 @@ func eat_one_pixel():
 	eaten_ele.sprite.region_rect.size -= self.direction.abs()
 	if self.direction.abs() == self.direction:
 		eaten_ele.sprite.region_rect.position += self.direction
-	

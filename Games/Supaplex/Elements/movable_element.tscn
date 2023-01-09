@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://du2f0bowkjdvr" path="res://Games/Supaplex/Elements/tile_sprite.tscn" id="2_svu1j"]
 
 [node name="MovableElement" type="RigidBody2D" groups=["movable"]]
+collision_layer = 3
 gravity_scale = 0.0
 script = ExtResource("1_lyefr")
 

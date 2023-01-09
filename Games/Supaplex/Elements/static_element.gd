@@ -13,7 +13,7 @@ func try_eat() -> bool:
 	return true
 
 func eat():
-	self.collision_shape.disabled = true
+	self.set_collision_layer_value(SUPAPLEX_CONSTANTS.PLAYER_LAYER, false)
 
 func has_been_eaten():
 	self.queue_free()

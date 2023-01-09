@@ -8,6 +8,8 @@
 
 [node name="Player" type="CharacterBody2D" groups=["exploadable", "explosive"]]
 z_index = 1
+collision_layer = 3
+collision_mask = 0
 script = ExtResource("1_dgcj1")
 
 [node name="TileSprite" parent="." instance=ExtResource("2_jq7wh")]
@@ -19,6 +21,7 @@ texture = ExtResource("1_lknmv")
 current = true
 
 [node name="MoveDirRayCast" parent="." instance=ExtResource("3_esdch")]
+collision_mask = 2
 
 [node name="FallingObjectsRayCastUp" type="RayCast2D" parent="."]
 target_position = Vector2(64, -48)

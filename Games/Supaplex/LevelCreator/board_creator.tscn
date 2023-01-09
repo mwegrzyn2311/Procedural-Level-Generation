@@ -230,25 +230,28 @@ position = Vector2(192, 256)
 position = Vector2(320, 320)
 
 [node name="Grass4" parent="Elements/Grasses" instance=ExtResource("3_xsb6u")]
-position = Vector2(576, 512)
+position = Vector2(640, 512)
 
 [node name="Grass5" parent="Elements/Grasses" instance=ExtResource("3_xsb6u")]
-position = Vector2(768, 512)
+position = Vector2(832, 512)
 
 [node name="Grass6" parent="Elements/Grasses" instance=ExtResource("3_xsb6u")]
-position = Vector2(768, 576)
+position = Vector2(832, 576)
 
 [node name="Grass7" parent="Elements/Grasses" instance=ExtResource("3_xsb6u")]
-position = Vector2(704, 640)
-
-[node name="Grass8" parent="Elements/Grasses" instance=ExtResource("3_xsb6u")]
-position = Vector2(640, 448)
-
-[node name="Grass9" parent="Elements/Grasses" instance=ExtResource("3_xsb6u")]
 position = Vector2(768, 640)
 
+[node name="Grass8" parent="Elements/Grasses" instance=ExtResource("3_xsb6u")]
+position = Vector2(704, 448)
+
+[node name="Grass9" parent="Elements/Grasses" instance=ExtResource("3_xsb6u")]
+position = Vector2(832, 640)
+
 [node name="Grass10" parent="Elements/Grasses" instance=ExtResource("3_xsb6u")]
-position = Vector2(576, 640)
+position = Vector2(640, 640)
+
+[node name="Grass11" parent="Elements/Grasses" instance=ExtResource("3_xsb6u")]
+position = Vector2(512, 512)
 
 [node name="Boulders" type="Node2D" parent="Elements"]
 
@@ -279,13 +282,13 @@ position = Vector2(384, 512)
 position = Vector2(320, 512)
 
 [node name="Boulder9" parent="Elements/Boulders" instance=ExtResource("4_k0mk8")]
-position = Vector2(640, 512)
-
-[node name="Boulder10" parent="Elements/Boulders" instance=ExtResource("4_k0mk8")]
 position = Vector2(704, 512)
 
+[node name="Boulder10" parent="Elements/Boulders" instance=ExtResource("4_k0mk8")]
+position = Vector2(768, 512)
+
 [node name="Boulder11" parent="Elements/Boulders" instance=ExtResource("4_k0mk8")]
-position = Vector2(640, 640)
+position = Vector2(704, 640)
 
 [node name="Points" type="Node2D" parent="Elements"]
 
@@ -293,10 +296,10 @@ position = Vector2(640, 640)
 position = Vector2(448, 192)
 
 [node name="Point2" parent="Elements/Points" instance=ExtResource("5_p3igk")]
-position = Vector2(640, 576)
+position = Vector2(704, 576)
 
 [node name="Point3" parent="Elements/Points" instance=ExtResource("5_p3igk")]
-position = Vector2(704, 576)
+position = Vector2(768, 576)
 
 [node name="Point4" parent="Elements/Points" instance=ExtResource("5_p3igk")]
 position = Vector2(320, 256)
@@ -304,7 +307,7 @@ position = Vector2(320, 256)
 [node name="Players" type="Node2D" parent="Elements"]
 
 [node name="Player" parent="Elements/Players" groups=["player"] instance=ExtResource("6_3ibnw")]
-position = Vector2(512, 512)
+position = Vector2(576, 512)
 
 [node name="Exits" type="Node2D" parent="Elements"]
 
@@ -312,4 +315,4 @@ position = Vector2(512, 512)
 position = Vector2(448, 512)
 
 [node name="Grass3" parent="." instance=ExtResource("3_xsb6u")]
-position = Vector2(640, 704)
+position = Vector2(704, 704)

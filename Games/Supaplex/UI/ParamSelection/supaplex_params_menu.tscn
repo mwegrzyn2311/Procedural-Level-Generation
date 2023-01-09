@@ -15,17 +15,25 @@ layout_mode = 3
 [node name="Margin" parent="." index="1"]
 layout_mode = 3
 
+[node name="Contents" parent="Margin" index="0"]
+layout_mode = 3
+
 [node name="Title" parent="Margin/Contents" index="0"]
+layout_mode = 3
 text = "Input params for Boulder Dash"
 
+[node name="Interactive" parent="Margin/Contents" index="1"]
+layout_mode = 3
+
+[node name="VBoxContainer" parent="Margin/Contents/Interactive" index="0"]
+layout_mode = 3
+
 [node name="BackButton" parent="Margin/Contents/Interactive/VBoxContainer" index="0" instance=ExtResource("4_d0ntp")]
-layout_mode = 2
 offset_right = 1152.0
 offset_bottom = 57.0
 text = "Back"
 
 [node name="GridContainer" type="GridContainer" parent="Margin/Contents/Interactive/VBoxContainer" index="1"]
-layout_mode = 2
 offset_top = 89.0
 offset_right = 1152.0
 offset_bottom = 241.0
@@ -34,33 +42,28 @@ theme_override_constants/v_separation = 32
 columns = 2
 
 [node name="WidthLabel" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="0" instance=ExtResource("2_4vwx6")]
-layout_mode = 2
 offset_right = 560.0
 text = "Width"
 
 [node name="WidthInput" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="1" instance=ExtResource("5_4b1fo")]
-layout_mode = 2
 offset_top = 0.0
 offset_bottom = 60.0
 min_value = 3.0
 value = 3.0
 
 [node name="HeightLabel" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="2" instance=ExtResource("2_4vwx6")]
-layout_mode = 2
 offset_top = 92.0
 offset_right = 560.0
 offset_bottom = 152.0
 text = "Height"
 
 [node name="HeightInput" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="3" instance=ExtResource("5_4b1fo")]
-layout_mode = 2
 offset_top = 92.0
 offset_bottom = 152.0
 min_value = 3.0
 value = 3.0
 
 [node name="StartButton" parent="Margin/Contents/Interactive/VBoxContainer" index="2" instance=ExtResource("4_d0ntp")]
-layout_mode = 2
 offset_top = 273.0
 offset_right = 1152.0
 offset_bottom = 330.0

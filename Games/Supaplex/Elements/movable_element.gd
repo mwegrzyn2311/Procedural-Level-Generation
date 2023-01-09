@@ -40,6 +40,9 @@ func _ready():
 	self.gravity_scale = 0.0
 
 func _physics_process(delta):
+	if self.freeze:
+		return
+	
 	if not is_moving():
 		if !try_for_movement():
 			return
@@ -130,7 +133,8 @@ func try_eat() -> bool:
 		return true
 
 func eat():
-	self.collision_shape.disabled = true
+	self.set_collision_layer_value(SUPAPLEX_CONSTANTS.PLAYER_LAYER, false)
+	self.freeze = true
 
 func has_been_eaten():
 	self.queue_free()
