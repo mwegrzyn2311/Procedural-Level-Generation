@@ -77,8 +77,8 @@ func chance_make_empty(map: Dictionary, pos: Vector2) -> float:
 func rock_chances_mult(width: int, height: int, map: Dictionary) -> Dictionary:
 	var vert_chances_mult: Dictionary = {}
 	var horiz_chances_mult: Dictionary = {}
-	for i in range(height):
-		for j in range(width):
+	for j in range(height):
+		for i in range(width):
 			var curr = Vector2(i, j)
 			if map[curr] == "grass":
 				if !vert_chances_mult.has(curr):
@@ -87,8 +87,8 @@ func rock_chances_mult(width: int, height: int, map: Dictionary) -> Dictionary:
 					analyze_row_chances(horiz_chances_mult, map, curr)
 	
 	var chances_mult: Dictionary = {}
-	for i in range(height):
-		for j in range(width):
+	for j in range(height):
+		for i in range(width):
 			var curr = Vector2(i, j)
 			chances_mult[Vector2(i, j)] = COLLECTION_UTIL.dict_get_or_default(vert_chances_mult, curr, 1.0) * COLLECTION_UTIL.dict_get_or_default(horiz_chances_mult, curr, 1.0)
 	return chances_mult

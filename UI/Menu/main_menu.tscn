@@ -47,7 +47,6 @@ offset_right = 1152.0
 offset_bottom = 106.0
 
 [node name="MenuButton" parent="MarginContainer/VBoxContainer/VBoxContainer/StartButtonCont" index="0"]
-layout_mode = 3
 offset_right = 1120.0
 offset_bottom = 106.0
 
@@ -57,7 +56,6 @@ offset_right = 1152.0
 offset_bottom = 228.0
 
 [node name="MenuButton" parent="MarginContainer/VBoxContainer/VBoxContainer/CreditsButtonCont" index="0"]
-layout_mode = 3
 offset_right = 1120.0
 offset_bottom = 106.0
 text = "Credits
@@ -69,7 +67,6 @@ offset_right = 1152.0
 offset_bottom = 350.0
 
 [node name="MenuButton" parent="MarginContainer/VBoxContainer/VBoxContainer/QuitButtonCont" index="0"]
-layout_mode = 3
 offset_right = 1120.0
 offset_bottom = 106.0
 text = "Quit

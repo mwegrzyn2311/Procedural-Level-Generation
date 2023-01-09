@@ -18,7 +18,6 @@ grow_vertical = 2
 script = ExtResource("1_fgtgf")
 
 [node name="MenuBackground" parent="." instance=ExtResource("1_fe5cs")]
-color = Color(0.054902, 0.0156863, 0.25098, 1)
 
 [node name="Margin" type="MarginContainer" parent="."]
 offset_right = 1280.0
