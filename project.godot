@@ -14,6 +14,26 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://Algorithm/template_generation/level_templates.gd"
 }, {
+"base": "Node",
+"class": &"MCTSGameState",
+"language": &"GDScript",
+"path": "res://Algorithm/MonteCarloGeneration/mcts_game_state.gd"
+}, {
+"base": "Node",
+"class": &"MCTSLevelGenerator",
+"language": &"GDScript",
+"path": "res://Algorithm/MonteCarloGeneration/mcts_level_generator.gd"
+}, {
+"base": "Node",
+"class": &"MCTSNode",
+"language": &"GDScript",
+"path": "res://Algorithm/MonteCarloGeneration/mcts_node.gd"
+}, {
+"base": "MCTSGameState",
+"class": &"MCTSSupaplexState",
+"language": &"GDScript",
+"path": "res://Games/Supaplex/LevelGeneration/MonteCarloGeneration/mcts_supaplex_state.gd"
+}, {
 "base": "RigidBody2D",
 "class": &"MovableElement",
 "language": &"GDScript",
@@ -51,6 +71,10 @@ _global_script_classes=[{
 }]
 _global_script_class_icons={
 "LevelTemplates": "",
+"MCTSGameState": "",
+"MCTSLevelGenerator": "",
+"MCTSNode": "",
+"MCTSSupaplexState": "",
 "MovableElement": "",
 "NumericInput": "",
 "Player": "",
