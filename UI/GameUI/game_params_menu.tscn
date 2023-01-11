@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://brcwtlk1fn7b7"]
+
+[ext_resource type="PackedScene" uid="uid://dqcm14c5mumdg" path="res://UI/Menu/basic_menu.tscn" id="1_jocvc"]
+[ext_resource type="Script" path="res://UI/GameUI/game_params_menu.gd" id="2_24khn"]
+[ext_resource type="PackedScene" uid="uid://dkmr2v1p6mjdq" path="res://UI/Menu/controls/menu_button.tscn" id="3_0l2da"]
+[ext_resource type="PackedScene" uid="uid://bjm1tvhsv2q8e" path="res://UI/Menu/controls/input_label.tscn" id="4_bevsa"]
+[ext_resource type="PackedScene" uid="uid://bhyhaf02ctar5" path="res://UI/Menu/controls/numeric_input.tscn" id="5_i00vy"]
+
+[node name="GameParamsMenu" instance=ExtResource("1_jocvc")]
+script = ExtResource("2_24khn")
+
+[node name="Background" parent="." index="0"]
+layout_mode = 3
+
+[node name="Margin" parent="." index="1"]
+layout_mode = 3
+
+[node name="Contents" parent="Margin" index="0"]
+layout_mode = 3
+
+[node name="Title" parent="Margin/Contents" index="0"]
+layout_mode = 3
+offset_bottom = 91.0
+text = "Input params for the Game"
+
+[node name="Interactive" parent="Margin/Contents" index="1"]
+layout_mode = 3
+offset_top = 95.0
+
+[node name="VBoxContainer" parent="Margin/Contents/Interactive" index="0"]
+layout_mode = 3
+offset_bottom = 577.0
+
+[node name="BackButton" parent="Margin/Contents/Interactive/VBoxContainer" index="0" instance=ExtResource("3_0l2da")]
+offset_right = 1152.0
+offset_bottom = 57.0
+text = "Back"
+
+[node name="GridContainer" type="GridContainer" parent="Margin/Contents/Interactive/VBoxContainer" index="1"]
+offset_top = 89.0
+offset_right = 1152.0
+offset_bottom = 241.0
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 2
+
+[node name="WidthLabel" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="0" instance=ExtResource("4_bevsa")]
+offset_right = 560.0
+text = "Width"
+
+[node name="WidthInput" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="1" instance=ExtResource("5_i00vy")]
+offset_top = 0.0
+offset_bottom = 60.0
+min_value = 3.0
+value = 3.0
+
+[node name="HeightLabel" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="2" instance=ExtResource("4_bevsa")]
+offset_top = 92.0
+offset_right = 560.0
+offset_bottom = 152.0
+text = "Height"
+
+[node name="HeightInput" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="3" instance=ExtResource("5_i00vy")]
+offset_top = 92.0
+offset_bottom = 152.0
+min_value = 3.0
+value = 3.0
+
+[node name="StartButton" parent="Margin/Contents/Interactive/VBoxContainer" index="2" instance=ExtResource("3_0l2da")]
+offset_top = 273.0
+offset_right = 1152.0
+offset_bottom = 330.0
+text = "Start"
+
+[connection signal="pressed" from="Margin/Contents/Interactive/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Margin/Contents/Interactive/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

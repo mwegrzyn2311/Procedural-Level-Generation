@@ -20,7 +20,7 @@ func _on_next_button_pressed():
 		MENU_INFO.selectedGame = game_select.selected
 		MENU_INFO.selectedAlgo = algo_select.selected
 		RNG_UTIL.set_seed(seed_input.get_int_value())
-		get_tree().change_scene_to_file(NAVIGATION.getParamsSelectionMenu(MENU_INFO.selectedGame))
+		get_tree().change_scene_to_file(NAVIGATION.getParamsSelectionMenu(MENU_INFO.selectedGame, MENU_INFO.selectedAlgo))
 
 func required_inputs_filled() -> bool:
 	return game_select.selected != -1 and algo_select.selected != -1
