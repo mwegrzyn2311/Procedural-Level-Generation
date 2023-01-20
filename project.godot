@@ -10,9 +10,39 @@ config_version=5
 
 _global_script_classes=[{
 "base": "Node",
+"class": &"LevelGenerator",
+"language": &"GDScript",
+"path": "res://Algorithm/level_generator.gd"
+}, {
+"base": "Node",
 "class": &"LevelTemplates",
 "language": &"GDScript",
 "path": "res://Algorithm/template_generation/level_templates.gd"
+}, {
+"base": "Node",
+"class": &"MCTSAction",
+"language": &"GDScript",
+"path": "res://Algorithm/MonteCarloGeneration/mcts_action.gd"
+}, {
+"base": "Node",
+"class": &"MCTSGameState",
+"language": &"GDScript",
+"path": "res://Algorithm/MonteCarloGeneration/mcts_game_state.gd"
+}, {
+"base": "LevelGenerator",
+"class": &"MCTSLevelGenerator",
+"language": &"GDScript",
+"path": "res://Algorithm/MonteCarloGeneration/mcts_level_generator.gd"
+}, {
+"base": "Node",
+"class": &"MCTSNode",
+"language": &"GDScript",
+"path": "res://Algorithm/MonteCarloGeneration/mcts_node.gd"
+}, {
+"base": "MCTSGameState",
+"class": &"MCTSSupaplexState",
+"language": &"GDScript",
+"path": "res://Games/Supaplex/LevelGeneration/MonteCarloGeneration/mcts_supaplex_state.gd"
 }, {
 "base": "RigidBody2D",
 "class": &"MovableElement",
@@ -34,12 +64,17 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://Games/Supaplex/Elements/static_element.gd"
 }, {
+"base": "MCTSLevelGenerator",
+"class": &"SupaplexMCTSLevelGenerator",
+"language": &"GDScript",
+"path": "res://Games/Supaplex/LevelGeneration/MonteCarloGeneration/supaplex_mcts_level_generator.gd"
+}, {
 "base": "TemplateLevelGenerator",
 "class": &"SupaplexTemplateLevelGenerator",
 "language": &"GDScript",
 "path": "res://Games/Supaplex/LevelGeneration/template_generation/supaplex_template_level_generator.gd"
 }, {
-"base": "Node",
+"base": "LevelGenerator",
 "class": &"TemplateLevelGenerator",
 "language": &"GDScript",
 "path": "res://Algorithm/template_generation/template_level_generator.gd"
@@ -50,11 +85,18 @@ _global_script_classes=[{
 "path": "res://Algorithm/template_generation/template_utils.gd"
 }]
 _global_script_class_icons={
+"LevelGenerator": "",
 "LevelTemplates": "",
+"MCTSAction": "",
+"MCTSGameState": "",
+"MCTSLevelGenerator": "",
+"MCTSNode": "",
+"MCTSSupaplexState": "",
 "MovableElement": "",
 "NumericInput": "",
 "Player": "",
 "StaticElement": "",
+"SupaplexMCTSLevelGenerator": "",
 "SupaplexTemplateLevelGenerator": "",
 "TemplateLevelGenerator": "",
 "TemplateUtils": ""

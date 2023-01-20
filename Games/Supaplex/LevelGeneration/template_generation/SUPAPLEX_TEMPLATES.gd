@@ -1,9 +1,9 @@
 extends Node
 
-const WALL = "wall"
-const GRASS = "grass"
+var WALL = TILE_ELEMENTS.Ele.WALL
+var GRASS = TILE_ELEMENTS.Ele.GRASS
 
-# Consider Array[Dictionary[Vector2,String]] as well for templates
+# Consider Array[Dictionary[Vector2,Ele]] as well for templates
 
 var TEMPLATES_6: LevelTemplates = LevelTemplates.new(
 	3,

@@ -1,4 +1,4 @@
-extends Node
+extends LevelGenerator
 class_name TemplateLevelGenerator
 
 # This class is responsile for generating levels from rectangular w x h tile templates

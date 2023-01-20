@@ -7,9 +7,9 @@ const ROCK_CHANCE_MULT: float = 0.2
 const EMPTY_CHANCE_MULT: float = 0.6
 const DEPTH_MODIF: float = 0.0
 const WIDTH_MODIF: float = 1.0
-const MAKE_EMPTY_NEIGH_TO_CHANCE: Dictionary = {
-	"grass": 0.2,
-	"rock": 0.5
+var MAKE_EMPTY_NEIGH_TO_CHANCE: Dictionary = {
+	TILE_ELEMENTS.Ele.GRASS: 0.2,
+	TILE_ELEMENTS.Ele.BOULDER: 0.5
 }
 
 func _init(width: int, height: int, level_templates: LevelTemplates):
@@ -34,22 +34,22 @@ func generate_level() -> Dictionary:
 func place_rocks(res: Dictionary) -> Dictionary:
 	var rock_chances_mult: Dictionary = rock_chances_mult(width, height, res)
 	for pos in res:
-		if res[pos] == "grass":
+		if res[pos] == TILE_ELEMENTS.Ele.GRASS:
 			# TODO: Extract chances to constants
 			var random_roll = RNG_UTIL.RNG.randf()
 			if random_roll < rock_chances_mult[pos] * ROCK_CHANCE_MULT:
-				res[pos] = "boulder"
+				res[pos] = TILE_ELEMENTS.Ele.BOULDER
 			# TODO: Much better way for placing points
 			elif random_roll < 0.4:
-				res[pos] = "point" 
+				res[pos] = TILE_ELEMENTS.Ele.POINT
 	return res
 
 func place_empty(res: Dictionary) -> Dictionary:
 	# TODO: Consider randomly changing grass randomly to empty if rock is not above it. Chance should be higher when neighbours are rocks but not if it's below a rock
 	for pos in res:
-		if res[pos] == "grass":
+		if res[pos] == TILE_ELEMENTS.Ele.GRASS:
 			if RNG_UTIL.RNG.randf() < chance_make_empty(res, pos):
-				res[pos] = "empty"
+				res[pos] = TILE_ELEMENTS.Ele.EMPTY
 				
 	return res
 
@@ -57,21 +57,21 @@ func place_player(res: Dictionary) -> Dictionary:
 		# TODO: Consider better way to place the player
 	# Randomly change random element into player
 	var player_pos: Vector2 = RNG_UTIL.rand_vec2(width, height)
-	while res[player_pos] != "grass":
+	while res[player_pos] != TILE_ELEMENTS.Ele.GRASS:
 		# reroll
 		player_pos = RNG_UTIL.rand_vec2(width, height)
-	res[player_pos] = "player"
+	res[player_pos] = TILE_ELEMENTS.Ele.PLAYER
 	
 	return res
 
 func chance_make_empty(map: Dictionary, pos: Vector2) -> float:
 	var chance: float = 0.0
 	var above: Vector2 = pos + Vector2(0, -1)
-	if map.has(above) and map[above] == "rock":
+	if map.has(above) and map[above] == TILE_ELEMENTS.Ele.BOULDER:
 		return chance
 	# Vertical Neighbours affect this chance
-	chance += COLLECTION_UTIL.dict_get_or_default(MAKE_EMPTY_NEIGH_TO_CHANCE, COLLECTION_UTIL.dict_get_or_default(map, pos + Vector2(1, 0), "null"), 0.0)
-	chance += COLLECTION_UTIL.dict_get_or_default(MAKE_EMPTY_NEIGH_TO_CHANCE, COLLECTION_UTIL.dict_get_or_default(map, pos + Vector2(-1, 0), "null"), 0.0)
+	chance += COLLECTION_UTIL.dict_get_or_default(MAKE_EMPTY_NEIGH_TO_CHANCE, COLLECTION_UTIL.dict_get_or_default(map, pos + Vector2(1, 0), TILE_ELEMENTS.Ele.EMPTY), 0.0)
+	chance += COLLECTION_UTIL.dict_get_or_default(MAKE_EMPTY_NEIGH_TO_CHANCE, COLLECTION_UTIL.dict_get_or_default(map, pos + Vector2(-1, 0), TILE_ELEMENTS.Ele.EMPTY), 0.0)
 	return chance
 
 func rock_chances_mult(width: int, height: int, map: Dictionary) -> Dictionary:
@@ -80,7 +80,7 @@ func rock_chances_mult(width: int, height: int, map: Dictionary) -> Dictionary:
 	for j in range(height):
 		for i in range(width):
 			var curr = Vector2(i, j)
-			if map[curr] == "grass":
+			if map[curr] == TILE_ELEMENTS.Ele.GRASS:
 				if !vert_chances_mult.has(curr):
 					analyze_column_chances(vert_chances_mult, map, curr)
 				if !horiz_chances_mult.has(curr):
@@ -112,7 +112,7 @@ func analyze_row_chances(chances_mult: Dictionary, map: Dictionary, start: Vecto
 func get_passage_width_in_dir(map: Dictionary, start: Vector2, dir: Vector2) -> int:
 	var depth: int = 0
 	var curr = Vector2(start)
-	while map[curr] != "grass":
+	while map[curr] != TILE_ELEMENTS.Ele.GRASS:
 		curr += dir
 		depth += 1
 	return depth

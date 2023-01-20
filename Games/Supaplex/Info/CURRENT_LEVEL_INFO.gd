@@ -6,7 +6,7 @@ var difficulty: int = 5
 var total_points: int = 2
 var collected_points: int = 0
 
-var level_generator: SupaplexTemplateLevelGenerator = null
+var level_generator: LevelGenerator = null
 
 var level_map: Array = []
 
@@ -17,7 +17,10 @@ func set_height(height: int):
 	self.height = height
 	
 func apply():
-	level_generator = SupaplexTemplateLevelGenerator.new(width, height, SUPAPLEX_TEMPLATES.TEMPLATES_6)
+	if MENU_INFO.selectedAlgo == CONSTANTS.SupportedAlgos.TEMPLATE_BASED:
+		level_generator = SupaplexTemplateLevelGenerator.new(width, height, SUPAPLEX_TEMPLATES.TEMPLATES_6)
+	elif MENU_INFO.selectedAlgo == CONSTANTS.SupportedAlgos.MONTE_CARLO:
+		level_generator = SupaplexMCTSLevelGenerator.new(width, height)
 
 func generate_map():
 	self.level_map = LEVEL_CONVERTER.vec_string_dict_to_tile_arr(level_generator.generate_level())
