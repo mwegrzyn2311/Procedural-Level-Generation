@@ -20,4 +20,6 @@ func rand_vec2(width: int, height: int) -> Vector2:
 	return Vector2(x, y)
 
 func choice(arr: Array):
+	if arr.is_empty():
+		return null
 	return arr[RNG.randi_range(0, arr.size() - 1)]

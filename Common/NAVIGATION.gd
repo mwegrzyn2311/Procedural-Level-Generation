@@ -9,7 +9,8 @@ var GAME_TO_SCENE: Dictionary = {
 }
 var GAME_TO_ALGO_TO_PARAM_SELECTION: Dictionary = {
 	CONSTANTS.SupportedGames.BOULDER_DASH : {
-		CONSTANTS.SupportedAlgos.TEMPLATE_BASED: "res://UI/GameUI/Supaplex/supaplex_template_based_params_menu.tscn"
+		CONSTANTS.SupportedAlgos.TEMPLATE_BASED: "res://UI/GameUI/Supaplex/supaplex_template_based_params_menu.tscn",
+		CONSTANTS.SupportedAlgos.MONTE_CARLO: "res://Games/Supaplex/UI/ParamSelection/supaplex_mcts_based_params_menu.tscn"
 	}
 }
 

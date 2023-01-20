@@ -10,14 +10,14 @@ func _init(intial_res: Dictionary):
 
 # =======================
 # Abstract functions here
-func move(action) -> MCTSGameState:
+func move(action: MCTSAction) -> MCTSGameState:
 	return null
 	
 func legal_actions() -> Array:
 	return []
 
-func generation_result():
-	return null
+func generation_result() -> float:
+	return -1.0
 
 func is_generation_completed() -> bool:
 	return false
