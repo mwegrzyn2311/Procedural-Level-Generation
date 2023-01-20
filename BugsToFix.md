@@ -42,7 +42,7 @@ Simply switching `i` and`j` back to `Vector2(i, j)` was enough
 
 It's possible to interfere with falling objects causing both player and the object to end up in illegal position - One of found reasons for that is when a rock would slide, but player eats what's next to it (Situation like in the image)
 
-![supaplex_illegal_coords_bug](.\ZZZ_BugsReportImages\supaplex_illegal_coords_bug.PNG)
+![supaplex_illegal_coords_bug](./ZZZ_BugsReportImages/supaplex_illegal_coords_bug.PNG)
 
 As you can see, when grass is eaten both player and rock detects that their movement is now possible, so they both begin to move but collide in the center
 
