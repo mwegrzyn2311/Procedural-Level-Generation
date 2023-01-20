@@ -22,7 +22,7 @@
 
 ## List of fixed bugs
 
-##### [**Boulder-Dash** *generation*] Template level generation works only for square levels
+#### [**Boulder-Dash** *generation*] Template level generation works only for square levels
 
 ###### Description
 
@@ -36,7 +36,7 @@ When trying to generate level given different width and height (For example widt
 
 Simply switching `i` and`j` back to `Vector2(i, j)` was enough
 
-##### [**Boulder-Dash** *gameplay*] Players and movable objects ending up in illegal coordinates
+#### [**Boulder-Dash** *gameplay*] Players and movable objects ending up in illegal coordinates
 
 ###### Description
 
