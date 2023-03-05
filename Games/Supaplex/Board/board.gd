@@ -6,6 +6,10 @@ extends Node2D
 func _ready():
 	self.generate_fence()
 	self.generate_elements()
+	call_deferred("register_in_navigation")
+	
+func register_in_navigation():
+	NAVIGATION.game_scene = self
 
 func generate_fence():
 	for i in range(-1, CURRENT_LEVEL_INFO.width + 1):
@@ -21,3 +25,11 @@ func generate_elements():
 	for element in CURRENT_LEVEL_INFO.level_map:
 		game_elements.add_child(element)
 		element.add_to_group("game_elements")
+		
+func cleanup():
+	for element in game_elements.get_children():
+		game_elements.remove_child(element)
+		
+func regenerate_level():
+	cleanup()
+	generate_elements()

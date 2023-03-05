@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://cucya5n70q0nb"]
+
+[ext_resource type="PackedScene" uid="uid://cjwqiif3jsat0" path="res://UI/GameUI/Overlay/base_overlay_button.tscn" id="1_eviot"]
+[ext_resource type="Script" path="res://UI/GameUI/Overlay/restart_rand_seed.gd" id="2_hr1xx"]
+[ext_resource type="Script" path="res://UI/GameUI/Overlay/restart_same_seed.gd" id="2_q6g22"]
+[ext_resource type="Script" path="res://UI/GameUI/Overlay/CopySeedToClipboard.gd" id="2_ukxbp"]
+[ext_resource type="Script" path="res://UI/GameUI/Overlay/seed_label.gd" id="4_7ukkr"]
+
+[node name="BaseGameOverlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SideBar" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 1088.0
+offset_top = 96.0
+offset_right = 1280.0
+offset_bottom = 768.0
+color = Color(0.211765, 0.211765, 0.211765, 1)
+
+[node name="Buttons" type="Control" parent="SideBar"]
+anchors_preset = 0
+offset_right = 192.0
+offset_bottom = 672.0
+
+[node name="CopyToClipboard" parent="SideBar/Buttons" instance=ExtResource("1_eviot")]
+layout_mode = 0
+offset_top = 128.0
+offset_bottom = 160.0
+theme_override_font_sizes/font_size = 16
+text = "Copy to clipboard"
+script = ExtResource("2_ukxbp")
+
+[node name="RestartSameSeed" parent="SideBar/Buttons" instance=ExtResource("1_eviot")]
+layout_mode = 0
+offset_top = 256.0
+offset_bottom = 320.0
+text = "Restart (same seed)"
+script = ExtResource("2_q6g22")
+
+[node name="RestartRandSeed" parent="SideBar/Buttons" instance=ExtResource("1_eviot")]
+layout_mode = 0
+offset_top = 384.0
+offset_bottom = 448.0
+text = "Restart (rand seed)"
+script = ExtResource("2_hr1xx")
+
+[node name="SeedLabel" type="Label" parent="SideBar"]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 112.0
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_7ukkr")
+
+[node name="TopBar" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 96.0
+color = Color(0.223529, 0.223529, 0.223529, 1)
+
+[connection signal="pressed" from="SideBar/Buttons/CopyToClipboard" to="SideBar/Buttons/CopyToClipboard" method="_on_pressed"]
+[connection signal="pressed" from="SideBar/Buttons/RestartSameSeed" to="SideBar/Buttons/RestartSameSeed" method="_on_pressed"]
+[connection signal="pressed" from="SideBar/Buttons/RestartRandSeed" to="SideBar/Buttons/RestartRandSeed" method="_on_pressed"]

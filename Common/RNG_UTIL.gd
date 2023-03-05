@@ -1,7 +1,9 @@
 extends Node
 
 var RNG = RandomNumberGenerator.new()
-var seed: int = 0
+var seed: int = 0: set = set_seed, get = get_seed
+
+var generation_state: int = 0
 
 func _ready():
 	RNG.randomize()
@@ -12,7 +14,10 @@ func set_seed(new_seed: int) -> void:
 		RNG.set_seed(new_seed)
 	else:
 		RNG.randomize()
-	self.seed = RNG.get_seed()
+	seed = RNG.get_seed()
+	
+func get_seed() -> int:
+	return seed
 
 func rand_vec2(width: int, height: int) -> Vector2:
 	var x = self.RNG.randi_range(0, width - 1)
@@ -23,3 +28,13 @@ func choice(arr: Array):
 	if arr.is_empty():
 		return null
 	return arr[RNG.randi_range(0, arr.size() - 1)]
+	
+func save_generation_state():
+	self.generation_state = RNG.state
+	
+func restore_randomness():
+	print(RNG.state)
+	RNG.state = generation_state
+
+func change_seed_to_random():
+	set_seed(-1)

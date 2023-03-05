@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjwqiif3jsat0"]
+
+[ext_resource type="FontFile" uid="uid://v4yqlddodibg" path="res://Fonts/Roboto-Medium.ttf" id="1_bd328"]
+
+[node name="BaseOverlayButton" type="Button"]
+offset_top = 480.0
+offset_right = 192.0
+offset_bottom = 544.0
+theme_override_fonts/font = ExtResource("1_bd328")
+theme_override_font_sizes/font_size = 20
+text = "Button text"

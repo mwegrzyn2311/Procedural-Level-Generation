@@ -10,4 +10,5 @@ func _init(width: int, height: int):
 	self.height = height
 
 func generate_level() -> Dictionary:
+	var _unused = super.generate_level()
 	return generate(MCTSSupaplexState.new(width, height))

@@ -15,61 +15,39 @@ layout_mode = 3
 [node name="Margin" parent="." index="1"]
 layout_mode = 3
 
-[node name="Contents" parent="Margin" index="0"]
-layout_mode = 3
-
 [node name="Title" parent="Margin/Contents" index="0"]
-layout_mode = 3
-offset_bottom = 91.0
 text = "Input params for the Game"
 
-[node name="Interactive" parent="Margin/Contents" index="1"]
-layout_mode = 3
-offset_top = 95.0
-
-[node name="VBoxContainer" parent="Margin/Contents/Interactive" index="0"]
-layout_mode = 3
-offset_bottom = 577.0
-
 [node name="BackButton" parent="Margin/Contents/Interactive/VBoxContainer" index="0" instance=ExtResource("3_0l2da")]
-offset_right = 1152.0
-offset_bottom = 57.0
+layout_mode = 2
 text = "Back"
 
 [node name="GridContainer" type="GridContainer" parent="Margin/Contents/Interactive/VBoxContainer" index="1"]
-offset_top = 89.0
-offset_right = 1152.0
-offset_bottom = 241.0
+layout_mode = 2
 theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 32
 columns = 2
 
 [node name="WidthLabel" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="0" instance=ExtResource("4_bevsa")]
-offset_right = 560.0
+layout_mode = 2
 text = "Width"
 
 [node name="WidthInput" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="1" instance=ExtResource("5_i00vy")]
-offset_top = 0.0
-offset_bottom = 60.0
+layout_mode = 2
 min_value = 3.0
 value = 3.0
 
 [node name="HeightLabel" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="2" instance=ExtResource("4_bevsa")]
-offset_top = 92.0
-offset_right = 560.0
-offset_bottom = 152.0
+layout_mode = 2
 text = "Height"
 
 [node name="HeightInput" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="3" instance=ExtResource("5_i00vy")]
-offset_top = 92.0
-offset_bottom = 152.0
+layout_mode = 2
 min_value = 3.0
 value = 3.0
 
 [node name="StartButton" parent="Margin/Contents/Interactive/VBoxContainer" index="2" instance=ExtResource("3_0l2da")]
-offset_top = 273.0
-offset_right = 1152.0
-offset_bottom = 330.0
+layout_mode = 2
 text = "Start"
 
 [connection signal="pressed" from="Margin/Contents/Interactive/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

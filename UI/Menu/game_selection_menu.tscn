@@ -18,8 +18,10 @@ grow_vertical = 2
 script = ExtResource("1_fgtgf")
 
 [node name="MenuBackground" parent="." instance=ExtResource("1_fe5cs")]
+layout_mode = 0
 
 [node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 768.0
 theme_override_constants/margin_left = 32
@@ -28,21 +30,15 @@ theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
 [node name="Contents" type="VBoxContainer" parent="Margin"]
-offset_left = 32.0
-offset_top = 32.0
-offset_right = 1248.0
-offset_bottom = 736.0
+layout_mode = 2
 
 [node name="MenuTitle" parent="Margin/Contents" instance=ExtResource("3_ya88u")]
-offset_right = 1216.0
-offset_bottom = 102.0
+layout_mode = 2
 text = "Selection
 "
 
 [node name="Interactive" type="MarginContainer" parent="Margin/Contents"]
-offset_top = 106.0
-offset_right = 1216.0
-offset_bottom = 704.0
+layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
@@ -50,55 +46,44 @@ theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
 [node name="VBox" type="VBoxContainer" parent="Margin/Contents/Interactive"]
-offset_left = 32.0
-offset_top = 32.0
-offset_right = 1184.0
-offset_bottom = 566.0
+layout_mode = 2
 theme_override_constants/separation = 32
 
 [node name="BackButton" parent="Margin/Contents/Interactive/VBox" instance=ExtResource("5_px8yu")]
-offset_right = 1152.0
-offset_bottom = 57.0
+layout_mode = 2
 text = "Back
 "
 
 [node name="GridContainer" type="GridContainer" parent="Margin/Contents/Interactive/VBox"]
-offset_top = 89.0
-offset_right = 1152.0
-offset_bottom = 333.0
+layout_mode = 2
 theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 32
 columns = 2
 
 [node name="GameLabel" parent="Margin/Contents/Interactive/VBox/GridContainer" instance=ExtResource("5_63x0y")]
-offset_right = 560.0
+layout_mode = 2
 text = "Game"
 
 [node name="GameSelect" parent="Margin/Contents/Interactive/VBox/GridContainer" instance=ExtResource("6_keppc")]
+layout_mode = 2
 
 [node name="GenerationAlgo" parent="Margin/Contents/Interactive/VBox/GridContainer" instance=ExtResource("5_63x0y")]
-offset_top = 92.0
-offset_right = 560.0
-offset_bottom = 152.0
+layout_mode = 2
 
 [node name="AlgoSelect" parent="Margin/Contents/Interactive/VBox/GridContainer" instance=ExtResource("6_keppc")]
-offset_top = 92.0
-offset_bottom = 152.0
+layout_mode = 2
 
 [node name="SeedLabel" parent="Margin/Contents/Interactive/VBox/GridContainer" instance=ExtResource("5_63x0y")]
-offset_top = 184.0
-offset_right = 560.0
-offset_bottom = 244.0
+layout_mode = 2
 text = "(Optional) Seed"
 
 [node name="SeedInput" parent="Margin/Contents/Interactive/VBox/GridContainer" instance=ExtResource("7_ai6cm")]
+layout_mode = 2
 min_value = -1.0
 value = -1.0
 
 [node name="NextButton" parent="Margin/Contents/Interactive/VBox" instance=ExtResource("5_px8yu")]
-offset_top = 365.0
-offset_right = 1152.0
-offset_bottom = 422.0
+layout_mode = 2
 text = "Next"
 
 [connection signal="pressed" from="Margin/Contents/Interactive/VBox/BackButton" to="." method="_on_back_button_pressed"]
