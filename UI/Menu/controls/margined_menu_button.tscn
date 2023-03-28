@@ -12,6 +12,4 @@ theme_override_constants/margin_left = 32
 theme_override_constants/margin_right = 32
 
 [node name="MenuButton" parent="." instance=ExtResource("1_xf7im")]
-offset_left = 32.0
-offset_right = 1248.0
-offset_bottom = 57.0
+layout_mode = 2

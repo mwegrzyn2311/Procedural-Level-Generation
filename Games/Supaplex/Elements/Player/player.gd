@@ -12,7 +12,7 @@ var _step_size: float = 1 / _pixels_per_second
 var _step: float = 0
 var _pixels_moved: int = 0
 
-var eaten_ele: MovableElement = null
+var eaten_ele = null
 
 func set_coords(coordinates: Vector2):
 	self.position = (coordinates + Vector2(1, 1)) * SUPAPLEX_CONSTANTS.TILE_SIZE
