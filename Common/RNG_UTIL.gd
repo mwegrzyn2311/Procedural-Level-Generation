@@ -23,6 +23,12 @@ func rand_vec2(width: int, height: int) -> Vector2:
 	var x = self.RNG.randi_range(0, width - 1)
 	var y = self.RNG.randi_range(0, height - 1)
 	return Vector2(x, y)
+	
+func rand_bool() -> bool:
+	if RNG.randi_range(0,1) == 0:
+		return false
+	else:
+		return true
 
 func choice(arr: Array):
 	if arr.is_empty():
@@ -33,7 +39,6 @@ func save_generation_state():
 	self.generation_state = RNG.state
 	
 func restore_randomness():
-	print(RNG.state)
 	RNG.state = generation_state
 
 func change_seed_to_random():

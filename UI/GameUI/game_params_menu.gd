@@ -17,4 +17,3 @@ func _on_start_button_pressed():
 	CURRENT_LEVEL_INFO.set_height(heightInput.get_int_value())
 	CURRENT_LEVEL_INFO.apply()
 	get_tree().change_scene_to_file(NAVIGATION.getGameScene(MENU_INFO.selectedGame))
-	
