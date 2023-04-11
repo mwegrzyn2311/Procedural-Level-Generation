@@ -29,6 +29,8 @@ SUPAPLEX_CONSTANTS="*res://Games/Supaplex/Info/CONSTANTS.gd"
 LEVEL_CONVERTER="*res://Games/Supaplex/LevelGeneration/LEVEL_CONVERTER.gd"
 SUPAPLEX_LEVEL_GENERATOR="*res://Games/Supaplex/LevelGeneration/SUPAPLEX_LEVEL_GENERATOR.gd"
 CURRENT_LEVEL_INFO="*res://Games/Supaplex/Info/CURRENT_LEVEL_INFO.gd"
+PANEL_ELEMENTS="*res://Games/Panel/LevelGeneration/PANEL_ELEMENTS.gd"
+CURRENT_PANEL="*res://Games/Panel/Info/CURRENT_PANEL.gd"
 
 [display]
 
