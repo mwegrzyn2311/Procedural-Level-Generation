@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://ce0xuctacswwp"]
+
+[ext_resource type="PackedScene" uid="uid://b6m4ht4tkdnbv" path="res://Games/Panel/Element/panel_ele.tscn" id="1_oilbp"]
+[ext_resource type="Texture2D" uid="uid://2j00fqpdw5fu" path="res://Games/Panel/Element/Pipe/Pipe.png" id="2_ls6bg"]
+[ext_resource type="Script" path="res://Games/Panel/Element/Pipe/pipe.gd" id="2_nnqc4"]
+
+[node name="Pipe" instance=ExtResource("1_oilbp")]
+script = ExtResource("2_nnqc4")
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_ls6bg")

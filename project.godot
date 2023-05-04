@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Dir2="*res://Common/Dir2.gd"
 CONSTANTS="*res://Common/CONSTANTS.gd"
 MENU_INFO="*res://Common/MENU_INFO.gd"
 NAVIGATION="*res://Common/NAVIGATION.gd"
@@ -31,6 +32,7 @@ SUPAPLEX_LEVEL_GENERATOR="*res://Games/Supaplex/LevelGeneration/SUPAPLEX_LEVEL_G
 CURRENT_LEVEL_INFO="*res://Games/Supaplex/Info/CURRENT_LEVEL_INFO.gd"
 PANEL_ELEMENTS="*res://Games/Panel/LevelGeneration/PANEL_ELEMENTS.gd"
 CURRENT_PANEL="*res://Games/Panel/Info/CURRENT_PANEL.gd"
+PANEL_ELE_CONVERTER="*res://Games/Panel/LevelGeneration/PANEL_ELE_CONVERTER.gd"
 
 [display]
 

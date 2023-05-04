@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7gwlqxxnegq1"
-path="res://.godot/imported/square_256.png-38649e163918a95aa227a2d3ae3704e5.ctex"
+uid="uid://c43hxrg6wnx5k"
+path="res://.godot/imported/circle.png-fab0cdc2cd15119fd9d9d2ff2561197d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Games/Panel/Board/square_256.png"
-dest_files=["res://.godot/imported/square_256.png-38649e163918a95aa227a2d3ae3704e5.ctex"]
+source_file="res://Games/Panel/Element/Start/circle.png"
+dest_files=["res://.godot/imported/circle.png-fab0cdc2cd15119fd9d9d2ff2561197d.ctex"]
 
 [params]
 

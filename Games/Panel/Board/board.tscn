@@ -1,16 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfj55mtw2xm2u"]
+[gd_scene load_steps=2 format=3 uid="uid://qg8prwos6mj0"]
 
 [ext_resource type="Script" path="res://Games/Panel/Board/board.gd" id="1_bi78r"]
-[ext_resource type="Texture2D" uid="uid://c43hxrg6wnx5k" path="res://Games/Panel/Board/circle.png" id="1_vqjgc"]
-[ext_resource type="Script" path="res://Games/Panel/Board/Intersection.gd" id="3_w8y56"]
-[ext_resource type="Texture2D" uid="uid://7gwlqxxnegq1" path="res://Games/Panel/Board/square_256.png" id="4_cuajv"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5p7r8"]
-radius = 32.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_215ui"]
-
-[node name="Board" type="Node2D"]
+[node name="PanelBoard" type="Node2D"]
 script = ExtResource("1_bi78r")
 
 [node name="Background" type="ColorRect" parent="."]
@@ -21,30 +13,4 @@ color = Color(0.231373, 0.231373, 0.231373, 1)
 
 [node name="Elements" type="Node2D" parent="."]
 
-[node name="Start" type="StaticBody2D" parent="Elements"]
-position = Vector2(256, 256)
-input_pickable = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Elements/Start"]
-shape = SubResource("CircleShape2D_5p7r8")
-
-[node name="Sprite2D" type="Sprite2D" parent="Elements/Start"]
-scale = Vector2(0.125, 0.125)
-texture = ExtResource("1_vqjgc")
-
-[node name="Intersection" type="StaticBody2D" parent="Elements"]
-input_pickable = true
-script = ExtResource("3_w8y56")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Elements/Intersection"]
-position = Vector2(544, 256)
-shape = SubResource("RectangleShape2D_215ui")
-
-[node name="Sprite2D" type="Sprite2D" parent="Elements/Intersection"]
-position = Vector2(544, 256)
-scale = Vector2(0.125, 0.125)
-texture = ExtResource("4_cuajv")
-
 [connection signal="gui_input" from="Background" to="." method="_on_background_gui_input"]
-[connection signal="input_event" from="Elements/Start" to="." method="_on_start_input_event"]
-[connection signal="mouse_entered" from="Elements/Intersection" to="Elements/Intersection" method="_on_mouse_entered"]

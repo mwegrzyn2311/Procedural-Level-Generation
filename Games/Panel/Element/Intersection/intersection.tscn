@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cx7q6e4h086fe"]
+
+[ext_resource type="Texture2D" uid="uid://7gwlqxxnegq1" path="res://Games/Panel/Element/Intersection/square_256.png" id="1_8fac1"]
+[ext_resource type="PackedScene" uid="uid://b6m4ht4tkdnbv" path="res://Games/Panel/Element/panel_ele.tscn" id="1_ee6qp"]
+[ext_resource type="Script" path="res://Games/Panel/Element/Intersection/intersection.gd" id="2_ifa7p"]
+
+[node name="Intersection" instance=ExtResource("1_ee6qp")]
+input_pickable = true
+script = ExtResource("2_ifa7p")
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("1_8fac1")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
