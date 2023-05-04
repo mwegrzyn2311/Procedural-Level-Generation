@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dejnjswceupeo"]
+
+[ext_resource type="Script" path="res://Games/Panel/Element/line.gd" id="1_acf41"]
+
+[sub_resource type="Curve" id="Curve_2fxc8"]
+
+[node name="line" type="Line2D"]
+width_curve = SubResource("Curve_2fxc8")
+default_color = Color(0, 0.392157, 0.392157, 1)
+script = ExtResource("1_acf41")

@@ -6,9 +6,9 @@ var difficulty: int = 5
 var total_points: int = 2
 var collected_points: int = 0
 
-var level_generator: LevelGenerator = null
-
 var level_map: Array = []
+
+var level_generator: LevelGenerator = null
 
 func set_width(width: int):
 	self.width = width

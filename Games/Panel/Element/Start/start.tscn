@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhe23gg0m3o2y"]
+
+[ext_resource type="Texture2D" uid="uid://c43hxrg6wnx5k" path="res://Games/Panel/Element/Start/circle.png" id="1_4vdri"]
+[ext_resource type="PackedScene" uid="uid://b6m4ht4tkdnbv" path="res://Games/Panel/Element/panel_ele.tscn" id="1_75fnm"]
+[ext_resource type="Script" path="res://Games/Panel/Element/Start/start.gd" id="2_eok7t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3v4rf"]
+radius = 256.0
+
+[node name="PanelStart" instance=ExtResource("1_75fnm")]
+input_pickable = true
+script = ExtResource("2_eok7t")
+
+[node name="Collision" parent="." index="0"]
+shape = SubResource("CircleShape2D_3v4rf")
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("1_4vdri")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
