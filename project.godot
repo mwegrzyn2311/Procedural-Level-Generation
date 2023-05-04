@@ -20,7 +20,6 @@ config/icon="res://icon.svg"
 Dir2="*res://Common/Dir2.gd"
 CONSTANTS="*res://Common/CONSTANTS.gd"
 MENU_INFO="*res://Common/MENU_INFO.gd"
-NAVIGATION="*res://Common/NAVIGATION.gd"
 COLLECTION_UTIL="*res://Common/COLLECTION_UTIL.gd"
 RNG_UTIL="*res://Common/RNG_UTIL.gd"
 SUPAPLEX_TEMPLATES="*res://Games/Supaplex/LevelGeneration/template_generation/SUPAPLEX_TEMPLATES.gd"
@@ -33,6 +32,7 @@ CURRENT_LEVEL_INFO="*res://Games/Supaplex/Info/CURRENT_LEVEL_INFO.gd"
 PANEL_ELEMENTS="*res://Games/Panel/LevelGeneration/PANEL_ELEMENTS.gd"
 CURRENT_PANEL="*res://Games/Panel/Info/CURRENT_PANEL.gd"
 PANEL_ELE_CONVERTER="*res://Games/Panel/LevelGeneration/PANEL_ELE_CONVERTER.gd"
+NAVIGATION="*res://Common/NAVIGATION.gd"
 
 [display]
 

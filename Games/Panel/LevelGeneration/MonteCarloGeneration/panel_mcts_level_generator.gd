@@ -10,5 +10,4 @@ func _init(width: int, height: int):
 	self.height = height
 
 func generate_level() -> Dictionary:
-	# TODO: Implement
-	return {}
+	return super.generate_level()

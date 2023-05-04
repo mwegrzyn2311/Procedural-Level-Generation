@@ -13,7 +13,8 @@ func _on_back_button_pressed():
 	get_tree().change_scene_to_file(NAVIGATION.GAME_SELECTION)
 
 func _on_start_button_pressed():
-	CURRENT_LEVEL_INFO.set_width(widthInput.get_int_value())
-	CURRENT_LEVEL_INFO.set_height(heightInput.get_int_value())
-	CURRENT_LEVEL_INFO.apply()
+	var info_script = NAVIGATION.GAME_TO_INFO_SCRIPT[MENU_INFO.selectedGame]
+	info_script.set_width(widthInput.get_int_value())
+	info_script.set_height(heightInput.get_int_value())
+	info_script.apply()
 	get_tree().change_scene_to_file(NAVIGATION.getGameScene(MENU_INFO.selectedGame))

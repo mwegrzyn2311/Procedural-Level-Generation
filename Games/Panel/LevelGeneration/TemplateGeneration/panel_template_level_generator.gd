@@ -7,4 +7,4 @@ func _init(width: int, height: int, level_templates: LevelTemplates):
 
 func generate_level() -> Dictionary:
 	# TODO: Implement
-	return {}
+	return super.generate_level()
