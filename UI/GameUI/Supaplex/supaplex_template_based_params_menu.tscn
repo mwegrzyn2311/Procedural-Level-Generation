@@ -6,3 +6,9 @@
 
 [node name="Title" parent="Margin/Contents" index="0"]
 text = "Input params for the Supaplex (Template Based)"
+
+[node name="WidthInput" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="1"]
+step = 3.0
+
+[node name="HeightInput" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="3"]
+step = 3.0

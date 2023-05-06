@@ -7,3 +7,11 @@
 [node name="Title" parent="Margin/Contents" index="0"]
 text = "Input params for Panel
 (Template based generation)"
+
+[node name="WidthInput" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="1"]
+min_value = 2.0
+value = 2.0
+
+[node name="HeightInput" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="3"]
+min_value = 2.0
+value = 2.0
