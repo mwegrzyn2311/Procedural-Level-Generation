@@ -11,4 +11,4 @@ func _init(function: Callable, args: Dictionary):
 	self.args = args
 	
 func apply():
-	self.function.call(self.args)
+	return self.function.call(self.args)

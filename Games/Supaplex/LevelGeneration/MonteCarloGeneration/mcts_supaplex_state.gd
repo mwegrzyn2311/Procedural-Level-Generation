@@ -2,6 +2,7 @@ extends MCTSGameState
 
 class_name MCTSSupaplexState
 
+var res: Dictionary = {}
 var walls_to_delete: int
 var points_to_place: int
 var initial_player_pos: Vector2
@@ -11,8 +12,10 @@ var rocks_placed: int = 0
 var points_placed: int = 0
 var last_dir: Vector2
 
+var curr_legal_actions: Array
+
 func _init(res: Dictionary, walls_to_delete: int, points_to_place: int, initial_player_pos: Vector2, player_pos: Vector2, walls_deleted: int = 0, rocks_placed: int = 0, points_placed: int = 0, last_dir: Vector2 = Vector2(0, 0)):
-	super(res)
+	self.res = res
 	self.walls_to_delete = walls_to_delete
 	self.points_to_place = points_to_place
 	self.initial_player_pos = initial_player_pos
@@ -21,6 +24,7 @@ func _init(res: Dictionary, walls_to_delete: int, points_to_place: int, initial_
 	self.rocks_placed = rocks_placed
 	self.points_placed = points_placed
 	self.last_dir = last_dir
+	self.curr_legal_actions = self.generate_legal_actions()
 	
 static func new_initial_state(width: int, height: int) -> MCTSSupaplexState:
 	var res: Dictionary = {}
@@ -33,8 +37,8 @@ static func new_initial_state(width: int, height: int) -> MCTSSupaplexState:
 	var points_to_place = int(RNG_UTIL.RNG.randf_range(0.15, 0.2) * walls_to_delete)
 	return MCTSSupaplexState.new(res, walls_to_delete, points_to_place, initial_player_pos, initial_player_pos)
 
-func copy() -> MCTSSupaplexState:
-	return MCTSSupaplexState.new(res.duplicate(true), walls_to_delete, points_to_place, Vector2(initial_player_pos), Vector2(player_pos), walls_deleted, rocks_placed, points_placed, Vector2(last_dir))
+func copy(res: Dictionary, walls_deleted: int, player_pos: Vector2, rocks_placed: int, points_placed: int, last_dir: Vector2) -> MCTSSupaplexState:
+	return MCTSSupaplexState.new(res, walls_deleted, points_to_place, initial_player_pos, player_pos, walls_deleted, rocks_placed, points_placed, last_dir)
 
 const NIEGH_CORRID_MULT: float = 1.0
 const NIEGH_DIAG_NON_CORRID_MULT: float = 5.0
@@ -55,16 +59,18 @@ func score_at_pos(pos: Vector2) -> float:
 func max_score_at_pos() -> float:
 	return NIEGH_CORRID_MULT * 4.0 + NIEGH_DIAG_NON_CORRID_MULT * 4.0
 
-func move_player(args: Dictionary):
+func move_player(args: Dictionary) -> MCTSSupaplexState:
+	var new_res = self.res.duplicate(true)
 	var dir = args["dir"]
 	var dest: Vector2 = self.player_pos + dir
 	assert(self.res.has(dest))
-	if self.res[dest] == TILE_ELEMENTS.Ele.WALL:
+	if new_res[dest] == TILE_ELEMENTS.Ele.WALL:
 		self.walls_deleted += 1
-	self.res[self.player_pos] = element_to_place()
-	self.res[dest] = TILE_ELEMENTS.Ele.PLAYER
-	self.player_pos = dest
-	self.last_dir = dir
+	var ele_to_place = element_to_place()
+	new_res[self.player_pos] = ele_to_place
+	var new_points_placed: int = points_placed + 1 if ele_to_place == TILE_ELEMENTS.Ele.POINT else ele_to_place
+	new_res[dest] = TILE_ELEMENTS.Ele.PLAYER
+	return self.copy(new_res, walls_deleted, dest, rocks_placed, new_points_placed, dir)
 	
 func element_to_place() -> TILE_ELEMENTS.Ele:
 	var point_chance = float(points_to_place - points_placed) / float(walls_to_delete - walls_deleted)
@@ -74,41 +80,40 @@ func element_to_place() -> TILE_ELEMENTS.Ele:
 	else:
 		return TILE_ELEMENTS.Ele.GRASS
 
-func place_boulder(args: Dictionary):
+func place_boulder(args: Dictionary) -> MCTSSupaplexState:
+	var new_res = res.duplicate(true)
 	var dest_ele: TILE_ELEMENTS.Ele = self.res[args["pos"]]
-	if dest_ele == TILE_ELEMENTS.Ele.WALL:
-		self.walls_deleted += 1
+	var new_walls_deleted: int = walls_deleted + 1 if dest_ele == TILE_ELEMENTS.Ele.WALL else walls_deleted
 	# TODO: Is the below commented out code needed?
 #	if TILE_ELEMENTS.is_corridor(dest_ele):
 #		self.walls_deleted -= 1
-	self.res[args["pos"]] = TILE_ELEMENTS.Ele.BOULDER
-	rocks_placed += 1
+	new_res[args["pos"]] = TILE_ELEMENTS.Ele.BOULDER
+	return self.copy(new_res, new_walls_deleted, Vector2(player_pos), rocks_placed + 1, points_placed, Vector2(last_dir))
 
 func finish_generation():
 	res[initial_player_pos] = TILE_ELEMENTS.Ele.PLAYER
 	res[player_pos] = TILE_ELEMENTS.Ele.EXIT
 
+func generate_legal_actions() -> Array:
+	return legal_move_actions() + legal_boulder_actions()
+
 # =======================
 # Abstract functions overrides here
-func move(action: MCTSAction) -> MCTSGameState:
-	action.apply()
-	var new_object = action.function.get_object()
-	return new_object
 	
 func legal_actions() -> Array:
-	return legal_move_actions() + legal_boulder_actions()
+	return self.curr_legal_actions
 
 func legal_move_actions() -> Array[MCTSAction]:
 	var legal_move_actions: Array[MCTSAction] = []
 	for unit_vector in CONSTANTS.UNIT_VECTORS:
 		if unit_vector != -last_dir and self.res.has(self.player_pos + unit_vector) and not (self.res.has(self.player_pos + unit_vector + Vector2.UP) and self.res[self.player_pos + unit_vector + Vector2.UP] == TILE_ELEMENTS.Ele.BOULDER):
-			legal_move_actions.append(MCTSAction.new(Callable(self.copy(), "move_player"), {"dir": unit_vector}))
+			legal_move_actions.append(MCTSAction.new(Callable(self, "move_player"), {"dir": unit_vector}))
 	return legal_move_actions
 	
 func legal_boulder_actions() -> Array[MCTSAction]:
 	var boulder_potential_pos: Vector2 = self.player_pos + Vector2.UP
 	if res.has(boulder_potential_pos) and not TILE_ELEMENTS.is_corridor(res[boulder_potential_pos]):
-		return [MCTSAction.new(Callable(self.copy(), "place_boulder"), {"pos": boulder_potential_pos})]
+		return [MCTSAction.new(Callable(self, "place_boulder"), {"pos": boulder_potential_pos})]
 	else:
 		return []
 
@@ -125,3 +130,6 @@ func is_generation_completed() -> bool:
 		finish_generation()
 		return true
 	return false
+
+func get_res_dict() -> Dictionary:
+	return self.res
