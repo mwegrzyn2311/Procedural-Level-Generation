@@ -10,5 +10,5 @@ func _init(width: int, height: int):
 	self.height = height
 
 func generate_level() -> Dictionary:
-	# TODO: Implement
-	return {}
+	var _unused = super.generate_level()
+	return generate(MCTSPanelState.new_initial_state(width, height))

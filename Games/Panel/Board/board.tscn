@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://qg8prwos6mj0"]
+[gd_scene load_steps=3 format=3 uid="uid://qg8prwos6mj0"]
 
 [ext_resource type="Script" path="res://Games/Panel/Board/board.gd" id="1_bi78r"]
+[ext_resource type="PackedScene" uid="uid://cucya5n70q0nb" path="res://UI/GameUI/Overlay/base_game_overlay.tscn" id="2_iybhh"]
 
 [node name="PanelBoard" type="Node2D"]
 script = ExtResource("1_bi78r")
@@ -12,5 +13,7 @@ mouse_filter = 1
 color = Color(0.231373, 0.231373, 0.231373, 1)
 
 [node name="Elements" type="Node2D" parent="."]
+
+[node name="BaseGameOverlay" parent="." instance=ExtResource("2_iybhh")]
 
 [connection signal="gui_input" from="Background" to="." method="_on_background_gui_input"]

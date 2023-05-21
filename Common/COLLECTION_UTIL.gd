@@ -14,3 +14,24 @@ func sum(arr: Array):
 	for i in range(1, arr.size()):
 		res += arr[i]
 	return res
+
+func get_dict_dims(dict: Dictionary) -> Vector2:
+	var res = Vector2(0, 0)
+	for pos in dict:
+		if pos.x > res.x:
+			res.x = pos.x
+		if pos.y > res.y:
+			res.y = pos.y
+	return res
+
+func nice_print_dict(dict: Dictionary):
+	var dims: Vector2 = get_dict_dims(dict)
+	for y in range(dims.y):
+		var row = ""
+		for x in range(dims.x):
+			var pos = Vector2(x, y)
+			if dict.has(pos):
+				row += str(dict[pos])
+			else:
+				row += " "
+		print(row)

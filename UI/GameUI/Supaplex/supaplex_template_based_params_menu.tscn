@@ -4,36 +4,11 @@
 
 [node name="SupaplexTemplateBasedParamsMenu" instance=ExtResource("1_lsla4")]
 
-[node name="Contents" parent="Margin" index="0"]
-layout_mode = 2
-
 [node name="Title" parent="Margin/Contents" index="0"]
-layout_mode = 2
 text = "Input params for the Supaplex (Template Based)"
 
-[node name="Interactive" parent="Margin/Contents" index="1"]
-layout_mode = 2
-
-[node name="VBoxContainer" parent="Margin/Contents/Interactive" index="0"]
-layout_mode = 2
-
-[node name="BackButton" parent="Margin/Contents/Interactive/VBoxContainer" index="0"]
-layout_mode = 2
-
-[node name="GridContainer" parent="Margin/Contents/Interactive/VBoxContainer" index="1"]
-layout_mode = 2
-
-[node name="WidthLabel" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="0"]
-layout_mode = 2
-
 [node name="WidthInput" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="1"]
-layout_mode = 2
-
-[node name="HeightLabel" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="2"]
-layout_mode = 2
+step = 3.0
 
 [node name="HeightInput" parent="Margin/Contents/Interactive/VBoxContainer/GridContainer" index="3"]
-layout_mode = 2
-
-[node name="StartButton" parent="Margin/Contents/Interactive/VBoxContainer" index="2"]
-layout_mode = 2
+step = 3.0

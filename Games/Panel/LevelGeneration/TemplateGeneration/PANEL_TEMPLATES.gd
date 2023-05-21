@@ -75,3 +75,31 @@ var TEMPLATES_1: LevelTemplates = LevelTemplates.new(
 		},
 	]
 )
+
+var TEMPLATES_2: LevelTemplates = LevelTemplates.new(
+	2,
+	2,
+	[
+		{
+			Vector2(0,0): INTERSECTION, Vector2(1,0): PIPE, Vector2(2,0): INTERSECTION,
+			Vector2(0,1): PIPE, Vector2(1,1): EMPTY,
+			Vector2(0,2):INTERSECTION
+		},
+		{
+			Vector2(0,0): INTERSECTION, Vector2(1,0): EMPTY,
+			Vector2(0,1): PIPE, Vector2(1,1): EMPTY,
+			Vector2(0,2):INTERSECTION
+		},
+		{
+			Vector2(0,0): INTERSECTION, Vector2(1,0): PIPE, Vector2(2,0): INTERSECTION,
+			Vector2(0,1): EMPTY, Vector2(1,1): EMPTY,
+		},
+		{
+			Vector2(0,0): EMPTY, Vector2(1,0): EMPTY,
+			Vector2(0,1): EMPTY, Vector2(1,1): EMPTY,
+		}
+	],
+	{},
+	false,
+	[Vector2.ZERO, Vector2.ONE]
+)

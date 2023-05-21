@@ -69,7 +69,7 @@ func value() -> float:
 		val += result * self.results[result]
 	return ((val / numberOfVisits) + sqrt(2 * log(parent.numberOfVisits) / numberOfVisits))
 	
-func children_compare(a: MCTSNode, b: MCTSNode) -> bool:
+static func children_compare(a: MCTSNode, b: MCTSNode) -> bool:
 	if a.value() == b.value():
 		return RNG_UTIL.rand_bool()
 	else:
@@ -78,10 +78,10 @@ func children_compare(a: MCTSNode, b: MCTSNode) -> bool:
 func best_child():
 	self.children.sort_custom(children_compare)
 	return self.children[0]
-	
-func children_compare_visits(a: MCTSNode, b: MCTSNode) -> bool:
+
+static func children_compare_visits(a: MCTSNode, b: MCTSNode) -> bool:
 	return a.numberOfVisits > b.numberOfVisits
-	
+
 func most_visited_child():
 	if children.is_empty():
 		return self

@@ -53,57 +53,104 @@ func gen_constraint_rotation_vectors(width: int, height: int) -> Array:
 # TODO: Switch from hardcoded for 3x3 to universally calculated
 # TODO: Consider extracting
 func gen_rotation_vectors(width: int, height: int) -> Array:
-	# Order here has crucial importance!
-	return [
-		# 0 degree
-		[
-			Vector2(0, 0), Vector2(1, 0), Vector2(2, 0), 
-			Vector2(0, 1), Vector2(1, 1), Vector2(2, 1),
-			Vector2(0, 2), Vector2(1, 2), Vector2(2, 2)
-		],
-		# 90 degree
-		[
-			Vector2(0, 2), Vector2(0, 1), Vector2(0, 0), 
-			Vector2(1, 2), Vector2(1, 1), Vector2(1, 0),
-			Vector2(2, 2), Vector2(2, 1), Vector2(2, 0)
-		],
-		# 180 degree
-		[
-			Vector2(2, 2), Vector2(1, 2), Vector2(0, 2), 
-			Vector2(2, 1), Vector2(1, 1), Vector2(0, 1),
-			Vector2(2, 0), Vector2(1, 0), Vector2(0, 0)
-		],
-		# 270 degree
-		[
-			Vector2(2, 0), Vector2(2, 1), Vector2(2, 2), 
-			Vector2(1, 0), Vector2(1, 1), Vector2(1, 2),
-			Vector2(0, 0), Vector2(0, 1), Vector2(0, 2)
-		],
-		# 0 degree + horizontal tilt
-		[
-			Vector2(2, 0), Vector2(1, 0), Vector2(0, 0), 
-			Vector2(2, 1), Vector2(1, 1), Vector2(0, 1),
-			Vector2(2, 2), Vector2(1, 2), Vector2(0, 2)
-		],
-		# 90 degree + horizontal tilt
-		[
-			Vector2(0, 0), Vector2(0, 1), Vector2(0, 2), 
-			Vector2(1, 0), Vector2(1, 1), Vector2(1, 2),
-			Vector2(2, 0), Vector2(2, 1), Vector2(2, 2)
-		],
-		# 180 degree + horizontal tilt
-		[
-			Vector2(0, 2), Vector2(1, 2), Vector2(2, 2), 
-			Vector2(0, 1), Vector2(1, 1), Vector2(2, 1),
-			Vector2(0, 0), Vector2(1, 0), Vector2(2, 0)
-		],
-		# 270 degree + horizontal tilt
-		[
-			Vector2(2, 2), Vector2(2, 1), Vector2(2, 0), 
-			Vector2(1, 2), Vector2(1, 1), Vector2(1, 0),
-			Vector2(0, 2), Vector2(0, 1), Vector2(0, 0)
-		],
-	]
+	if width == 2 and height == 2:
+		return [
+			# 0 degrees
+			[
+				Vector2(0, 0), Vector2(1, 0),
+				Vector2(0, 1), Vector2(1, 1)
+			],
+			# 90 degrees
+			[
+				Vector2(0, 1), Vector2(0, 0),
+				Vector2(1, 1), Vector2(1, 0)
+			],
+			# 180 degrees
+			[
+				Vector2(1, 1), Vector2(0, 1),
+				Vector2(1, 0), Vector2(0, 0)
+			],
+			# 270 degress
+			[
+				Vector2(1, 0), Vector2(1, 1),
+				Vector2(0, 0), Vector2(0, 1)
+			],
+			# 0 degrees + horizontal tilt
+			[
+				Vector2(1, 0), Vector2(0, 0),
+				Vector2(1, 1), Vector2(0, 1)
+			],
+			# 90 degrees + horizontal tilt
+			[
+				Vector2(0, 0), Vector2(0, 1),
+				Vector2(1, 0), Vector2(1, 1)
+			],
+			# 180 degrees + horizontal tilt
+			[
+				Vector2(0, 1), Vector2(1, 1),
+				Vector2(0, 0), Vector2(1, 0)
+			],
+			# 270 degrees + horizontal tilt
+			[
+				Vector2(1, 1), Vector2(1, 0),
+				Vector2(0, 1), Vector2(0, 0)
+			]
+		]
+	elif width == 3 and height == 3:
+		# Order here has crucial importance!
+		return [
+			# 0 degree
+			[
+				Vector2(0, 0), Vector2(1, 0), Vector2(2, 0), 
+				Vector2(0, 1), Vector2(1, 1), Vector2(2, 1),
+				Vector2(0, 2), Vector2(1, 2), Vector2(2, 2)
+			],
+			# 90 degree
+			[
+				Vector2(0, 2), Vector2(0, 1), Vector2(0, 0), 
+				Vector2(1, 2), Vector2(1, 1), Vector2(1, 0),
+				Vector2(2, 2), Vector2(2, 1), Vector2(2, 0)
+			],
+			# 180 degree
+			[
+				Vector2(2, 2), Vector2(1, 2), Vector2(0, 2), 
+				Vector2(2, 1), Vector2(1, 1), Vector2(0, 1),
+				Vector2(2, 0), Vector2(1, 0), Vector2(0, 0)
+			],
+			# 270 degree
+			[
+				Vector2(2, 0), Vector2(2, 1), Vector2(2, 2), 
+				Vector2(1, 0), Vector2(1, 1), Vector2(1, 2),
+				Vector2(0, 0), Vector2(0, 1), Vector2(0, 2)
+			],
+			# 0 degree + horizontal tilt
+			[
+				Vector2(2, 0), Vector2(1, 0), Vector2(0, 0), 
+				Vector2(2, 1), Vector2(1, 1), Vector2(0, 1),
+				Vector2(2, 2), Vector2(1, 2), Vector2(0, 2)
+			],
+			# 90 degree + horizontal tilt
+			[
+				Vector2(0, 0), Vector2(0, 1), Vector2(0, 2), 
+				Vector2(1, 0), Vector2(1, 1), Vector2(1, 2),
+				Vector2(2, 0), Vector2(2, 1), Vector2(2, 2)
+			],
+			# 180 degree + horizontal tilt
+			[
+				Vector2(0, 2), Vector2(1, 2), Vector2(2, 2), 
+				Vector2(0, 1), Vector2(1, 1), Vector2(2, 1),
+				Vector2(0, 0), Vector2(1, 0), Vector2(2, 0)
+			],
+			# 270 degree + horizontal tilt
+			[
+				Vector2(2, 2), Vector2(2, 1), Vector2(2, 0), 
+				Vector2(1, 2), Vector2(1, 1), Vector2(1, 0),
+				Vector2(0, 2), Vector2(0, 1), Vector2(0, 0)
+			],
+		]
+	else:
+		# TODO: Throw error instead
+		return []
 
 func rotate_template(template: Dictionary, rotation_index: int) -> Dictionary:
 	var res: Dictionary = {}
