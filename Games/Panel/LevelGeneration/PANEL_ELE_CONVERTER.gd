@@ -6,6 +6,7 @@ const NEIGH_DIST: float = (PANEL_ELEMENTS.PIPE_LEN + 1) * PANEL_ELEMENTS.ELE_SIZ
 func convert(ele: PANEL_ELEMENTS.Ele, pos: Vector2, board: PanelBoard) -> PanelEle:
 	if not PANEL_ELEMENTS.ELE_TO_SCENE.has(ele):
 		return null
+	var tmp = PANEL_ELEMENTS.ELE_TO_SCENE[ele].SCENE
 	var element: PanelEle = PANEL_ELEMENTS.ELE_TO_SCENE[ele].SCENE.instantiate()
 	element.initialize(board, pos, coord_to_position(pos), int(pos.y) % 2 == 1)
 	return element

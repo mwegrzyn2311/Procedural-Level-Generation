@@ -143,3 +143,7 @@ func curr_over_exited(curr_over: PanelEle):
 		if _should_go_back(currently_over.position, mouse_move_dir):
 			_go_back(currently_over.position)
 	currently_over = null
+
+# TODO: Implement
+func check_for_finish(finish: PanelFinish):
+	pass

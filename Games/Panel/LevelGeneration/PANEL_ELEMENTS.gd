@@ -8,7 +8,7 @@ enum Ele {
 	START,
 	INTERSECTION,
 	PIPE,
-	END,
+	FINISH,
 	EMPTY
 }
 
@@ -19,4 +19,5 @@ var ELE_TO_SCENE: Dictionary = {
 	Ele.START: PanelStart,
 	Ele.INTERSECTION: PanelIntersection,
 	Ele.PIPE: PanelPipe,
+	Ele.FINISH: PanelFinish
 }

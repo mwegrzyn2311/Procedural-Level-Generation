@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnuujvux73men"]
+
+[ext_resource type="PackedScene" uid="uid://b6m4ht4tkdnbv" path="res://Games/Panel/Element/panel_ele.tscn" id="1_0p5u7"]
+[ext_resource type="Texture2D" uid="uid://bvw6kosg3g3kh" path="res://Games/Panel/Element/Finish/diamond_512.png" id="2_rlkss"]
+
+[node name="Finish" instance=ExtResource("1_0p5u7")]
+input_pickable = true
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_rlkss")
