@@ -1,10 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnuujvux73men"]
+[gd_scene load_steps=4 format=3 uid="uid://bnuujvux73men"]
 
 [ext_resource type="PackedScene" uid="uid://b6m4ht4tkdnbv" path="res://Games/Panel/Element/panel_ele.tscn" id="1_0p5u7"]
+[ext_resource type="Script" path="res://Games/Panel/Element/Finish/finish.gd" id="2_62xba"]
 [ext_resource type="Texture2D" uid="uid://bvw6kosg3g3kh" path="res://Games/Panel/Element/Finish/diamond_512.png" id="2_rlkss"]
 
 [node name="Finish" instance=ExtResource("1_0p5u7")]
 input_pickable = true
+script = ExtResource("2_62xba")
 
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource("2_rlkss")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
