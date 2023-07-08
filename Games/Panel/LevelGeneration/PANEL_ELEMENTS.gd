@@ -1,8 +1,8 @@
 extends Node
 
-const PIPE_LEN = 5
+const PIPE_LEN = 3
 const ELE_SIZE = 256
-const ELE_SCALE = 0.125
+const ELE_SCALE = 0.1
 
 enum Ele {
 	START,

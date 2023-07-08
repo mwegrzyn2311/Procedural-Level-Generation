@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://caqbelolne23g"]
+
+[node name="MoveDirRayCast" type="RayCast2D"]
+target_position = Vector2(0, 64)

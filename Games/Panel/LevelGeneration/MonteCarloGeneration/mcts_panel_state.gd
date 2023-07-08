@@ -17,7 +17,7 @@ func _init(width: int, height: int, line: Array[Vector2]):
 
 static func new_initial_state(width: int, height: int) -> MCTSPanelState:
 	# Start might we fully random, though I feel like more interesting patterns would emerge from having it on the side
-	var start: Vector2 = RNG_UTIL.rand_vec2(0, 2 * ((height + 1) / 2))
+	var start: Vector2 = RNG_UTIL.rand_vec2(1, ((height + 1) / 2)) * 2
 	# TODO: Implement
 	return MCTSPanelState.new(width, height, [start])
 

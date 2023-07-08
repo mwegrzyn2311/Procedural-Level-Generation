@@ -24,6 +24,7 @@ func best_action():
 	const simulations: int = 100
 	
 	for i in range(simulations):
+		print(i)
 		self.rollout()
 	
 	return self.most_visited_child()
@@ -61,14 +62,13 @@ func backpropagate(result):
 		self.parent.backpropagate(result)
 
 func value() -> float:
-	if numberOfVisits == 0:
-		return 999999999999.0
 	# TODO: Might have to be normalized to one
-	var val = 0.0
+	var val: float = 0.0
 	for result in self.results:
 		val += result * self.results[result]
-	return ((val / numberOfVisits) + sqrt(2 * log(parent.numberOfVisits) / numberOfVisits))
-	
+	var value: float = (val / ((numberOfVisits + 1) * state.max_score())) + sqrt(2 * log(parent.numberOfVisits + 1) / (numberOfVisits + 1))
+	return value
+
 static func children_compare(a: MCTSNode, b: MCTSNode) -> bool:
 	if a.value() == b.value():
 		return RNG_UTIL.rand_bool()

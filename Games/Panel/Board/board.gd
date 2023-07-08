@@ -87,7 +87,9 @@ func register_start(start: PanelStart):
 	self.start = start
 
 func _has_already_been_visited(pos: Vector2):
-	return line.points.find(pos) != -1
+	var pos_index: int = line.points.find(pos)
+	# TODO: Verify that it correct to filter out the last point (in case we get pixel perfect)
+	return pos_index != -1 and pos_index != line.points.size() - 1
 
 func has_already_been_visited(ele: PanelEle):
 	return _has_already_been_visited(ele.position)
@@ -103,9 +105,9 @@ func is_neighbouring_node(currently_over: PanelEle) -> bool:
 	var curr_pos: Vector2 = currently_over.position
 	var prev_pos: Vector2 = line.get_point_position(line.get_point_count() - 2)
 	if curr_pos.x == prev_pos.x:
-		return abs(curr_pos.y - prev_pos.y) == PANEL_ELE_CONVERTER.NEIGH_DIST
+		return is_equal_approx(abs(curr_pos.y - prev_pos.y), PANEL_ELE_CONVERTER.NEIGH_DIST)
 	elif curr_pos.y == prev_pos.y:
-		return abs(curr_pos.x - prev_pos.x) == PANEL_ELE_CONVERTER.NEIGH_DIST
+		return is_equal_approx(abs(curr_pos.x - prev_pos.x), PANEL_ELE_CONVERTER.NEIGH_DIST)
 	else:
 		return false
 	

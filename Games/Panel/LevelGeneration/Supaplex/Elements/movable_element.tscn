@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://Games/Panel/LevelGeneration/Supaplex/Elements/movable_element.gd" id="1_lyefr"]
+[ext_resource type="PackedScene" uid="uid://3jbv6fsvf4lj" path="res://Games/Panel/LevelGeneration/Supaplex/Elements/tile_collision.tscn" id="1_q6wfi"]
+[ext_resource type="PackedScene" uid="uid://caqbelolne23g" path="res://Games/Panel/LevelGeneration/Supaplex/Elements/move_dir_ray_cast.tscn" id="2_q3ih4"]
+[ext_resource type="PackedScene" uid="uid://du2f0bowkjdvr" path="res://Games/Panel/LevelGeneration/Supaplex/Elements/tile_sprite.tscn" id="2_svu1j"]
+
+[node name="MovableElement" type="RigidBody2D" groups=["movable"]]
+collision_layer = 3
+gravity_scale = 0.0
+script = ExtResource("1_lyefr")
+
+[node name="TileSprite" parent="." instance=ExtResource("2_svu1j")]
+
+[node name="TileCollision" parent="." instance=ExtResource("1_q6wfi")]
+
+[node name="MoveDirRayCast" parent="." instance=ExtResource("2_q3ih4")]
+
+[node name="GravityRayCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 64)
+
+[node name="GravityRayCastRight" type="RayCast2D" parent="."]
+target_position = Vector2(39, 64)
+
+[node name="GravityRayCastLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-39, 64)
+
+[node name="GravityRayCastEnsureSlowerFall" type="RayCast2D" parent="."]
+target_position = Vector2(0, 103)
+
+[node name="GravityRayCastRightEnsureSlowerFall" type="RayCast2D" parent="."]
+target_position = Vector2(39, 103)
+
+[node name="GravityRayCastLeftEnsureSlowerFall" type="RayCast2D" parent="."]
+target_position = Vector2(-39, 103)
+
+[node name="SlideLeftRayCastHoriz" type="RayCast2D" parent="."]
+target_position = Vector2(-64, 0)
+
+[node name="SlideLeftRayCastHorizUp" type="RayCast2D" parent="."]
+target_position = Vector2(-64, -39)
+
+[node name="SlideLeftRayCastVert" type="RayCast2D" parent="."]
+position = Vector2(-64, 0)
+target_position = Vector2(0, 64)
+
+[node name="SlideRightRayCastHoriz" type="RayCast2D" parent="."]
+target_position = Vector2(64, 0)
+
+[node name="SlideRightRayCastHorizUp" type="RayCast2D" parent="."]
+target_position = Vector2(64, -39)
+
+[node name="SlideRightRayCastVert" type="RayCast2D" parent="."]
+position = Vector2(64, 0)
+target_position = Vector2(0, 64)
+
+[node name="ExplodeEleBelowRayCastDown" type="RayCast2D" parent="."]
+target_position = Vector2(0, 41)
+
+[node name="ExplodeEleBelowRayCastRight" type="RayCast2D" parent="."]
+target_position = Vector2(38, 41)
+
+[node name="ExplodeEleBelowRayCastLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-38, 41)

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://Games/Panel/LevelGeneration/Supaplex/Elements/static_element.tscn" id="1_ramju"]
+[ext_resource type="PackedScene" uid="uid://3jbv6fsvf4lj" path="res://Games/Panel/LevelGeneration/Supaplex/Elements/tile_collision.tscn" id="2_7i8rc"]
+
+[node name="StaticSolidElement" instance=ExtResource("1_ramju")]
+
+[node name="TileCollision" parent="." index="1" instance=ExtResource("2_7i8rc")]
