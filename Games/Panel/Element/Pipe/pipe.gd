@@ -22,3 +22,6 @@ func offset_by_half_pipe_len(is_vertical: bool = false):
 		self.position.y += HALF_PIPE_OFFSET
 	else:
 		self.position.x += HALF_PIPE_OFFSET
+
+static func getScene() -> Resource:
+	return SCENE

@@ -17,3 +17,6 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	board.curr_over_exited(self)
+
+static func getScene() -> Resource:
+	return SCENE

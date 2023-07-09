@@ -86,7 +86,7 @@ func get_level_dict() -> Dictionary:
 		for x in range(width):
 			res[Vector2(x, y)] = PANEL_ELEMENTS.Ele.EMPTY
 	res[line[0]] = PANEL_ELEMENTS.Ele.START
-	for i in range(1, line.size() - 1):
+	for i in range(1, line.size()):
 		res[line[i]] = PANEL_ELEMENTS.Ele.INTERSECTION
 		res[(line[i] + line[i - 1]) / 2] = PANEL_ELEMENTS.Ele.PIPE
 	res[line[line.size() - 1]] = PANEL_ELEMENTS.Ele.FINISH
