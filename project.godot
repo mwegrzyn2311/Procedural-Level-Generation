@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+TETROMINO_UTIL="*res://Games/Panel/Element/Tetromino/TETRMOMINO_UTIL.gd"
 Dir2="*res://Common/Dir2.gd"
 CONSTANTS="*res://Common/CONSTANTS.gd"
 MENU_INFO="*res://Common/MENU_INFO.gd"

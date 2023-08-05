@@ -43,3 +43,9 @@ func restore_randomness():
 
 func change_seed_to_random():
 	set_seed(-1)
+
+func rand_pos_neg() -> int:
+	if RNG.randi_range(0,1) == 0:
+		return -1
+	else:
+		return 1

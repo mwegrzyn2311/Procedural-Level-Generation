@@ -3,6 +3,7 @@ extends Node
 
 var width: int = 4
 var height: int = 4
+var max_tetromino_actions = 5
 
 var panel_dict: Dictionary
 
