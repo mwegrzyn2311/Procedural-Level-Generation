@@ -3,8 +3,12 @@ extends Node
 
 var width: int = 4
 var height: int = 4
+var max_tetromino_actions = 5
 
+# Dictionary[Vector2, PANEL_ELEMENTS.Ele]
 var panel_dict: Dictionary
+# Dictionary[Vector2, TETROMINO_UTIL.Type]
+var tetrominos: Dictionary
 
 var level_generator: LevelGenerator = PanelMockGenerator.new()
 

@@ -35,3 +35,9 @@ func nice_print_dict(dict: Dictionary):
 			else:
 				row += " "
 		print(row)
+
+func true_filter(val: bool):
+	return val == true
+
+func false_filter(val: bool):
+	return val == false

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi767eidf4gx0"]
+
+[ext_resource type="PackedScene" uid="uid://brcwtlk1fn7b7" path="res://UI/GameUI/game_params_menu.tscn" id="1_pujov"]
+
+[node name="GameParamsMenu" instance=ExtResource("1_pujov")]
+
+[node name="Title" parent="Margin/Contents" index="0"]
+text = "Input params for Supaplex
+(MCTS based generation)"

@@ -15,6 +15,9 @@ func legal_actions() -> Array:
 func generation_result() -> float:
 	return -1.0
 
+func max_score() -> float:
+	return 1.0
+
 func is_generation_completed() -> bool:
 	return false
 	

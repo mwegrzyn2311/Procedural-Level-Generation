@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://den43pcrvtam0"]
+
+[ext_resource type="Texture2D" uid="uid://cbxx8ww88hlwr" path="res://Games/Panel/Element/Tetromino/square_32_with_frame.png" id="1_o3j8u"]
+
+[sub_resource type="GDScript" id="GDScript_tjv8n"]
+script/source = "extends Sprite2D
+
+class_name TetrominoSquareSprite
+"
+
+[node name="TetrominoSquareSprite" type="Sprite2D"]
+texture = ExtResource("1_o3j8u")
+script = SubResource("GDScript_tjv8n")
