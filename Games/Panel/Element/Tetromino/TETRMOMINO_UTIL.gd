@@ -31,12 +31,21 @@ const TypeToShape: Dictionary = {
 	Type.PLUS:         [Vector2(1,0), Vector2(0,1), Vector2(1,1), Vector2(1,2), Vector2(2,1)]
 }
 
+const ELE_CENTER: Vector2 = Vector2(PANEL_ELEMENTS.ELE_SIZE * PANEL_ELEMENTS.PIPE_LEN / 2, PANEL_ELEMENTS.ELE_SIZE * PANEL_ELEMENTS.PIPE_LEN / 2)
+
 var rotations: Array[Vector2] = [Vector2(-1, 1), Vector2(-1, -1), Vector2(1, -1)]
 # Dictionary[Type, Array[Array[Vector2]]] - We have it here in the singleton so that it is generated once in order to optimize
 var rotated_shapes: Dictionary = {}
-var types_arr: Array[Type] = []
+var types_arr: Array[Type]
+# Dictionary[Type, Node2D(Composed of a few sprites)]
+var tetromino_sprites: Dictionary = {}
 
 func _init():
+	_generate_rotated_shapes()
+	_genereate_types_arr()
+	_generate_tetromino_sprites()
+
+func _generate_rotated_shapes():
 	for type in TypeToShape:
 		# Array[Array[Vector2]]
 		var shapes: Array[Array] = [TypeToShape[type]]
@@ -46,8 +55,6 @@ func _init():
 			if not _contains_shape(shapes, rotated_shape):
 				shapes.append(rotated_shape)
 		rotated_shapes[type] = shapes
-	for type in Type:
-		types_arr.append(type)
 
 static func _contains_shape(shapes: Array[Array], shape: Array) -> bool:
 	for existing_shape in shapes:
@@ -63,3 +70,30 @@ static func _contains_shape(shapes: Array[Array], shape: Array) -> bool:
 
 static func _left_top(shape: Array):
 	return Vector2(shape.map(func(pos) -> int: return pos.x).min(), shape.map(func(pos) -> int: return pos.y).min())
+
+static func _right_bottom(shape: Array):
+	return Vector2(shape.map(func(pos) -> int: return pos.x).max(), shape.map(func(pos) -> int: return pos.y).max()) + Vector2.ONE
+
+func _genereate_types_arr():
+	types_arr = []
+	for type in Type.values():
+		types_arr.append(type)
+
+func _generate_tetromino_sprites():
+	for type in TypeToShape:
+		_generate_tetromino_sprite(type)
+
+func _generate_tetromino_sprite(type: Type):
+	var shape = TypeToShape[type]
+	var left_top: Vector2 = _left_top(shape)
+	var right_bottom: Vector2 = _right_bottom(shape)
+	var offset: Vector2 = (right_bottom - left_top) * PANEL_ELEMENTS.TETROMINO_SQUARE_SIZE / 2
+	var node: Node2D = Node2D.new()
+	for ele in shape:
+		var sprite = Sprite2D.new()
+		sprite.texture = load("res://Games/Panel/Element/Tetromino/square_64_with_frame.png")
+		sprite.scale = Vector2(PANEL_ELEMENTS.PIPE_LEN, PANEL_ELEMENTS.PIPE_LEN)
+		node.add_child(sprite)
+		var pos = ELE_CENTER - offset + ele * PANEL_ELEMENTS.TETROMINO_SQUARE_SIZE
+		sprite.position = pos
+	tetromino_sprites[type] = node

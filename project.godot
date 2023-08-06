@@ -17,7 +17,6 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-TETROMINO_UTIL="*res://Games/Panel/Element/Tetromino/TETRMOMINO_UTIL.gd"
 Dir2="*res://Common/Dir2.gd"
 CONSTANTS="*res://Common/CONSTANTS.gd"
 MENU_INFO="*res://Common/MENU_INFO.gd"
@@ -32,6 +31,7 @@ LEVEL_CONVERTER="*res://Games/Panel/LevelGeneration/Supaplex/LevelGeneration/LEV
 SUPAPLEX_LEVEL_GENERATOR="*res://Games/Panel/LevelGeneration/Supaplex/LevelGeneration/SUPAPLEX_LEVEL_GENERATOR.gd"
 CURRENT_LEVEL_INFO="*res://Games/Panel/LevelGeneration/Supaplex/Info/CURRENT_LEVEL_INFO.gd"
 PANEL_ELEMENTS="*res://Games/Panel/LevelGeneration/PANEL_ELEMENTS.gd"
+TETROMINO_UTIL="*res://Games/Panel/Element/Tetromino/TETRMOMINO_UTIL.gd"
 CURRENT_PANEL="*res://Games/Panel/Info/CURRENT_PANEL.gd"
 PANEL_ELE_CONVERTER="*res://Games/Panel/LevelGeneration/PANEL_ELE_CONVERTER.gd"
 NAVIGATION="*res://Common/NAVIGATION.gd"

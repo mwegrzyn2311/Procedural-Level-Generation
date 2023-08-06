@@ -16,5 +16,6 @@ func right_or_left(a: Vector2, b: Vector2, c: Vector2) -> Vector2:
 	return Vector2(vec1.x * vec2.y - vec1.y * vec2.x, 0)
 
 func go_right_or_left(a: Vector2, b: Vector2, dir: Vector2) -> Vector2:
+	assert(dir == Vector2.RIGHT or dir == Vector2.LEFT, "Dir2#go_right_or_left should only get RIGHT or LEFT as dir")
 	var last_vec: Vector2 = b - a
-	return Vector2(last_vec.y, - last_vec.x) * dir
+	return Vector2(- last_vec.y, last_vec.x) * dir.x

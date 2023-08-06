@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkf8pii0aarer"]
+
+[ext_resource type="PackedScene" uid="uid://b6m4ht4tkdnbv" path="res://Games/Panel/Element/panel_ele.tscn" id="1_41llr"]
+[ext_resource type="Script" path="res://Games/Panel/Element/Tetromino/tetromino_ele.gd" id="2_8xuvc"]
+
+[node name="TetrominoEle" instance=ExtResource("1_41llr")]
+script = ExtResource("2_8xuvc")
+
+[node name="Collision" parent="." index="0"]
+disabled = true
+
+[node name="Sprite" parent="." index="1"]
+scale = Vector2(12, 12)
