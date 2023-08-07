@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Player
+class_name SupaplexPlayer
 
 @onready var ray: RayCast2D = $MoveDirRayCast
 @onready var falling_objects_rays: Array = [$FallingObjectsRayCastUp, $FallingObjectsRayCastDown]

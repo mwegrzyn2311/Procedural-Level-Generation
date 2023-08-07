@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3]
-
-[ext_resource type="PackedScene" uid="uid://does8dg375ha8" path="res://Games/Panel/LevelGeneration/Supaplex/Elements/movable_element.tscn" id="1_1skq4"]
-[ext_resource type="Texture2D" uid="uid://d22w6kyhcpn2j" path="res://Games/Panel/LevelGeneration/Supaplex/Elements/Boulder/tmp_boulder.png" id="2_st8ij"]
-
-[node name="Boulder" instance=ExtResource("1_1skq4")]
-
-[node name="TileSprite" parent="." index="0"]
-texture = ExtResource("2_st8ij")
