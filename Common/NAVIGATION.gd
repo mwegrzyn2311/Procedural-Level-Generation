@@ -4,6 +4,7 @@ extends Node
 const MAIN_MENU: String = "res://UI/Menu/main_menu.tscn"
 const GAME_SELECTION: String = "res://UI/Menu/game_selection_menu.tscn"
 var game_scene = null
+var game_overlay: BaseGameOverlay
 
 var GAME_TO_SCENE: Dictionary = {
 	CONSTANTS.SupportedGames.BOULDER_DASH : "res://Games/Supaplex/Board/board.tscn",
@@ -29,3 +30,6 @@ func getGameScene(game: CONSTANTS.SupportedGames) -> String:
 
 func getParamsSelectionMenu(game: CONSTANTS.SupportedGames, algo: CONSTANTS.SupportedAlgos) -> String:
 	return GAME_TO_ALGO_TO_PARAM_SELECTION.get(game).get(algo)
+
+func register_game_overlay(overlay: BaseGameOverlay):
+	self.game_overlay = overlay

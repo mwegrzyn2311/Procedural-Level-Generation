@@ -80,7 +80,7 @@ func _end_drawing():
 	_reset_line()
 
 func _on_background_gui_input(event):
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		_end_drawing()
 
 func register_start(start: PanelStart):
@@ -144,6 +144,12 @@ func curr_over_exited(curr_over: PanelEle):
 			_go_back(currently_over.position)
 	currently_over = null
 
+# TODO: Actually implement
+func _is_panel_solved() -> bool:
+	return true
+
 # TODO: Implement
 func check_for_finish(finish: PanelFinish):
-	pass
+	if _is_panel_solved():
+		_end_drawing()
+		NAVIGATION.game_overlay.enable_completion_overlay_visibility

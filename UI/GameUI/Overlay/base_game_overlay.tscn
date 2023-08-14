@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cucya5n70q0nb"]
+[gd_scene load_steps=8 format=3 uid="uid://cucya5n70q0nb"]
 
 [ext_resource type="PackedScene" uid="uid://cjwqiif3jsat0" path="res://UI/GameUI/Overlay/base_overlay_button.tscn" id="1_eviot"]
+[ext_resource type="Script" path="res://UI/GameUI/Overlay/base_game_overlay.gd" id="1_f68mo"]
 [ext_resource type="Script" path="res://UI/GameUI/Overlay/restart_rand_seed.gd" id="2_hr1xx"]
 [ext_resource type="Script" path="res://UI/GameUI/Overlay/restart_same_seed.gd" id="2_q6g22"]
 [ext_resource type="Script" path="res://UI/GameUI/Overlay/CopySeedToClipboard.gd" id="2_ukxbp"]
 [ext_resource type="Script" path="res://UI/GameUI/Overlay/seed_label.gd" id="4_7ukkr"]
+[ext_resource type="FontFile" uid="uid://v4yqlddodibg" path="res://Fonts/Roboto-Medium.ttf" id="7_dj4kj"]
 
 [node name="BaseGameOverlay" type="Control"]
 layout_mode = 3
@@ -13,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_f68mo")
 
 [node name="SideBar" type="ColorRect" parent="."]
 layout_mode = 0
@@ -64,6 +67,25 @@ layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 96.0
 color = Color(0.223529, 0.223529, 0.223529, 1)
+
+[node name="LevelCompletedOverlay" type="ColorRect" parent="."]
+visible = false
+z_index = 99
+layout_mode = 0
+offset_top = 96.0
+offset_right = 1088.0
+offset_bottom = 768.0
+mouse_filter = 2
+color = Color(0.854902, 0.854902, 0.854902, 1)
+
+[node name="LineEdit" type="LineEdit" parent="LevelCompletedOverlay"]
+layout_mode = 0
+offset_right = 1088.0
+offset_bottom = 672.0
+theme_override_fonts/font = ExtResource("7_dj4kj")
+theme_override_font_sizes/font_size = 42
+text = "Congratulations! You've cleared the level."
+alignment = 1
 
 [connection signal="pressed" from="SideBar/Buttons/CopyToClipboard" to="SideBar/Buttons/CopyToClipboard" method="_on_pressed"]
 [connection signal="pressed" from="SideBar/Buttons/RestartSameSeed" to="SideBar/Buttons/RestartSameSeed" method="_on_pressed"]

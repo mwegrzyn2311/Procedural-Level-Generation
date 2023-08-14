@@ -10,7 +10,7 @@ func _on_mouse_exited():
 
 func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
-		board.check_finish(self)
+		board.check_for_finish(self)
 
 static func getScene() -> Resource:
 	return load("res://Games/Panel/Element/Finish/finish.tscn")

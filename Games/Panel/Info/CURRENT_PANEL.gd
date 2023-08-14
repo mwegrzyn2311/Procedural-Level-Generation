@@ -3,7 +3,7 @@ extends Node
 
 var width: int = 4
 var height: int = 4
-var max_tetromino_actions = 5
+var max_tetromino_actions = 4
 
 # Dictionary[Vector2, PANEL_ELEMENTS.Ele]
 var panel_dict: Dictionary

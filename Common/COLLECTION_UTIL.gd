@@ -22,7 +22,7 @@ func get_dict_dims(dict: Dictionary) -> Vector2:
 			res.x = pos.x
 		if pos.y > res.y:
 			res.y = pos.y
-	return res
+	return res + Vector2.ONE
 
 func nice_print_dict(dict: Dictionary):
 	var dims: Vector2 = get_dict_dims(dict)

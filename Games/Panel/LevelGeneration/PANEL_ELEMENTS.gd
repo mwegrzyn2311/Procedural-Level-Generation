@@ -1,6 +1,6 @@
 extends Node
 
-const PIPE_LEN = 3
+const PIPE_LEN = 2
 const ELE_SIZE = 256
 const ELE_SCALE = 0.125
 const TETROMINO_SQUARE_FRACTION = 0.25

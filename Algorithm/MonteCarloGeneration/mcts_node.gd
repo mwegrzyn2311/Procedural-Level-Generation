@@ -22,10 +22,15 @@ func _init(state: MCTSGameState, parent: MCTSNode=null, parent_action: MCTSActio
 func best_action():
 	# TODO: Change this to time-based?
 	const simulations: int = 100
+	var time_start = Time.get_unix_time_from_system()
+	var time_now = Time.get_unix_time_from_system()
 	
-	for i in range(simulations):
-		print(i)
+	#for i in range(simulations):
+	# TODO: Make configurable
+	while time_now - time_start < 1:
 		self.rollout()
+		time_now = Time.get_unix_time_from_system()
+		#print(time_now - time_start)
 	
 	return self.most_visited_child()
 	

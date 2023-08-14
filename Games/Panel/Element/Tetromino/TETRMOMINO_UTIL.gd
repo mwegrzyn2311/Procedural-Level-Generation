@@ -78,6 +78,7 @@ func _genereate_types_arr():
 	types_arr = []
 	for type in Type.values():
 		types_arr.append(type)
+	types_arr.erase(Type.ONE_BY_ONE)
 
 func _generate_tetromino_sprites():
 	for type in TypeToShape:
