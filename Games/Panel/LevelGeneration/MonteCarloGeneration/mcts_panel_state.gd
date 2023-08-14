@@ -14,6 +14,7 @@ var could_place_tetromino: bool
 # Array[TetrominoZone]
 var tetromino_zones
 var lines_gen_finished: bool
+var is_terminal: bool
 
 func _init(width: int, height: int, line: Array[Vector2], could_place_teromino: bool, tetromino_zones, lines_gen_finished: bool):
 	self.width = width
@@ -23,6 +24,7 @@ func _init(width: int, height: int, line: Array[Vector2], could_place_teromino: 
 	self.tetromino_zones = tetromino_zones
 	self.lines_gen_finished = lines_gen_finished
 	self.curr_legal_actions = self.generate_legal_actions()
+	self.is_terminal = (self.curr_legal_actions.size() == 0)
 
 static func new_initial_state(width: int, height: int) -> MCTSPanelState:
 	# Starts on the side for the sake of current implementation of tetromino generation
@@ -135,8 +137,9 @@ func generate_tetromino_actions() -> Array:
 					_try_create_tetromino_action(actions, zone, i, type)
 					if actions.size() == CURRENT_PANEL.max_tetromino_actions:
 						return actions
-			var type: TETROMINO_UTIL.Type = TETROMINO_UTIL.Type.ONE_BY_ONE
-			_try_create_tetromino_action(actions, zone, i, type)
+			# TODO: Decide if should uncomment
+			#var type: TETROMINO_UTIL.Type = TETROMINO_UTIL.Type.ONE_BY_ONE
+			#_try_create_tetromino_action(actions, zone, i, type)
 		return actions
 
 func _try_create_tetromino_action(actions: Array, zone: TetrominoZone, zone_idx: int, type: TETROMINO_UTIL.Type):
@@ -162,14 +165,15 @@ func legal_actions() -> Array:
 
 # TODO: It would be best to somehow return number of solutions
 func generation_result() -> float:
-	return tetromino_zones.size()
+	var M: float = float(tetromino_zones.size())
+	return (M - 1) / M
 	
 func max_score() -> float:
-	return 3.0
+	return 1.0
 
 # We might return true if either no more legal moves exist or a satisfactory result is found
 func is_generation_completed() -> bool:
-	return curr_legal_actions.size() == 0
+	return self.is_terminal
 	
 func get_level_dict() -> Dictionary:
 	var res: Dictionary = {}

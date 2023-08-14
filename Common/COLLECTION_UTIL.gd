@@ -41,3 +41,27 @@ func true_filter(val: bool):
 
 func false_filter(val: bool):
 	return val == false
+	
+static func max_custom(arr: Array, val_func: Callable):
+	if arr.size() == 0:
+		return null
+	var val_max = val_func.call(arr[0])
+	var idx_max = 0
+	for i in range(1, arr.size()):
+		var val = val_func.call(arr[i])
+		if val > val_max:
+			val_max = val
+			idx_max = i
+	return arr[idx_max]
+
+static func min_custom(arr: Array, val_func: Callable):
+	if arr.size() == 0:
+		return null
+	var val_min = val_func.call(arr[0])
+	var idx_min = 0
+	for i in range(1, arr.size()):
+		var val = val_func.call(arr[i])
+		if val < val_min:
+			val_min = val
+			idx_min = i
+	return arr[idx_min]
