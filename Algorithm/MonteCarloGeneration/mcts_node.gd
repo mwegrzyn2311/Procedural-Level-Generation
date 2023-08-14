@@ -26,18 +26,22 @@ func best_action():
 	var time_now = Time.get_unix_time_from_system()
 	
 	#for i in range(simulations):
-	# TODO: Make configurable
 	while time_now - time_start < 1:
-		self.rollout()
+		var node = tree_policy(self)
+		var result = node.rollout()
+		node.backpropagate(result)
 		time_now = Time.get_unix_time_from_system()
 		#print(time_now - time_start)
 	
 	return self.most_visited_child()
 	
-func tree_policy():
-	while not self.is_fully_expanded():
-		self.expand()
-	return self.best_child()
+func tree_policy(node):
+	while not node.is_terminal_node():
+		if not self.is_fully_expanded():
+			return self.expand()
+		else:
+			node = node.best_child()
+	return node
 	
 func is_fully_expanded() -> bool:
 	return self.untried_actions.is_empty()
@@ -56,9 +60,14 @@ func rollout():
 	var curr_node = self
 
 	while not curr_node.is_terminal_node():
-		curr_node = curr_node.tree_policy()
-	var reward = curr_node.state.generation_result()
-	curr_node.backpropagate(reward)
+		# random rollout
+		var action: MCTSAction = RNG_UTIL.choice(curr_node.untried_actions)
+		curr_node.untried_actions.erase(action)
+		var next_state: MCTSGameState = curr_node.state.move(action)
+		var child_node: MCTSNode = curr_node.create_child_node(action, next_state)
+		curr_node.children.append(child_node)
+		curr_node = child_node
+	return curr_node.state.generation_result()
 
 func backpropagate(result):
 	self.numberOfVisits += 1
