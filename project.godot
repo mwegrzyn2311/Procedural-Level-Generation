@@ -35,6 +35,7 @@ TETROMINO_UTIL="*res://Games/Panel/Element/Tetromino/TETRMOMINO_UTIL.gd"
 CURRENT_PANEL="*res://Games/Panel/Info/CURRENT_PANEL.gd"
 PANEL_ELE_CONVERTER="*res://Games/Panel/LevelGeneration/PANEL_ELE_CONVERTER.gd"
 NAVIGATION="*res://Common/NAVIGATION.gd"
+PANEL_UTILS="*res://Games/Panel/PANEL_UTILS.gd"
 
 [display]
 

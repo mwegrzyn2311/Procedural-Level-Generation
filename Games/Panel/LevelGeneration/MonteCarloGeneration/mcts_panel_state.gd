@@ -2,6 +2,10 @@ extends MCTSGameState
 
 class_name MCTSPanelState
 
+const A: float = 2.0
+const B: float = 1.0
+const C: float = 1.0
+
 var width: int
 var height: int
 
@@ -15,6 +19,8 @@ var could_place_tetromino: bool
 var tetromino_zones
 var lines_gen_finished: bool
 var is_terminal: bool
+var X: float
+var gen_res: float
 
 func _init(width: int, height: int, line: Array[Vector2], could_place_teromino: bool, tetromino_zones, lines_gen_finished: bool):
 	self.width = width
@@ -25,6 +31,8 @@ func _init(width: int, height: int, line: Array[Vector2], could_place_teromino: 
 	self.lines_gen_finished = lines_gen_finished
 	self.curr_legal_actions = self.generate_legal_actions()
 	self.is_terminal = (self.curr_legal_actions.size() == 0)
+	self.X = -1.0
+	self.gen_res = -1.0
 
 static func new_initial_state(width: int, height: int) -> MCTSPanelState:
 	# Starts on the side for the sake of current implementation of tetromino generation
@@ -152,7 +160,7 @@ func generate_move_actions() -> Array:
 	if lines_gen_finished:
 		return []
 	var curr_pos: Vector2 = line[line.size() - 1]
-	var dest_positions: Array = [Vector2.UP, Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT]\
+	var dest_positions: Array = CONSTANTS.UNIT_VECTORS\
 		.map(func(unit_vec: Vector2): return curr_pos + unit_vec * 2)\
 		.filter(func(next: Vector2) -> bool: return _in_bounds(next) and !line.has(next))
 	if dest_positions.is_empty():
@@ -164,18 +172,33 @@ func legal_actions() -> Array:
 	return curr_legal_actions
 
 # TODO: It would be best to somehow return number of solutions
+# TODO: Consider giving tetromino elements values to further parameterize gen result
 func generation_result() -> float:
-	var M: float = float(tetromino_zones.size())
-	return (M - 1) / M
-	
+	if self.gen_res != -1.0:
+		return self.gen_res
+	# Dictionary[Vector2, TETROMINO_UTILS.Type]
+	var tetromino_dict: Dictionary = {}
+	for zone in tetromino_zones:
+		for tetromino in zone.tetrominos:
+			tetromino_dict[tetromino.pos] = tetromino.type
+
+	#self.X = float(PANEL_UTILS.number_of_solutions(line[0], line[line.size() - 1], tetromino_dict, width, height))
+	var Y: float = float(tetromino_zones.size())
+	var Z: float = float(tetromino_zones.map(func(zone): return zone.zone_tiles.size()).reduce(COLLECTION_UTIL.num_sum, 0)) / float(width / 2 * height / 2)
+
+	#A * pow(0.5, X-1)
+	self.gen_res =  + B * (Y - 1) / Y + C * 4 * Z * (1 - Z)
+	return self.gen_res
+
 func max_score() -> float:
-	return 1.0
+	return B + C
 
 # We might return true if either no more legal moves exist or a satisfactory result is found
 func is_generation_completed() -> bool:
 	return self.is_terminal
 	
 func get_level_dict() -> Dictionary:
+	print("Generated lvl with " + str(X) + " solutions and quality of " + str(gen_res / max_score()))
 	var res: Dictionary = {}
 	for y in range(height):
 		for x in range(width):

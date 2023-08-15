@@ -28,4 +28,8 @@ func apply():
 
 func generate_map():
 	self.panel_dict = level_generator.generate_level()
+	self.tetrominos = {}
+	for pos in panel_dict:
+		if panel_dict[pos] is Tetromino:
+			self.tetrominos[pos] = panel_dict[pos].type
 	COLLECTION_UTIL.nice_print_dict(self.panel_dict)

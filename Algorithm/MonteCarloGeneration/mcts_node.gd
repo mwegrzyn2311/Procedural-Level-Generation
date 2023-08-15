@@ -25,8 +25,8 @@ func best_action():
 	var time_start = Time.get_unix_time_from_system()
 	var time_now = Time.get_unix_time_from_system()
 	
-	for i in range(simulations):
-#	while time_now - time_start < 1:
+#	for i in range(simulations):
+	while time_now - time_start < 1:
 		var node = tree_policy(self)
 		var result = node.rollout()
 		node.backpropagate(result)
@@ -40,7 +40,7 @@ func tree_policy(node):
 		if not node.is_fully_expanded():
 			return node.expand()
 		else:
-			node = node.best_child()
+			node = node.best_explor_child()
 	return node
 	
 func is_fully_expanded() -> bool:
@@ -75,17 +75,31 @@ func backpropagate(result):
 	if self.parent:
 		self.parent.backpropagate(result)
 
-func value() -> float:
+func explor_value() -> float:
 	# TODO: Might have to be normalized to one
 	var val: float = 0.0
 	for result in self.results:
 		val += result * self.results[result]
 	var value: float = (val / ((numberOfVisits) * state.max_score())) + 0.1 * sqrt(2 * log(parent.numberOfVisits) / (numberOfVisits))
 	return value
-		
-static func node_val(node: MCTSNode) -> float:
-	return node.value()
+	
+func value() -> float:
+	# TODO: Might have to be normalized to one
+	var val: float = 0.0
+	for result in self.results:
+		val += result * self.results[result]
+	var value: float = (val / ((numberOfVisits) * state.max_score()))
+	return value
 
+static func node_explor_val(node: MCTSNode) -> float:
+	return node.explor_value()
+
+static func node_val(node: MCTSNode) -> float:
+	return node.value();
+
+func best_explor_child():
+	return COLLECTION_UTIL.max_custom(self.children, node_explor_val)
+	
 func best_child():
 	return COLLECTION_UTIL.max_custom(self.children, node_val)
 	

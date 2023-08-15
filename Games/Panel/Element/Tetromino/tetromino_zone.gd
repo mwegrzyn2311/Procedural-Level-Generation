@@ -50,4 +50,10 @@ func place_tetromino(tetromino: Tetromino):
 		zone_tiles[pos] = true
 	self.tetrominos.append(tetromino)
 	if zone_tiles.values().filter(COLLECTION_UTIL.false_filter).is_empty():
-		is_completed = true
+		self._complete_zone()
+
+func _complete_zone():
+	self.is_completed = true
+	var randomized_positions: Array = RNG_UTIL.rand_k_vals(zone_tiles.keys(), tetrominos.size())
+	for i in range(randomized_positions.size()):
+		tetrominos[i].pos = randomized_positions[i]

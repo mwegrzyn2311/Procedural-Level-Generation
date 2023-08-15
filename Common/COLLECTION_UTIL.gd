@@ -65,3 +65,6 @@ static func min_custom(arr: Array, val_func: Callable):
 			val_min = val
 			idx_min = i
 	return arr[idx_min]
+	
+static func num_sum(a, b):
+	return a + b
