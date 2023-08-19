@@ -68,3 +68,20 @@ static func min_custom(arr: Array, val_func: Callable):
 	
 static func num_sum(a, b):
 	return a + b
+	
+static func sets_eq(a: Array, b: Array) -> bool:
+	if a.size() != b.size():
+		return false
+	var remaining = a.duplicate(true)
+	for el in b:
+		if (el is Array and deep_has(remaining, el)) or (not el is Array and el not in remaining):
+			return false
+		remaining.erase(el)
+	return true
+
+# func(Array[Array], Array)
+static func deep_has(a, b) -> bool:
+	for arr in a:
+		if sets_eq(arr, b):
+			return true
+	return false

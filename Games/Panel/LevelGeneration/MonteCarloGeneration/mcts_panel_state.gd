@@ -2,7 +2,7 @@ extends MCTSGameState
 
 class_name MCTSPanelState
 
-const A: float = 2.0
+const A: float = 3.0
 const B: float = 1.0
 const C: float = 1.0
 
@@ -30,6 +30,7 @@ func _init(width: int, height: int, line: Array[Vector2], could_place_teromino: 
 	self.tetromino_zones = tetromino_zones
 	self.lines_gen_finished = lines_gen_finished
 	self.curr_legal_actions = self.generate_legal_actions()
+	self.curr_legal_actions.shuffle()
 	self.is_terminal = (self.curr_legal_actions.size() == 0)
 	self.X = -1.0
 	self.gen_res = -1.0
@@ -145,9 +146,9 @@ func generate_tetromino_actions() -> Array:
 					_try_create_tetromino_action(actions, zone, i, type)
 					if actions.size() == CURRENT_PANEL.max_tetromino_actions:
 						return actions
-			# TODO: Decide if should uncomment
-			#var type: TETROMINO_UTIL.Type = TETROMINO_UTIL.Type.ONE_BY_ONE
-			#_try_create_tetromino_action(actions, zone, i, type)
+			if not CURRENT_PANEL.is_one_by_one_tetromino_disabled:
+				var type: TETROMINO_UTIL.Type = TETROMINO_UTIL.Type.ONE_BY_ONE
+				_try_create_tetromino_action(actions, zone, i, type)
 		return actions
 
 func _try_create_tetromino_action(actions: Array, zone: TetrominoZone, zone_idx: int, type: TETROMINO_UTIL.Type):
@@ -176,22 +177,31 @@ func legal_actions() -> Array:
 func generation_result() -> float:
 	if self.gen_res != -1.0:
 		return self.gen_res
+	
+	self.X = 2.0
 	# Dictionary[Vector2, TETROMINO_UTILS.Type]
 	var tetromino_dict: Dictionary = {}
 	for zone in tetromino_zones:
+		if not zone.is_completed:
+			self.X = 0.0
 		for tetromino in zone.tetrominos:
 			tetromino_dict[tetromino.pos] = tetromino.type
 
-	#self.X = float(PANEL_UTILS.number_of_solutions(line[0], line[line.size() - 1], tetromino_dict, width, height))
+	self.X = float(PANEL_UTILS.number_of_solutions(line[0], line[line.size() - 1], tetromino_dict, width, height))
+	if self.X == 0.0:
+		self.gen_res = -INF * self.max_score()
+		return self.gen_res
 	var Y: float = float(tetromino_zones.size())
-	var Z: float = float(tetromino_zones.map(func(zone): return zone.zone_tiles.size()).reduce(COLLECTION_UTIL.num_sum, 0)) / float(width / 2 * height / 2)
+	var w: float = float(width / 2)
+	var h: float = float(width / 2)
+	var sqrt_wh: float = sqrt(w * h)
+	var Z: float = float(tetromino_zones.map(func(zone): return zone.zone_tiles.size()).reduce(COLLECTION_UTIL.num_sum, 0)) / (w * h)
 
-	#A * pow(0.5, X-1)
-	self.gen_res =  + B * (Y - 1) / Y + C * 4 * Z * (1 - Z)
+	self.gen_res = A * max(0, -(X - sqrt_wh - 1) * (X + sqrt_wh - 1)) / (w * h) +  B * Y / (Y + 1) + C * 4 * Z * (1 - Z)
 	return self.gen_res
 
 func max_score() -> float:
-	return B + C
+	return A + B + C
 
 # We might return true if either no more legal moves exist or a satisfactory result is found
 func is_generation_completed() -> bool:

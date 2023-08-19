@@ -2,10 +2,11 @@ extends Node
 
 
 # func(Vector2, Vector2, Dictionary[Vector2, TetrominoType], int, int)
-static func number_of_solutions(start: Vector2, finish: Vector2, tetrominos: Dictionary, width: int, height: int) -> int:
-	return no_of_sols_recursive([start], start, finish, tetrominos, width, height)
+static func number_of_solutions_legacy(start: Vector2, finish: Vector2, tetrominos: Dictionary, width: int, height: int) -> int:
+	var sols = no_of_sols_recursive_legacy([start], start, finish, tetrominos, width, height)
+	return sols
 
-static func no_of_sols_recursive(line: Array[Vector2], curr_pos: Vector2, finish: Vector2, tetrominos: Dictionary, width: int, height: int) -> int:
+static func no_of_sols_recursive_legacy(line: Array[Vector2], curr_pos: Vector2, finish: Vector2, tetrominos: Dictionary, width: int, height: int) -> int:
 	if curr_pos == finish:
 		if is_correct_solution(line, tetrominos, width, height):
 			return 1
@@ -18,9 +19,63 @@ static func no_of_sols_recursive(line: Array[Vector2], curr_pos: Vector2, finish
 	var res: int = 0
 	for next_pos in next_positions:
 		line.append(next_pos)
-		res += no_of_sols_recursive(line, next_pos, finish, tetrominos, width, height)
+		res += no_of_sols_recursive_legacy(line, next_pos, finish, tetrominos, width, height)
 		line.erase(next_pos)
 	return res
+
+# func(Vector2, Vector2, Dictionary[Vector2, TetrominoType], int, int)
+static func number_of_solutions(start: Vector2, finish: Vector2, tetrominos: Dictionary, width: int, height: int) -> int:
+	var sols = no_of_sols_recursive([start], [], [], start, finish, tetrominos, width, height)
+	return sols
+
+static func no_of_sols_recursive(line: Array[Vector2], unique_zone_sets, valid_zones, curr_pos: Vector2, finish: Vector2, tetrominos: Dictionary, width: int, height: int) -> int:
+	if curr_pos == finish:
+		if is_correct_unique_solution(line, unique_zone_sets, valid_zones, tetrominos, width, height):
+			return 1
+		else:
+			return 0
+	var next_positions: Array = CONSTANTS.UNIT_VECTORS\
+		.map(func(unit_vec: Vector2) -> Vector2: return curr_pos + unit_vec * 2)\
+		.filter(func(next: Vector2) -> bool: return in_bounds(next, width, height) and !line.has(next))
+	
+	var res: int = 0
+	for next_pos in next_positions:
+		line.append(next_pos)
+		res += no_of_sols_recursive(line, unique_zone_sets, valid_zones, next_pos, finish, tetrominos, width, height)
+		line.erase(next_pos)
+	return res
+
+static func is_correct_unique_solution(sim_line: Array[Vector2], unique_zone_sets, valid_zones, tetrominos: Dictionary, width: int, height: int) -> bool:
+	if tetrominos.is_empty():
+		return true
+	var a: Vector2
+	var b: Vector2 = sim_line[0]
+	var curr_zones: Array = []
+	for i in range(1, sim_line.size()):
+		a = b
+		b = sim_line[i]
+		if i < sim_line.size() - 1:
+			if not on_borders(a, width, height) and on_borders(b, width, height):
+				var c: Vector2 = b + (b - sim_line[i + 1])
+				if not is_correct_tetromino_zone(a, b, c, sim_line, tetrominos, width, height, unique_zone_sets, valid_zones, curr_zones):
+					return false
+		else:
+			var last_dir: Vector2 = (b - a)
+			var norm: Vector2 = Vector2(last_dir.y, last_dir.x)
+			var c1: Vector2 = b + norm
+			var c2: Vector2 = b - norm
+			if (in_bounds(c1, width, height) and not is_correct_tetromino_zone(a, b, c1, sim_line, tetrominos, width, height, unique_zone_sets, valid_zones, curr_zones)) or (in_bounds(c2, width, height) and not is_correct_tetromino_zone(a, b, c2, sim_line, tetrominos, width, height, unique_zone_sets, valid_zones, curr_zones)):
+				return false
+				
+	if COLLECTION_UTIL.deep_has(unique_zone_sets, curr_zones):
+		return false
+	else:
+		unique_zone_sets.append(curr_zones)
+		return true
+
+#static func _zone_in_unique_zones(unique_zones, zone_positions) -> bool:
+#	for unique_zone in unique_zones:
+#		for
 
 static func is_correct_solution(sim_line: Array[Vector2], tetrominos: Dictionary, width: int, height: int) -> bool:
 	var a: Vector2
@@ -42,7 +97,7 @@ static func is_correct_solution(sim_line: Array[Vector2], tetrominos: Dictionary
 				return false
 	return true
 		
-static func is_correct_tetromino_zone(a: Vector2, b: Vector2, c: Vector2, sim_line: Array[Vector2], tetrominos: Dictionary, width: int, height: int) -> bool:
+static func is_correct_tetromino_zone(a: Vector2, b: Vector2, c: Vector2, sim_line: Array[Vector2], tetrominos: Dictionary, width: int, height: int, unique_zones = null, valid_zones = null, curr_zone_set = null) -> bool:
 	var zone_corner: Vector2 = Vector2(min(a.x, b.x, c.x), min(a.y, b.y, c.y)) + Vector2.ONE
 	var zone_positions: Array[Vector2] = []
 	fill_zone_recursively(zone_positions, zone_corner, sim_line, width, height)
@@ -56,6 +111,10 @@ static func is_correct_tetromino_zone(a: Vector2, b: Vector2, c: Vector2, sim_li
 	
 	if tetromino_types_in_zone.is_empty():
 		return true
+		
+	if valid_zones != null and COLLECTION_UTIL.deep_has(valid_zones, zone_positions):
+		curr_zone_set.append(zone_positions)
+		return true
 	
 	# This is only for the sake of optimiation - to return early if it would fail anyways
 	if tetromino_types_in_zone\
@@ -63,7 +122,13 @@ static func is_correct_tetromino_zone(a: Vector2, b: Vector2, c: Vector2, sim_li
 		.reduce(func(a, b): return a + b, 0) != zone_positions.size():
 		return false
 	
-	return _try_placing(zone_dict, tetromino_types_in_zone)
+	if _try_placing(zone_dict, tetromino_types_in_zone):
+		if curr_zone_set != null:
+			valid_zones.append(zone_positions)
+			curr_zone_set.append(zone_positions)
+		return true
+	else:
+		return false
 
 static func _try_placing(zone_dict: Dictionary, types_remaining: Array) -> bool:
 	if types_remaining.is_empty() and zone_dict.values().filter(func(occupied): return not occupied).is_empty():

@@ -4,6 +4,7 @@ extends Node
 var width: int = 4
 var height: int = 4
 var max_tetromino_actions = 4
+var is_one_by_one_tetromino_disabled: bool = true
 
 # Dictionary[Vector2, PANEL_ELEMENTS.Ele]
 var panel_dict: Dictionary

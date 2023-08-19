@@ -157,4 +157,5 @@ func check_for_finish(finish: PanelFinish):
 		NAVIGATION.game_overlay.enable_completion_overlay_visibility()
 	else:
 		print("wrong solution")
+		print(PANEL_UTILS.number_of_solutions(start.board_coord, finish.board_coord, CURRENT_PANEL.tetrominos, CURRENT_PANEL.width, CURRENT_PANEL.height))
 	line.remove_coord_tmp()

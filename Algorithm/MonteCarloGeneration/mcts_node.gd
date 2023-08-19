@@ -26,12 +26,18 @@ func best_action():
 	var time_now = Time.get_unix_time_from_system()
 	
 #	for i in range(simulations):
-	while time_now - time_start < 1:
+	var i: int = 0
+	var time_limit: float = 5.0
+	#while time_now - time_start < time_limit:
+	for j in range(10):
+		i += 1
 		var node = tree_policy(self)
 		var result = node.rollout()
 		node.backpropagate(result)
-		time_now = Time.get_unix_time_from_system()
+	time_now = Time.get_unix_time_from_system()
 		#print(time_now - time_start)
+	
+	print(str(i) + " iterations over " + str(time_now - time_start) + " seconds")
 	
 	return self.bestest_child()
 	
@@ -80,16 +86,11 @@ func explor_value() -> float:
 	var val: float = 0.0
 	for result in self.results:
 		val += result * self.results[result]
-	var value: float = (val / ((numberOfVisits) * state.max_score())) + 0.1 * sqrt(2 * log(parent.numberOfVisits) / (numberOfVisits))
+	var value: float = (val / ((numberOfVisits) * state.max_score())) + 0.5 * sqrt(2 * log(parent.numberOfVisits) / (numberOfVisits))
 	return value
 	
 func value() -> float:
-	# TODO: Might have to be normalized to one
-	var val: float = 0.0
-	for result in self.results:
-		val += result * self.results[result]
-	var value: float = (val / ((numberOfVisits) * state.max_score()))
-	return value
+	return self.results.keys().max() if not self.results.is_empty() else 0.0
 
 static func node_explor_val(node: MCTSNode) -> float:
 	return node.explor_value()
