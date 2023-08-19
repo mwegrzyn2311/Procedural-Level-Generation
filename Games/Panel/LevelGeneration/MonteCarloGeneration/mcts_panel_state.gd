@@ -197,7 +197,7 @@ func generation_result() -> float:
 	var sqrt_wh: float = sqrt(w * h)
 	var Z: float = float(tetromino_zones.map(func(zone): return zone.zone_tiles.size()).reduce(COLLECTION_UTIL.num_sum, 0)) / (w * h)
 
-	self.gen_res = A * max(0, -(X - sqrt_wh - 1) * (X + sqrt_wh - 1)) / (w * h) +  B * Y / (Y + 1) + C * 4 * Z * (1 - Z)
+	self.gen_res = A * max(0.0, -(X - sqrt_wh - 1) * (X + sqrt_wh - 1)) / (w * h) +  B * Y / (Y + 1) + C * 4 * Z * (1 - Z)
 	return self.gen_res
 
 func max_score() -> float:

@@ -18,7 +18,12 @@ func _init(width: int, height: int, level_templates: LevelTemplates):
 # TODO: I think that with some templates it's possible to get an occurence that no template would fit which leads to inifite loop
 # TODO: It'd also be good to not pick the same template with the same rotation twice but with so many choices it might consume some memory and maybe even time...
 func generate_level() -> Dictionary:
-	var res: Dictionary = super.generate_level()
+	var res: Dictionary = {}
+	var i = 0
+	while res.is_empty() or not SUPAPLEX_UTILS.is_one_open_region(res):
+		res = super.generate_level()
+		i += 1
+	print("generated after " + str(i) + " tries")
 	# Randomly change grass into rocks/ points
 	# Chance to turn grass into rocks should depend on:
 	# a) Height between roof and ground because rocks on the bottom are less interesting
