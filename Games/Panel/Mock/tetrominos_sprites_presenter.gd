@@ -1,5 +1,7 @@
 extends Node2D
 
+# This class is used to generate tetromino sprites in one scene for documentation purposes
+
 const OFFSET: Vector2 = Vector2(128,128)
 
 func _ready():
