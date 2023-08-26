@@ -27,20 +27,20 @@ func best_action():
 	
 #	for i in range(simulations):
 	var i: int = 0
-	var time_limit: float = 5.0
-	#while time_now - time_start < time_limit:
-	for j in range(10):
+	var time_limit: float = 3.0
+	while time_now - time_start < time_limit:
+#	for j in range(1000):
 		i += 1
 		var node = tree_policy(self)
 		var result = node.rollout()
 		node.backpropagate(result)
-	time_now = Time.get_unix_time_from_system()
+		time_now = Time.get_unix_time_from_system()
 		#print(time_now - time_start)
 	
-	print(str(i) + " iterations over " + str(time_now - time_start) + " seconds")
-	
-	return self.bestest_child()
-	
+	var res = self.bestest_child()
+	print(str(i) + " iterations over " + str(time_now - time_start) + " seconds and res with value of " + str(res.state.generation_result() / res.state.max_score()))
+	return res
+
 func tree_policy(node):
 	while not node.is_terminal_node():
 		if not node.is_fully_expanded():
@@ -86,7 +86,7 @@ func explor_value() -> float:
 	var val: float = 0.0
 	for result in self.results:
 		val += result * self.results[result]
-	var value: float = (val / ((numberOfVisits) * state.max_score())) + 0.5 * sqrt(2 * log(parent.numberOfVisits) / (numberOfVisits))
+	var value: float = (val / ((numberOfVisits) * state.max_score())) + 0.1 * sqrt(2 * log(parent.numberOfVisits) / (numberOfVisits))
 	return value
 	
 func value() -> float:
