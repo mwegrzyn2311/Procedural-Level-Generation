@@ -9,6 +9,12 @@ func closest_dir(dir: Vector2) -> Vector2:
 func is_dir(vec: Vector2) -> bool:
 	return vec == Vector2.RIGHT or vec == Vector2.DOWN or vec == Vector2.LEFT or vec == Vector2.UP
 
+func is_vertical(vec: Vector2) -> bool:
+	return vec.x == 0
+	
+func is_horizontal(vec: Vector2) -> bool:
+	return vec.y == 0
+
 # WARNING: THIS IMPLEMENTATION HAS NOT BEEN TESTED
 func right_or_left(a: Vector2, b: Vector2, c: Vector2) -> Vector2:
 	var vec1: Vector2 = b - a

@@ -33,7 +33,11 @@ const TypeToShape: Dictionary = {
 
 const ELE_CENTER: Vector2 = Vector2(PANEL_ELEMENTS.ELE_SIZE * PANEL_ELEMENTS.PIPE_LEN / 2, PANEL_ELEMENTS.ELE_SIZE * PANEL_ELEMENTS.PIPE_LEN / 2)
 
-var rotations: Array[Vector2] = [Vector2(-1, 1), Vector2(-1, -1), Vector2(1, -1)]
+var rotations: Array[Callable] = [
+	func(pos: Vector2) -> Vector2: return Vector2(-pos.y, pos.x),
+	func(pos: Vector2) -> Vector2: return -pos,
+	func(pos: Vector2) -> Vector2: return Vector2(pos.y, -pos.x),
+]
 # Dictionary[Type, Array[Array[Vector2]]] - We have it here in the singleton so that it is generated once in order to optimize
 var rotated_shapes: Dictionary = {}
 var types_arr: Array[Type]
@@ -51,7 +55,7 @@ func _generate_rotated_shapes():
 		var shapes: Array[Array] = [TypeToShape[type]]
 		for rotation in rotations:
 			# Array[Vector2]
-			var rotated_shape: Array = TypeToShape[type].map(func(pos) -> Vector2: return pos * rotation)
+			var rotated_shape: Array = TypeToShape[type].map(rotation)
 			if not _contains_shape(shapes, rotated_shape):
 				shapes.append(rotated_shape)
 		rotated_shapes[type] = shapes
@@ -78,6 +82,7 @@ func _genereate_types_arr():
 	types_arr = []
 	for type in Type.values():
 		types_arr.append(type)
+	types_arr.erase(Type.ONE_BY_ONE)
 
 func _generate_tetromino_sprites():
 	for type in TypeToShape:

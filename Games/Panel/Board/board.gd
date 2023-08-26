@@ -53,21 +53,21 @@ func _last_drawing_origin() -> Vector2:
 	return line.get_point_position(line.get_point_count() - 2)
 
 func _reset_line():
-	line.clear_points()
+	line.clear_points_custom()
 	var start_pos = Vector2(0,0) if start == null else start.position
-	line.add_point(start_pos)
+	var start_coord = Vector2(0,0) if start == null else start.board_coord
+	line.add_point_custom(start_pos, start_coord)
 	line.add_point(start_pos)
 	
-func _turn(intersection_pos: Vector2, mouse_move_dir: Vector2):
+func _turn(intersection_pos: Vector2, mouse_move_dir: Vector2, intersection_coords: Vector2):
 	self.drawing_dir = mouse_move_dir
-	line.set_point_position(line.get_point_count() - 1, intersection_pos)
-	line.add_point(_line_point_inside_pipe())
+	line.add_intersection(intersection_pos, _line_point_inside_pipe(), intersection_coords)
 
 func _change_dir(mouse_move_dir: Vector2):
 	self.drawing_dir = mouse_move_dir
 
 func _go_back(back_dir: Vector2):
-	line.remove_point(line.get_point_count() - 2)
+	line.remove_last_intersection()
 
 func _start_drawing():
 	self.register_curr_over(start)
@@ -80,11 +80,12 @@ func _end_drawing():
 	_reset_line()
 
 func _on_background_gui_input(event):
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		_end_drawing()
 
 func register_start(start: PanelStart):
 	self.start = start
+	_reset_line()
 
 func _has_already_been_visited(pos: Vector2):
 	var pos_index: int = line.points.find(pos)
@@ -135,7 +136,7 @@ func curr_over_exited(curr_over: PanelEle):
 	if not _can_move_mouse_to(curr_over, mouse_move_dir):
 		return
 	if _should_turn(currently_over.position, mouse_move_dir):
-		_turn(currently_over.position, mouse_move_dir)
+		_turn(currently_over.position, mouse_move_dir, curr_over.board_coord)
 	elif _should_change_dir(currently_over.position, mouse_move_dir):
 		_change_dir(mouse_move_dir)
 	else:
@@ -144,6 +145,17 @@ func curr_over_exited(curr_over: PanelEle):
 			_go_back(currently_over.position)
 	currently_over = null
 
+# TODO: Actually implement
+func _is_panel_solved() -> bool:
+	return PANEL_UTILS.is_correct_solution(line.sim_line, CURRENT_PANEL.tetrominos, CURRENT_PANEL.width, CURRENT_PANEL.height)
+
 # TODO: Implement
 func check_for_finish(finish: PanelFinish):
-	pass
+	line.add_coord_tmp(finish.board_coord)
+	if _is_panel_solved():
+		_end_drawing()
+		NAVIGATION.game_overlay.enable_completion_overlay_visibility()
+	else:
+		print("wrong solution")
+		print(PANEL_UTILS.number_of_solutions(start.board_coord, finish.board_coord, CURRENT_PANEL.tetrominos, CURRENT_PANEL.width, CURRENT_PANEL.height))
+	line.remove_coord_tmp()

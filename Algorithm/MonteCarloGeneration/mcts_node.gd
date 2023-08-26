@@ -22,17 +22,32 @@ func _init(state: MCTSGameState, parent: MCTSNode=null, parent_action: MCTSActio
 func best_action():
 	# TODO: Change this to time-based?
 	const simulations: int = 100
+	var time_start = Time.get_unix_time_from_system()
+	var time_now = Time.get_unix_time_from_system()
 	
-	for i in range(simulations):
-		print(i)
-		self.rollout()
+#	for i in range(simulations):
+	var i: int = 0
+	var time_limit: float = 3.0
+	while time_now - time_start < time_limit:
+#	for j in range(1000):
+		i += 1
+		var node = tree_policy(self)
+		var result = node.rollout()
+		node.backpropagate(result)
+		time_now = Time.get_unix_time_from_system()
+		#print(time_now - time_start)
 	
-	return self.most_visited_child()
-	
-func tree_policy():
-	while not self.is_fully_expanded():
-		self.expand()
-	return self.best_child()
+	var res = self.bestest_child()
+	print(str(i) + " iterations over " + str(time_now - time_start) + " seconds and res with value of " + str(res.state.generation_result() / res.state.max_score()))
+	return res
+
+func tree_policy(node):
+	while not node.is_terminal_node():
+		if not node.is_fully_expanded():
+			return node.expand()
+		else:
+			node = node.best_explor_child()
+	return node
 	
 func is_fully_expanded() -> bool:
 	return self.untried_actions.is_empty()
@@ -51,9 +66,14 @@ func rollout():
 	var curr_node = self
 
 	while not curr_node.is_terminal_node():
-		curr_node = curr_node.tree_policy()
-	var reward = curr_node.state.generation_result()
-	curr_node.backpropagate(reward)
+		# random rollout
+		var action: MCTSAction = RNG_UTIL.choice(curr_node.untried_actions)
+		curr_node.untried_actions.erase(action)
+		var next_state: MCTSGameState = curr_node.state.move(action)
+		var child_node: MCTSNode = curr_node.create_child_node(action, next_state)
+		curr_node.children.append(child_node)
+		curr_node = child_node
+	return curr_node.state.generation_result()
 
 func backpropagate(result):
 	self.numberOfVisits += 1
@@ -61,33 +81,34 @@ func backpropagate(result):
 	if self.parent:
 		self.parent.backpropagate(result)
 
-func value() -> float:
+func explor_value() -> float:
 	# TODO: Might have to be normalized to one
 	var val: float = 0.0
 	for result in self.results:
 		val += result * self.results[result]
-	var value: float = (val / ((numberOfVisits + 1) * state.max_score())) + sqrt(2 * log(parent.numberOfVisits + 1) / (numberOfVisits + 1))
+	var value: float = (val / ((numberOfVisits) * state.max_score())) + 0.1 * sqrt(2 * log(parent.numberOfVisits) / (numberOfVisits))
 	return value
+	
+func value() -> float:
+	return self.results.keys().max() if not self.results.is_empty() else 0.0
 
-static func children_compare(a: MCTSNode, b: MCTSNode) -> bool:
-	if a.value() == b.value():
-		return RNG_UTIL.rand_bool()
-	else:
-		return a.value() > b.value()
+static func node_explor_val(node: MCTSNode) -> float:
+	return node.explor_value()
 
+static func node_val(node: MCTSNode) -> float:
+	return node.value();
+
+func best_explor_child():
+	return COLLECTION_UTIL.max_custom(self.children, node_explor_val)
+	
 func best_child():
-	self.children.sort_custom(children_compare)
-	return self.children[0]
-
-static func children_compare_visits(a: MCTSNode, b: MCTSNode) -> bool:
-	return a.numberOfVisits > b.numberOfVisits
-
-func most_visited_child():
-	if children.is_empty():
+	return COLLECTION_UTIL.max_custom(self.children, node_val)
+	
+func bestest_child():
+	if is_terminal_node():
 		return self
 	else:
-		self.children.sort_custom(children_compare_visits)
-		return self.children[0].most_visited_child()
+		return self.best_child().bestest_child()
 
 func is_terminal_node():
 	return self.state.is_generation_completed()

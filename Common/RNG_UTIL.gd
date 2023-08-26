@@ -49,3 +49,12 @@ func rand_pos_neg() -> int:
 		return -1
 	else:
 		return 1
+
+func rand_k_vals(values: Array, k: int) -> Array:
+	var copied_values: Array = values.duplicate(true)
+	var res: Array = []
+	for i in range(k):
+		var rand_i = RNG.randi_range(0, copied_values.size() - 1)
+		res.append(copied_values[rand_i])
+		copied_values.remove_at(rand_i)
+	return res

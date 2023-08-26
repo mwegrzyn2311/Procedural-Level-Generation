@@ -24,6 +24,11 @@ func copy():
 	
 # Returns a tetromino ready to be placed or null if placement not possible
 func can_place_tetromino(tetromino_type: TETROMINO_UTIL.Type) -> Tetromino:
+	if CURRENT_PANEL.is_one_by_one_tetromino_disabled and zone_tiles.values()\
+		.filter(func(occupied: bool) -> bool : return not occupied)\
+		.size() - 1 == TETROMINO_UTIL.TypeToShape[tetromino_type].size():
+		return null
+		
 	# Try place starting at every zone pos
 	for zone_pos in zone_tiles:
 		# If is not occupied
@@ -40,7 +45,8 @@ func can_place_tetromino(tetromino_type: TETROMINO_UTIL.Type) -> Tetromino:
 						fits = false
 						break
 				if fits:
-					return Tetromino.new(tetromino_type, shape.map(func(pos: Vector2) -> Vector2: return pos * 2 + offset))
+					var tetromino_tiles = shape.map(func(pos: Vector2) -> Vector2: return pos * 2 + offset)
+					return Tetromino.new(tetromino_type, tetromino_tiles, RNG_UTIL.choice(tetromino_tiles))
 	return null
 
 func place_tetromino(tetromino: Tetromino):
@@ -50,4 +56,10 @@ func place_tetromino(tetromino: Tetromino):
 		zone_tiles[pos] = true
 	self.tetrominos.append(tetromino)
 	if zone_tiles.values().filter(COLLECTION_UTIL.false_filter).is_empty():
-		is_completed = true
+		self._complete_zone()
+
+func _complete_zone():
+	self.is_completed = true
+	var randomized_positions: Array = RNG_UTIL.rand_k_vals(zone_tiles.keys(), tetrominos.size())
+	for i in range(randomized_positions.size()):
+		tetrominos[i].pos = randomized_positions[i]

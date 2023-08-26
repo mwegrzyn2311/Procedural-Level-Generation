@@ -2,6 +2,10 @@ extends MCTSGameState
 
 class_name MCTSPanelState
 
+const A: float = 3.0
+const B: float = 1.0
+const C: float = 1.0
+
 var width: int
 var height: int
 
@@ -14,6 +18,9 @@ var could_place_tetromino: bool
 # Array[TetrominoZone]
 var tetromino_zones
 var lines_gen_finished: bool
+var is_terminal: bool
+var X: float
+var gen_res: float
 
 func _init(width: int, height: int, line: Array[Vector2], could_place_teromino: bool, tetromino_zones, lines_gen_finished: bool):
 	self.width = width
@@ -23,6 +30,10 @@ func _init(width: int, height: int, line: Array[Vector2], could_place_teromino: 
 	self.tetromino_zones = tetromino_zones
 	self.lines_gen_finished = lines_gen_finished
 	self.curr_legal_actions = self.generate_legal_actions()
+	self.curr_legal_actions.shuffle()
+	self.is_terminal = (self.curr_legal_actions.size() == 0)
+	self.X = -1.0
+	self.gen_res = -1.0
 
 static func new_initial_state(width: int, height: int) -> MCTSPanelState:
 	# Starts on the side for the sake of current implementation of tetromino generation
@@ -103,12 +114,20 @@ func _finish_line_gen():
 			var b: Vector2 = a + Vector2((a - o).y, (a - o).x) * RNG_UTIL.rand_pos_neg()
 			_create_tetromino_zone(o, a ,b, line)
 
+func _is_start(pos: Vector2):
+	return line[0] == pos 
+
 # =======================
 # Abstract functions overrides here
 
 # TODO: Add placing tetromino here
 func generate_legal_actions() -> Array:
-	return generate_move_actions() + generate_tetromino_actions()
+	# This ifelse is there to reduce the width of the tree
+	# Append is there cause it might generate a zone but only if it would return empty list
+	if _are_tetrominos_placed():
+		return generate_move_actions() + generate_tetromino_actions()
+	else:
+		return generate_tetromino_actions()
 
 func generate_tetromino_actions() -> Array:
 	var actions = []
@@ -124,21 +143,27 @@ func generate_tetromino_actions() -> Array:
 			if zone.is_completed:
 				continue
 			for type in TETROMINO_UTIL.types_arr:
-				var tetromino_opt: Tetromino = zone.can_place_tetromino(type)
-				if tetromino_opt != null:
-					actions.append(MCTSAction.new(Callable(self, "place_tetromino"), {"tetromino": tetromino_opt, "zone_idx": i}))
+					_try_create_tetromino_action(actions, zone, i, type)
 					if actions.size() == CURRENT_PANEL.max_tetromino_actions:
 						return actions
+			if not CURRENT_PANEL.is_one_by_one_tetromino_disabled:
+				var type: TETROMINO_UTIL.Type = TETROMINO_UTIL.Type.ONE_BY_ONE
+				_try_create_tetromino_action(actions, zone, i, type)
 		return actions
+
+func _try_create_tetromino_action(actions: Array, zone: TetrominoZone, zone_idx: int, type: TETROMINO_UTIL.Type):
+	var tetromino_opt: Tetromino = zone.can_place_tetromino(type)
+	if tetromino_opt != null:
+		actions.append(MCTSAction.new(Callable(self, "place_tetromino"), {"tetromino": tetromino_opt, "zone_idx": zone_idx}))
 
 # TODO: Might create something to put an end earlier
 func generate_move_actions() -> Array:
 	if lines_gen_finished:
 		return []
 	var curr_pos: Vector2 = line[line.size() - 1]
-	var dest_positions: Array = [Vector2.UP, Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT]\
+	var dest_positions: Array = CONSTANTS.UNIT_VECTORS\
 		.map(func(unit_vec: Vector2): return curr_pos + unit_vec * 2)\
-		.filter(func(next: Vector2): return !line.has(next) && _in_bounds(next))
+		.filter(func(next: Vector2) -> bool: return _in_bounds(next) and !line.has(next))
 	if dest_positions.is_empty():
 		_finish_line_gen()
 	# Create zone but make sure it doesnt invoke again (a flag or smth
@@ -148,14 +173,42 @@ func legal_actions() -> Array:
 	return curr_legal_actions
 
 # TODO: It would be best to somehow return number of solutions
+# TODO: Consider giving tetromino elements values to further parameterize gen result
 func generation_result() -> float:
-	return line.size()
+	if self.gen_res != -1.0:
+		return self.gen_res
+	
+	self.X = 2.0
+	# Dictionary[Vector2, TETROMINO_UTILS.Type]
+	var tetromino_dict: Dictionary = {}
+	for zone in tetromino_zones:
+		if not zone.is_completed:
+			self.X = 0.0
+		for tetromino in zone.tetrominos:
+			tetromino_dict[tetromino.pos] = tetromino.type
+
+	self.X = float(PANEL_UTILS.number_of_solutions(line[0], line[line.size() - 1], tetromino_dict, width, height))
+	if self.X == 0.0:
+		self.gen_res = -INF * self.max_score()
+		return self.gen_res
+	var Y: float = float(tetromino_zones.size())
+	var w: float = float(width / 2)
+	var h: float = float(width / 2)
+	var sqrt_wh: float = sqrt(w * h)
+	var Z: float = float(tetromino_zones.map(func(zone): return zone.zone_tiles.size()).reduce(COLLECTION_UTIL.num_sum, 0)) / (w * h)
+
+	self.gen_res = A * max(0.0, -(X - sqrt_wh - 1) * (X + sqrt_wh - 1)) / (w * h) +  B * Y / (Y + 1) + C * 4 * Z * (1 - Z)
+	return self.gen_res
+
+func max_score() -> float:
+	return A + B + C
 
 # We might return true if either no more legal moves exist or a satisfactory result is found
 func is_generation_completed() -> bool:
-	return curr_legal_actions.size() == 0
+	return self.is_terminal
 	
 func get_level_dict() -> Dictionary:
+	print("Generated lvl with " + str(X) + " solutions and quality of " + str(gen_res / max_score()))
 	var res: Dictionary = {}
 	for y in range(height):
 		for x in range(width):
@@ -166,7 +219,7 @@ func get_level_dict() -> Dictionary:
 				res[Vector2(x, y)] = PANEL_ELEMENTS.Ele.PIPE
 			else:
 				res[Vector2(x, y)] = PANEL_ELEMENTS.Ele.EMPTY
-			
+	
 	res[line[0]] = PANEL_ELEMENTS.Ele.START
 	res[line[line.size() - 1]] = PANEL_ELEMENTS.Ele.FINISH
 	

@@ -3,7 +3,8 @@ extends Node
 
 var width: int = 4
 var height: int = 4
-var max_tetromino_actions = 5
+var max_tetromino_actions = 4
+var is_one_by_one_tetromino_disabled: bool = true
 
 # Dictionary[Vector2, PANEL_ELEMENTS.Ele]
 var panel_dict: Dictionary
@@ -28,4 +29,8 @@ func apply():
 
 func generate_map():
 	self.panel_dict = level_generator.generate_level()
+	self.tetrominos = {}
+	for pos in panel_dict:
+		if panel_dict[pos] is Tetromino:
+			self.tetrominos[pos] = panel_dict[pos].type
 	COLLECTION_UTIL.nice_print_dict(self.panel_dict)

@@ -11,6 +11,14 @@ enum Ele {
 	EXIT
 }
 
+const PLAYER_CAN_MOVE_TO: Array[TILE_ELEMENTS.Ele] = [
+	TILE_ELEMENTS.Ele.POINT, TILE_ELEMENTS.Ele.GRASS, TILE_ELEMENTS.Ele.EMPTY, TILE_ELEMENTS.Ele.EXIT
+]
+const FALLABLE_ELEMENTS: Array[TILE_ELEMENTS.Ele] = [TILE_ELEMENTS.Ele.BOULDER, TILE_ELEMENTS.Ele.POINT]
+
+func _can_move_to(ele) -> bool:
+	return PLAYER_CAN_MOVE_TO.has(ele)
+
 func is_corridor(ele: Ele) -> bool:
 	# Player is above empty so it can be counted as a corridor
 	return ele == Ele.GRASS || ele == Ele.EMPTY || ele == Ele.PLAYER || ele == Ele.POINT
