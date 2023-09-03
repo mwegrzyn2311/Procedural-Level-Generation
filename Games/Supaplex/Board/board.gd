@@ -22,14 +22,22 @@ func generate_fence():
 
 func generate_elements():
 	CURRENT_LEVEL_INFO.generate_map()
+	generate_map()
+
+func generate_map():
+	CURRENT_LEVEL_INFO.regenerate_map()
 	for element in CURRENT_LEVEL_INFO.level_map:
 		game_elements.add_child(element)
 		element.add_to_group("game_elements")
-		
+
+func regenerate_new_level():
+	cleanup()
+	generate_elements()
+
 func cleanup():
 	for element in game_elements.get_children():
 		game_elements.remove_child(element)
 		
 func regenerate_level():
 	cleanup()
-	generate_elements()
+	generate_map()

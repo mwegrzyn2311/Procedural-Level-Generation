@@ -1,5 +1,5 @@
 extends TemplateLevelGenerator
-class_name SupaplexTemplateLevelGenerator
+class_name SupaplexTemplateLevelGeneratorV1
 
 # This class is responsile for generating levels from 3x3 tile templates
 
@@ -23,7 +23,7 @@ func generate_level() -> Dictionary:
 	while res.is_empty() or not SUPAPLEX_UTILS.is_one_open_region(res):
 		res = super.generate_level()
 		i += 1
-	print("generated after " + str(i) + " tries")
+	print("generated open region after " + str(i) + " tries")
 	# Randomly change grass into rocks/ points
 	# Chance to turn grass into rocks should depend on:
 	# a) Height between roof and ground because rocks on the bottom are less interesting
@@ -34,6 +34,11 @@ func generate_level() -> Dictionary:
 	res = place_rocks(res)
 	res = place_empty(res)
 	res = place_player(res)
+	return res
+	
+func place_exit(res: Dictionary) -> Dictionary:
+	var rand_grass_pos: Vector2 =  RNG_UTIL.choice(res.keys().filter(func(pos): res[pos] == TILE_ELEMENTS.Ele.GRASS))
+	res[rand_grass_pos] = TILE_ELEMENTS.Ele.EXIT
 	return res
 	
 func place_rocks(res: Dictionary) -> Dictionary:

@@ -1,6 +1,6 @@
 extends MCTSGameState
 
-class_name MCTSSupaplexStateLegacy
+class_name MCTSSupaplexStateV1
 
 var res: Dictionary
 var walls_to_delete: int

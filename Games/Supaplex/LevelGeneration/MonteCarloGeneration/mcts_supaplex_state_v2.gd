@@ -1,6 +1,6 @@
 extends MCTSGameState
 
-class_name MCTSSupaplexState
+class_name MCTSSupaplexStateV2
 
 # Dictionary[Vector2, TILE_ELEMENTS.Ele]
 var placed_elements: Dictionary
