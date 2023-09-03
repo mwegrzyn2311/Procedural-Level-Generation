@@ -14,9 +14,10 @@ var ded: bool
 var waiting_actions: int
 var curr_legal_actions: Array
 var prev_pos: Vector2
+var has_pushed: bool
 
 func _init(initial_player_pos: Vector2, player_pos: Vector2, map: Dictionary, falling_eles_at: Array[Vector2],\
-		placed_elements: Dictionary, moves_remaining: int, ded: bool, waiting_actions: int, prev_pos: Vector2):
+		placed_elements: Dictionary, moves_remaining: int, ded: bool, waiting_actions: int, prev_pos: Vector2, has_pushed: bool):
 	self.initial_player_pos = initial_player_pos
 	self.player_pos = player_pos
 	self.map = map
@@ -28,6 +29,7 @@ func _init(initial_player_pos: Vector2, player_pos: Vector2, map: Dictionary, fa
 	self.curr_legal_actions = self._generate_legal_actions()
 	self.curr_legal_actions.shuffle()
 	self.prev_pos = prev_pos
+	self.has_pushed = has_pushed
 
 static func _initial_moves(width: int, height: int) -> int:
 	return width * height
@@ -41,12 +43,12 @@ static func new_initial_state(width: int, height: int) -> MCTSSupaplexState:
 			map[Vector2(x, y)] = TILE_ELEMENTS.Ele.WALL
 	map[initial_player_pos] = TILE_ELEMENTS.Ele.PLAYER
 	return MCTSSupaplexState.new(initial_player_pos, initial_player_pos, map,\
-		[], {}, _initial_moves(width, height), false, 0, initial_player_pos)
+		[], {}, _initial_moves(width, height), false, 0, initial_player_pos, false)
 
-func copy(new_player_pos: Vector2, new_map: Dictionary, new_falling_eles_at: Array[Vector2],\
-	new_placed_elements: Dictionary, new_ded: bool, new_waiting_actions: int, prev_pos: Vector2) -> MCTSSupaplexState:
+func copy(new_player_pos: Vector2, new_map: Dictionary, new_falling_eles_at: Array[Vector2], new_placed_elements: Dictionary,\
+new_ded: bool, new_waiting_actions: int, prev_pos: Vector2, new_has_pushed: bool) -> MCTSSupaplexState:
 	return MCTSSupaplexState.new(initial_player_pos, new_player_pos, new_map, new_falling_eles_at, new_placed_elements,
-		moves_remaining - 1, new_ded, new_waiting_actions, prev_pos)
+		moves_remaining - 1, new_ded, new_waiting_actions, prev_pos, new_has_pushed)
 
 func move_player(args: Dictionary) -> MCTSSupaplexState:
 	var dest = player_pos + args["dir"]
@@ -57,14 +59,14 @@ func move_player(args: Dictionary) -> MCTSSupaplexState:
 	if new_map[dest] == TILE_ELEMENTS.Ele.WALL:
 		new_map[dest] = TILE_ELEMENTS.Ele.EMPTY
 	var new_falling_eles_at = falling_eles_at.duplicate(true)
-	var new_ded: bool = not SUPAPLEX_UTILS.simulate_one_turn_opt(new_map, new_map.duplicate(true), new_falling_eles_at, falling_eles_at, player_pos, dest, CURRENT_LEVEL_INFO.width, CURRENT_LEVEL_INFO.height)
-	return copy(dest, new_map, new_falling_eles_at, new_placed_elements, new_ded, waiting_actions, player_pos)
+	var sim_res: SUPAPLEX_UTILS.SimRes = SUPAPLEX_UTILS.simulate_one_turn_opt(new_map, new_map.duplicate(true), new_falling_eles_at, falling_eles_at, player_pos, dest, CURRENT_LEVEL_INFO.width, CURRENT_LEVEL_INFO.height)
+	return copy(dest, new_map, new_falling_eles_at, new_placed_elements, sim_res == SUPAPLEX_UTILS.SimRes.FAIL, waiting_actions, player_pos, (has_pushed || SUPAPLEX_UTILS.SimRes.PUSH))
 
 func stay_still(args: Dictionary) -> MCTSSupaplexState:
 	var new_map = map.duplicate(true)
 	var new_falling_eles_at = falling_eles_at.duplicate(true)
-	var new_ded: bool = not SUPAPLEX_UTILS.simulate_one_turn_opt(new_map, map, new_falling_eles_at, falling_eles_at, player_pos, player_pos, CURRENT_LEVEL_INFO.width, CURRENT_LEVEL_INFO.height)
-	return copy(player_pos, new_map, new_falling_eles_at, placed_elements.duplicate(true), new_ded, waiting_actions + 1, prev_pos)
+	var sim_res: SUPAPLEX_UTILS.SimRes = SUPAPLEX_UTILS.simulate_one_turn_opt(new_map, map, new_falling_eles_at, falling_eles_at, player_pos, player_pos, CURRENT_LEVEL_INFO.width, CURRENT_LEVEL_INFO.height)
+	return copy(player_pos, new_map, new_falling_eles_at, placed_elements.duplicate(true), sim_res == SUPAPLEX_UTILS.SimRes.FAIL, waiting_actions + 1, prev_pos, has_pushed)
 
 func place_boulder(args: Dictionary) -> MCTSSupaplexState:
 	var boulder_pos: Vector2 = args["boulder_pos"]
@@ -73,7 +75,7 @@ func place_boulder(args: Dictionary) -> MCTSSupaplexState:
 	var new_falling_eles_at = falling_eles_at.duplicate(true)
 	var new_map = map.duplicate(true)
 	new_map[boulder_pos] = TILE_ELEMENTS.Ele.BOULDER
-	return self.copy(player_pos, new_map, new_falling_eles_at, new_placed_elements, ded, waiting_actions, prev_pos)
+	return self.copy(player_pos, new_map, new_falling_eles_at, new_placed_elements, ded, waiting_actions, prev_pos, has_pushed)
 
 func finish_generation():
 	placed_elements[initial_player_pos] = TILE_ELEMENTS.Ele.PLAYER
@@ -127,7 +129,7 @@ func legal_boulder_actions() -> Array[MCTSAction]:
 		var below: Vector2 = pos + Vector2.DOWN
 		if pos in map and pos not in placed_elements and not (below in map and map[below] == TILE_ELEMENTS.Ele.EMPTY):
 			res.append(MCTSAction.new(Callable(self, "place_boulder"), {"boulder_pos": pos}))
-		if res.size() == 4:
+		if res.size() == 2:
 			return res
 	return res
 
@@ -138,6 +140,8 @@ static func _rescale(val: float) -> float:
 	#return pow(2 * val + 1, 3) * pow(1 - val, 3)
 
 func generation_result() -> float:
+	if not has_pushed:
+		return 0.0
 	var placed_points = placed_elements.values()\
 		.filter(func(ele: TILE_ELEMENTS.Ele) -> int: return ele == TILE_ELEMENTS.Ele.POINT)\
 		.size()
@@ -147,8 +151,8 @@ func generation_result() -> float:
 	var max = _initial_moves(CURRENT_LEVEL_INFO.width, CURRENT_LEVEL_INFO.height)
 	var other = max - (placed_points + placed_boulders + waiting_actions)
 	
-	var res = _rescale(float(placed_points)/max) * _rescale(float(placed_boulders)/max)\
-		* _rescale(float(waiting_actions)/max) * _rescale(float(other)/max)
+	var res = _rescale(float(placed_points)/max) * _rescale(float(placed_boulders)/(2.0 * max))\
+		* _rescale(float(waiting_actions)/max) * _rescale(float(other * 1.5)/max)
 	return res
 	
 func max_score() -> float:

@@ -147,25 +147,35 @@ func _can_push(map: Dictionary, curr_pos: Vector2, new_pos: Vector2) -> bool:
 	return map[new_pos] == TILE_ELEMENTS.Ele.BOULDER and Dir2.is_horizontal(dir)\
 		and ((new_pos + dir) in map and map[new_pos + dir] == TILE_ELEMENTS.Ele.EMPTY)
 
-func simulate_one_turn(map: Dictionary, falling_eles_at: Array[Vector2], curr_pos: Vector2, new_pos: Vector2, width: int, height: int) -> bool:
+func simulate_one_turn(map: Dictionary, falling_eles_at: Array[Vector2], curr_pos: Vector2, new_pos: Vector2, width: int, height: int) -> SimRes:
 	return simulate_one_turn_opt(map, map.duplicate(true), falling_eles_at, falling_eles_at.duplicate(true), curr_pos, new_pos, width, height)
 
-func simulate_one_turn_opt(map: Dictionary, curr_map: Dictionary, falling_eles_at: Array[Vector2], curr_falling_eles_at: Array[Vector2], curr_pos: Vector2, new_pos: Vector2, width: int, height: int) -> bool:
+enum SimRes {
+	FAIL,
+	PUSH,
+	MOVE,
+	STAY
+}
+
+func simulate_one_turn_opt(map: Dictionary, curr_map: Dictionary, falling_eles_at: Array[Vector2], curr_falling_eles_at: Array[Vector2], curr_pos: Vector2, new_pos: Vector2, width: int, height: int) -> SimRes:
 	falling_eles_at.clear()
 	var pushed_to: Vector2 = Vector2(-1, -1)
+	var potential_res: SimRes
 	if curr_pos == new_pos:
-		pass
+		potential_res = SimRes.STAY
 	elif _can_push(curr_map, curr_pos, new_pos):
 		map[curr_pos] = TILE_ELEMENTS.Ele.EMPTY
 		map[new_pos] = TILE_ELEMENTS.Ele.PLAYER
 		pushed_to = new_pos + (new_pos - curr_pos)
 		map[pushed_to] = curr_map[new_pos]
+		potential_res = SimRes.PUSH
 	elif TILE_ELEMENTS._can_move_to(curr_map[new_pos]):
 		map[curr_pos] = TILE_ELEMENTS.Ele.EMPTY
 		map[new_pos] = TILE_ELEMENTS.Ele.PLAYER
+		potential_res = SimRes.MOVE
 	else:
 		# Not possible to move anymore
-		return false
+		return SimRes.FAIL
 	
 	# Nothing can fall nor slide if it's on the lowest level so we can start one above
 	for y in range(height-2, -1, -1):
@@ -182,7 +192,7 @@ func simulate_one_turn_opt(map: Dictionary, curr_map: Dictionary, falling_eles_a
 			var right_below: Vector2 = below + Vector2.RIGHT
 			# Try kill player
 			if below == new_pos and pos in curr_falling_eles_at:
-				return false
+				return SimRes.FAIL
 			# Try fall
 			elif curr_map[below] == TILE_ELEMENTS.Ele.EMPTY:
 				map[below] = curr_map[pos]
@@ -200,4 +210,4 @@ func simulate_one_turn_opt(map: Dictionary, curr_map: Dictionary, falling_eles_a
 				map[right_below] = curr_map[pos]
 				map[pos] = TILE_ELEMENTS.Ele.EMPTY
 				falling_eles_at.append(right_below)
-	return true
+	return potential_res
