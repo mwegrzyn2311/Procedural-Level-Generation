@@ -25,5 +25,6 @@ var ELE_TO_SCENE: Dictionary = {
 	Ele.INTERSECTION: PanelIntersection,
 	Ele.PIPE: PanelPipe,
 	Ele.FINISH: PanelFinish,
-	Ele.TETROMINO: TetrominoEle
+	Ele.TETROMINO: TetrominoEle,
+	Ele.LINE: DebugLine
 }
