@@ -49,7 +49,7 @@ func generate_level() -> Dictionary:
 				# Move
 				var possible_moves = CONSTANTS.UNIT_VECTORS\
 					.map(func(unit_vec: Vector2) -> Vector2: return curr_pos + unit_vec)\
-					.filter(func(dest: Vector2) -> bool: return is_in_map(dest) and (TILE_ELEMENTS._can_move_to(tmp_map[dest]) or ((dest + (dest - curr_pos)) in tmp_map and tmp_map[dest] == TILE_ELEMENTS.Ele.BOULDER and tmp_map[(dest + (dest - curr_pos))] == TILE_ELEMENTS.Ele.EMPTY)))
+					.filter(func(dest: Vector2) -> bool: return is_in_map(dest) and not(is_in_map(dest + Vector2.UP) and (dest + Vector2.UP) in falling_eles_at) and (TILE_ELEMENTS._can_move_to(tmp_map[dest]) or ((dest + (dest - curr_pos)) in tmp_map and tmp_map[dest] == TILE_ELEMENTS.Ele.BOULDER and tmp_map[(dest + (dest - curr_pos))] == TILE_ELEMENTS.Ele.EMPTY)))
 				if possible_moves.is_empty():
 					break
 				var new_pos = RNG_UTIL.choice(possible_moves)
@@ -65,6 +65,8 @@ func generate_level() -> Dictionary:
 				curr_pos = new_pos
 			elif action_chance < 0.625:
 				# Wait
+				if (curr_pos + Vector2.UP) in falling_eles_at:
+					continue
 				var sim_res: SUPAPLEX_UTILS.SimRes = SUPAPLEX_UTILS.simulate_one_turn(tmp_map, falling_eles_at, curr_pos, curr_pos, width, height)
 				if sim_res == SUPAPLEX_UTILS.SimRes.FAIL:
 					break

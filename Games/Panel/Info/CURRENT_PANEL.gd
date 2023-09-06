@@ -21,7 +21,7 @@ func set_height(height: int):
 	
 func apply():
 	if MENU_INFO.selectedAlgo == CONSTANTS.SupportedAlgos.TEMPLATE_BASED:
-		level_generator = PanelTemplateLevelGenerator.new(width, height, PANEL_TEMPLATES.TEMPLATES_2)
+		level_generator = PanelTemplateLevelGenerator.new(width, height, PANEL_TEMPLATES.TEMPLATES_1)
 	elif MENU_INFO.selectedAlgo == CONSTANTS.SupportedAlgos.MONTE_CARLO:
 		level_generator = PanelMCTSLevelGenerator.new(width, height)
 	else:

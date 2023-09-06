@@ -15,7 +15,7 @@ func _ready():
 	self.add_child(line)
 	_reset_line()
 	call_deferred("register_in_navigation")
-	regenerate_level()
+	regenerate_new_level()
 
 func _process(delta):
 	if not is_drawing:

@@ -32,7 +32,7 @@ func _init(initial_player_pos: Vector2, player_pos: Vector2, map: Dictionary, fa
 	self.has_pushed = has_pushed
 
 static func _initial_moves(width: int, height: int) -> int:
-	return width * height
+	return width * height * 2
 
 static func new_initial_state(width: int, height: int) -> MCTSSupaplexState:
 	var initial_player_pos: Vector2 = RNG_UTIL.rand_vec2(width, height)
@@ -83,6 +83,11 @@ func finish_generation():
 		placed_elements[prev_pos] = TILE_ELEMENTS.Ele.EXIT
 	else:
 		placed_elements[player_pos] = TILE_ELEMENTS.Ele.EXIT
+	for pos in placed_elements:
+		if placed_elements[pos] == TILE_ELEMENTS.Ele.BOULDER:
+			var below: Vector2 = pos + Vector2.DOWN
+			if SUPAPLEX_UTILS.in_bounds(below) and not below in placed_elements:
+				placed_elements[below] = TILE_ELEMENTS.Ele.GRASS
 
 # =======================
 # Abstract functions overrides here
@@ -112,13 +117,18 @@ func legal_move_actions() -> Array[MCTSAction]:
 	for i in range(4):
 		var unit_vector: Vector2 = CONSTANTS.UNIT_VECTORS[i]
 		var dest: Vector2 = player_pos + unit_vector
-		if SUPAPLEX_UTILS.in_bounds(dest) and map[dest] != TILE_ELEMENTS.Ele.BOULDER:
+		var above_dest: Vector2 = dest + Vector2.UP
+		if SUPAPLEX_UTILS.in_bounds(dest) and map[dest] != TILE_ELEMENTS.Ele.BOULDER and not above_dest in falling_eles_at:
 			var ele_to_place = SUPAPLEX_UTILS.ELEMENTS_TO_PLACE[i]
 			legal_move_actions.append(MCTSAction.new(Callable(self, "move_player"), {"dir": unit_vector, "ele_to_place": ele_to_place}))
 	return legal_move_actions
 
 # TODO: Might consider calculating how many times it's necesary to clear level
 func legal_stay_still_actions() -> Array[MCTSAction]:
+	var above: Vector2 = player_pos + Vector2.UP
+	# That would just result in death so why not prevent it?
+	if above in falling_eles_at:
+		return []
 	return [MCTSAction.new(Callable(self, "stay_still"), {})]
 
 func legal_boulder_actions() -> Array[MCTSAction]:
@@ -128,16 +138,20 @@ func legal_boulder_actions() -> Array[MCTSAction]:
 		var pos: Vector2 = player_pos + offset
 		var below: Vector2 = pos + Vector2.DOWN
 		if pos in map and pos not in placed_elements and not (below in map and map[below] == TILE_ELEMENTS.Ele.EMPTY):
-			res.append(MCTSAction.new(Callable(self, "place_boulder"), {"boulder_pos": pos}))
-		if res.size() == 2:
+			var neighbouring_boulders: int = CONSTANTS.UNIT_VECTORS\
+				.map(func(unit_vec: Vector2) -> Vector2: return pos + unit_vec)\
+				.filter(func(potential_boulder: Vector2) -> bool: return potential_boulder in placed_elements and placed_elements[potential_boulder] == TILE_ELEMENTS.Ele.BOULDER)\
+				.size()
+			if neighbouring_boulders < 2:
+				res.append(MCTSAction.new(Callable(self, "place_boulder"), {"boulder_pos": pos}))
+		if res.size() == 1:
 			return res
 	return res
 
-static func _rescale(val: float) -> float:
-	if val >= 0.5:
+static func _rescale(val: float, max_x: float) -> float:
+	if val >= max_x * 2:
 		return 0.0
-	return val * (0.5 - val)
-	#return pow(2 * val + 1, 3) * pow(1 - val, 3)
+	return val * (max_x * 2 - val) / (max_x * max_x)
 
 func generation_result() -> float:
 	if not has_pushed:
@@ -151,12 +165,12 @@ func generation_result() -> float:
 	var max = _initial_moves(CURRENT_LEVEL_INFO.width, CURRENT_LEVEL_INFO.height)
 	var other = max - (placed_points + placed_boulders + waiting_actions)
 	
-	var res = _rescale(float(placed_points)/max) * _rescale(float(placed_boulders)/(2.0 * max))\
-		* _rescale(float(waiting_actions)/max) * _rescale(float(other * 1.5)/max)
+	var res = _rescale(float(placed_points)/max, 0.25) * _rescale(float(placed_boulders)/max, 0.25)\
+		* _rescale(float(waiting_actions)/max, 0.25) * _rescale(float(other)/max, 0.25)
 	return res
 	
 func max_score() -> float:
-	return pow(_rescale(0.25), 4)
+	return 1.0
 
 func is_generation_completed() -> bool:
 	if ded or moves_remaining == 0:

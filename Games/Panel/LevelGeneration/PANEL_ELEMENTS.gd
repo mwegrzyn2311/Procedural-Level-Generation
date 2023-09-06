@@ -13,7 +13,8 @@ enum Ele {
 	PIPE,
 	FINISH,
 	EMPTY,
-	TETROMINO
+	TETROMINO,
+	LINE
 }
 
 # This should be done with preload instead of class_name and being forced to 

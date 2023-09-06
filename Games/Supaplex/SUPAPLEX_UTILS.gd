@@ -6,7 +6,7 @@ const POS_NOT_FOUND = Vector2(-1, -1)
 
 func _ready():
 	ELEMENTS_TO_PLACE = [TILE_ELEMENTS.Ele.GRASS, TILE_ELEMENTS.Ele.GRASS, TILE_ELEMENTS.Ele.GRASS, TILE_ELEMENTS.Ele.POINT]
-	for y in range(-2, 3):
+	for y in range(-1, 3):
 		for x in range(-2, 3):
 			PLAYER_PROXIMITY.append(Vector2(x, y))
 	PLAYER_PROXIMITY.erase(Vector2(0,0))
