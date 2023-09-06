@@ -1,6 +1,6 @@
 extends MCTSGameState
 
-class_name MCTSSupaplexState
+class_name MCTSSupaplexStateV2
 
 # Dictionary[Vector2, TILE_ELEMENTS.Ele]
 var placed_elements: Dictionary
@@ -17,24 +17,24 @@ func _init(placed_elements: Dictionary, player_pos: Vector2, moves_remaining: in
 	self.player_pos_history = player_pos_history
 	self.player_pos_history.append(player_pos)
 
-static func new_initial_state(width: int, height: int) -> MCTSSupaplexState:
+static func new_initial_state(width: int, height: int) -> MCTSSupaplexStateV2:
 	# TODO: Investigate best initial value for moves_remaining
-	return MCTSSupaplexState.new({}, RNG_UTIL.rand_vec2(width, height), width * height, false, [])
+	return MCTSSupaplexStateV2.new({}, RNG_UTIL.rand_vec2(width, height), width * height, false, [])
 
-func copy(placed_elements: Dictionary, player_pos: Vector2, moves_remaining: int, may_place_boulder: bool) -> MCTSSupaplexState:
-	return MCTSSupaplexState.new(placed_elements, player_pos, moves_remaining, may_place_boulder, player_pos_history.duplicate(true))
+func copy(placed_elements: Dictionary, player_pos: Vector2, moves_remaining: int, may_place_boulder: bool) -> MCTSSupaplexStateV2:
+	return MCTSSupaplexStateV2.new(placed_elements, player_pos, moves_remaining, may_place_boulder, player_pos_history.duplicate(true))
 
-func move_player(args: Dictionary) -> MCTSSupaplexState:
+func move_player(args: Dictionary) -> MCTSSupaplexStateV2:
 	var dest = player_pos + args["dir"]
 	var new_placed_elements = placed_elements.duplicate(true)
 	# Should overwrite the previous value because current move is the more recent one so it would be the one to pick this stuff
 	new_placed_elements[player_pos] = TILE_ELEMENTS.Ele.EXIT if new_placed_elements.is_empty() else args["ele_to_place"]
 	return copy(new_placed_elements, dest, moves_remaining - 1, Dir2.is_vertical(args["dir"]))
 
-func stay_still(args: Dictionary) -> MCTSSupaplexState:
+func stay_still(args: Dictionary) -> MCTSSupaplexStateV2:
 	return copy(placed_elements.duplicate(true), player_pos, moves_remaining - 1, false)
 
-func place_boulder(args: Dictionary) -> MCTSSupaplexState:
+func place_boulder(args: Dictionary) -> MCTSSupaplexStateV2:
 	var boulder_pos: Vector2 = player_pos + Vector2.UP
 	var new_placed_elements = placed_elements.duplicate(true)
 	new_placed_elements[boulder_pos] = TILE_ELEMENTS.Ele.BOULDER

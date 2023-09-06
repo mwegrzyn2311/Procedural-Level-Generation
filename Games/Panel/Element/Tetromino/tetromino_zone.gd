@@ -58,6 +58,13 @@ func place_tetromino(tetromino: Tetromino):
 	if zone_tiles.values().filter(COLLECTION_UTIL.false_filter).is_empty():
 		self._complete_zone()
 
+func erase_tetromino(tetromino: Tetromino):
+	assert(not self.is_completed, "ERR: Trying to remove tetromino from a complete zone")
+	for pos in tetromino.tiles:
+		zone_tiles[pos] = false
+	self.tetrominos.erase(tetromino)
+	
+
 func _complete_zone():
 	self.is_completed = true
 	var randomized_positions: Array = RNG_UTIL.rand_k_vals(zone_tiles.keys(), tetrominos.size())

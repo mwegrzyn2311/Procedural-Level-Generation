@@ -1,5 +1,10 @@
 extends Node
 
+@onready var dirs: Array[Vector2]
+
+func _ready():
+	self.dirs = [Vector2.UP, Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT]
+
 func closest_dir(dir: Vector2) -> Vector2:
 	if abs(dir.x) > abs(dir.y):
 		return Vector2.RIGHT if dir.x > 0 else Vector2.LEFT

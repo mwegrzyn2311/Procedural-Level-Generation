@@ -28,9 +28,10 @@ func best_action():
 #	for i in range(simulations):
 	var i: int = 0
 	var time_limit: float = 3.0
-	while time_now - time_start < time_limit:
-#	for j in range(1000):
+#	while time_now - time_start < time_limit:
+	for j in range(1000):
 		i += 1
+#		print(i)
 		var node = tree_policy(self)
 		var result = node.rollout()
 		node.backpropagate(result)

@@ -7,6 +7,7 @@ var total_points: int = 2
 var collected_points: int = 0
 
 var level_map: Array = []
+var map_backup: Dictionary = {}
 
 var level_generator: LevelGenerator = null
 
@@ -23,7 +24,12 @@ func apply():
 		level_generator = SupaplexMCTSLevelGenerator.new(width, height)
 
 func generate_map():
-	self.level_map = LEVEL_CONVERTER.vec_string_dict_to_tile_arr(level_generator.generate_level())
+	self.map_backup = level_generator.generate_level()
+	self.level_map = LEVEL_CONVERTER.vec_string_dict_to_tile_arr(map_backup)
+	self.total_points = number_of_points_in_map()
+
+func regenerate_map():
+	self.level_map = LEVEL_CONVERTER.vec_string_dict_to_tile_arr(map_backup)
 	self.total_points = number_of_points_in_map()
 
 func number_of_points_in_map() -> int:

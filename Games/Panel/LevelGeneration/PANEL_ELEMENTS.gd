@@ -13,7 +13,8 @@ enum Ele {
 	PIPE,
 	FINISH,
 	EMPTY,
-	TETROMINO
+	TETROMINO,
+	LINE
 }
 
 # This should be done with preload instead of class_name and being forced to 
@@ -24,5 +25,6 @@ var ELE_TO_SCENE: Dictionary = {
 	Ele.INTERSECTION: PanelIntersection,
 	Ele.PIPE: PanelPipe,
 	Ele.FINISH: PanelFinish,
-	Ele.TETROMINO: TetrominoEle
+	Ele.TETROMINO: TetrominoEle,
+	Ele.LINE: DebugLine
 }

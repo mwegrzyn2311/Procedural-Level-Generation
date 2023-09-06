@@ -1,6 +1,6 @@
 extends MCTSGameState
 
-class_name MCTSSupaplexStateLegacy
+class_name MCTSSupaplexStateV1
 
 var res: Dictionary
 var walls_to_delete: int
@@ -30,7 +30,7 @@ func _init(res: Dictionary, walls_to_delete: int, points_to_place: int, initial_
 	self.generate_legal_actions()
 	self.calc_gen_res()
 	
-static func new_initial_state(width: int, height: int) -> MCTSSupaplexState:
+static func new_initial_state(width: int, height: int) -> MCTSSupaplexStateV1:
 	var res: Dictionary = {}
 	for j in range(height):
 		for i in range(width):
@@ -39,10 +39,10 @@ static func new_initial_state(width: int, height: int) -> MCTSSupaplexState:
 	res[initial_player_pos] = TILE_ELEMENTS.Ele.PLAYER
 	var walls_to_delete = int(RNG_UTIL.RNG.randf_range(0.45, 0.55) * width * height)
 	var points_to_place = int(RNG_UTIL.RNG.randf_range(0.15, 0.2) * walls_to_delete)
-	return MCTSSupaplexState.new(res, walls_to_delete, points_to_place, initial_player_pos, initial_player_pos)
+	return MCTSSupaplexStateV1.new(res, walls_to_delete, points_to_place, initial_player_pos, initial_player_pos)
 
-func copy(res: Dictionary, new_player_pos: Vector2, new_walls_deleted: int, new_rocks_placed: int, new_points_placed: int, new_last_dir: Vector2) -> MCTSSupaplexState:
-	return MCTSSupaplexState.new(res, walls_to_delete, points_to_place, initial_player_pos, new_player_pos, new_walls_deleted, new_rocks_placed, new_points_placed, new_last_dir)
+func copy(res: Dictionary, new_player_pos: Vector2, new_walls_deleted: int, new_rocks_placed: int, new_points_placed: int, new_last_dir: Vector2) -> MCTSSupaplexStateV1:
+	return MCTSSupaplexStateV1.new(res, walls_to_delete, points_to_place, initial_player_pos, new_player_pos, new_walls_deleted, new_rocks_placed, new_points_placed, new_last_dir)
 
 const NIEGH_CORRID_MULT: float = 1.0
 const NIEGH_DIAG_NON_CORRID_MULT: float = 5.0

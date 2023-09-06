@@ -23,7 +23,11 @@ func _init(width: int, height: int, level_templates: LevelTemplates):
 # TODO: I think that with some templates it's possible to get an occurence that no template would fit which leads to inifite loop
 # TODO: It'd also be good to not pick the same template with the same rotation twice but with so many choices it might consume some memory and maybe even time...
 func generate_level() -> Dictionary:
-	var res: Dictionary = super.generate_level()
+	return _generate_level(super.generate_level(), [], false)
+
+func _generate_level(res: Dictionary, skip_at: Array[Vector2], is_panel: bool) -> Dictionary:
+	# Needed just to do some super-class stuff but the result is ignored
+	super.generate_level()
 	var templates: Array = level_templates.templates
 	
 	var tiles_vert: int = self.height/t_height
@@ -34,6 +38,8 @@ func generate_level() -> Dictionary:
 	# Start off by building levels out of random templates
 	for j in range(tiles_vert):
 		for i in range(tiles_horiz):
+			if Vector2(i, j) in skip_at:
+				continue
 			var base: Vector2 = Vector2(i * t_width, j * t_height)
 			var template_indices: Array = range(templates_count)
 			var template_chosen: bool = false
@@ -60,6 +66,14 @@ func generate_level() -> Dictionary:
 			if not template_chosen:
 				print(res)
 			assert(template_chosen, "ERROR: Failed to find a matching template")
+		if is_panel:
+			# TODO: This implementation only works as tmp solution for 2x2 templates
+			var base: Vector2 = Vector2(tiles_horiz * t_width, j * t_height)
+			if not base in res:
+				res[base] = PANEL_ELEMENTS.Ele.INTERSECTION
+				res[base + Vector2.DOWN] = PANEL_ELEMENTS.Ele.PIPE
+			else:
+				res[base + Vector2.DOWN] = PANEL_ELEMENTS.Ele.LINE if res[base] == PANEL_ELEMENTS.Ele.LINE else PANEL_ELEMENTS.Ele.PIPE
 	return res
 	
 func template_fits(base: Vector2, map: Dictionary, template: Dictionary) -> bool:

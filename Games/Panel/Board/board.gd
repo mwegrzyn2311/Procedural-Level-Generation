@@ -15,7 +15,7 @@ func _ready():
 	self.add_child(line)
 	_reset_line()
 	call_deferred("register_in_navigation")
-	regenerate_level()
+	regenerate_new_level()
 
 func _process(delta):
 	if not is_drawing:
@@ -34,6 +34,9 @@ func register_in_navigation():
 
 func generate_elements():
 	CURRENT_PANEL.generate_map()
+	draw_level()
+
+func draw_level():
 	for pos in CURRENT_PANEL.panel_dict:
 		var element = PANEL_ELE_CONVERTER.convert(CURRENT_PANEL.panel_dict[pos], pos, self)
 		if element != null:
@@ -46,6 +49,10 @@ func cleanup():
 		panel_elements.remove_child(element)
 		
 func regenerate_level():
+	cleanup()
+	draw_level()
+
+func regenerate_new_level():
 	cleanup()
 	generate_elements()
 
